@@ -9,7 +9,11 @@
 # production
 /build
 
+# styles
+src/**/*.css
+
 # misc
+.vscode
 .DS_Store
 .env
 npm-debug.log*
