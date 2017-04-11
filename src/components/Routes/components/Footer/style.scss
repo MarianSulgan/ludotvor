@@ -1,0 +1,27 @@
+@import '../../../../utils/variables.scss';
+
+.footer {
+    background-color: $gray-lighter;
+    position: relative;
+    z-index: 1;
+}
+
+.footer__block {
+    padding-top: 1.6em;
+}
+
+// .footer__block--social {
+//     //...
+// }
+
+// .footer__block--links {
+//     //...
+// }
+
+.footer__block--copyright {
+    padding-bottom: 1.6em;
+}
+
+.list_footer {
+    text-align: center;
+}

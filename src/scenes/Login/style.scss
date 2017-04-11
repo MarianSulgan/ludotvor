@@ -1,0 +1,11 @@
+@import '../../utils/variables.scss';
+
+.block__social-icon {
+    padding: 0.2em;
+    margin: 0.6em;
+    cursor: pointer;
+}
+
+.block__social-icon:hover {
+    color: $brand-info;
+}

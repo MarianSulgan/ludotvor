@@ -1,0 +1,73 @@
+/*
+Styles for scenes
+
+Scenes (= application pages) are styled here on
+very general level.
+*/
+
+@import '../utils/mixins.scss';
+@import '../utils/variables.scss';
+
+$base-font-size: 1.6rem;
+$base-line-height:  $base-font-size * 1.6;
+$headline-font-size: $base-font-size * 3.2;
+$headline-line-height: $headline-font-size * 1.2;
+
+.text {
+    max-width: 32 * $base-font-size;
+    // should be circa 65 ems based on research by SmashingMagazine
+    // max-width: 65em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.block__text_left {
+    margin-left: 15px;
+    text-align: left;
+}
+
+.block__text_right {
+    margin-right: 0;
+    text-align: right;
+}
+
+// .block {
+// }
+
+.block__headline {
+    font-weight: 700;
+    letter-spacing: -.025em;
+    
+}
+
+.block__headline_h1 {
+    letter-spacing: -.025em;
+    font-size: $headline-font-size;
+    text-align: center;
+    line-height: $headline-line-height;
+    margin-bottom: $base-line-height;
+}
+
+.block__headline_left {
+    text-align: left;
+    margin-left: 15px;
+}
+
+.block__text {
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+}
+
+.block__link_unstyled {
+    @include remove-effects();
+    color: $text-color;
+}
+
+.block__link_unstyled:hover {
+    @include remove-effects();
+    color: $text-color;
+
+    h2 {
+        text-decoration: underline;
+    }
+}

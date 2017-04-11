@@ -1,0 +1,138 @@
+/* 
+Indicator based on Codrops article, type: Zahi
+ */
+
+ @import '../../utils/variables.scss';
+ @import '../../utils/mixins.scss';
+
+.section--nav {
+
+    margin-top: 17rem;
+
+    @media (max-width: $screen-xs-max) {
+        padding-top: 0;
+    }
+
+    // general nav styling
+
+    .nav {
+        position: relative;
+        width: 8em;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: calc(-50vh);
+            left: 5px;
+            width: 2px;
+            height: 150vh;
+            background: $gray-light;
+        }
+
+        a {
+            @include remove-effects();
+            display: block;
+        }
+    }
+
+    .nav__item {
+        line-height: 1.6;
+        position: relative;
+        display: block;
+        margin: 0;
+        padding: 0;
+        letter-spacing: 0;
+        color: currentColor;
+        border: 0;
+        background: none;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+
+    .nav__item:focus {
+        outline: none;
+    }
+
+    // "Zahi" indicatior specific styling
+
+    .nav--zahi .nav__item {
+        width: 6em;
+        margin-bottom: 6em;
+        text-align: left;
+    }
+
+    .nav--zahi .nav__item::before,
+    .nav--zahi .nav__item::after {
+        content: '';
+        position: absolute;
+    }
+
+    .nav--zahi .nav__item:not(:last-child)::before {
+        // top: calc(2em - 7px);
+        top: 0;
+        left: 5px;
+        width: 2px;
+        // height: calc(2em - 12px);
+        height: 200px;
+        background: $gray-light;
+    }
+
+    .nav--zahi .nav__item::after {
+        top: 10px;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        margin: -5px 0 0 0;
+        border: 2px solid $gray-light;
+        border-radius: 50%;
+        background: $gray-lighter;
+        -webkit-transition: -webkit-transform 0.3s, border-color 0.3s, border-width 0.3s, background 0.3s;
+        transition: transform 0.3s, border-color 0.3s, border-width 0.3s, background 0.3s;
+    }
+
+    @include keyframes(sidebar_btn) {
+        0%   { transform: scale3d(1,1,1); }
+        100% { transform: scale3d(1.6,1.6,1); }
+    }
+
+    .nav--zahi .nav__item--current::after {
+        border-width: 1px;
+        border-color: $gray-light;
+        -webkit-transform: scale3d(1.6,1.6,1);
+        transform: scale3d(1.6,1.6,1);
+        background: $brand-info;
+        @include animation('sidebar_btn .3s 1');
+    }
+
+    .nav--zahi .nav__item:not(.nav__item--current):focus::after,
+    .nav--zahi .nav__item:not(.nav__item--current):hover::after {
+        border-color: $gray-light;
+        background: $brand-info;
+    }
+
+    .nav--zahi .nav__item-title {
+        line-height: 1.6;
+        display: block;
+        position: relative;
+        padding: 0 0 0 1.6em;
+        white-space: nowrap;
+        opacity: 0.3;
+        color: $gray-dark;
+        -webkit-transition: opacity 0.3s, color 0.3s;
+        transition: opacity 0.3s, color 0.3s;
+
+        @media (max-width: 540px) {
+            display: none;
+        }
+    }
+
+    .nav--zahi .nav__item:not(.nav__item--current):focus .nav__item-title,
+    .nav--zahi .nav__item:not(.nav__item--current):hover .nav__item-title {
+        opacity: 1;
+    }
+
+    .nav--zahi .nav__item--current .nav__item-title {
+        opacity: 1;
+        color: $gray-dark;
+    }
+
+}
