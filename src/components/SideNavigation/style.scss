@@ -5,6 +5,10 @@ Indicator based on Codrops article, type: Zahi
  @import '../../utils/variables.scss';
  @import '../../utils/mixins.scss';
 
+ .page-content_editor_theme .section--nav {
+     padding-top: 20px;
+ }
+
 .section--nav {
 
     margin-top: 17rem;

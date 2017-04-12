@@ -54,7 +54,7 @@ class SideNavigation extends Component {
 
     render() {
         return (
-            <section className="section section--nav">
+            <section className="section--nav">
                 <nav className="nav nav--zahi">
                     <Link to="/select-product">
                         <button className="nav__item" aria-label="Item 1">

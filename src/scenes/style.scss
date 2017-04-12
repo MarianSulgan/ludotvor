@@ -21,6 +21,10 @@ $headline-line-height: $headline-font-size * 1.2;
     margin-right: auto;
 }
 
+.block_100vh {
+    height: 100vh;
+}
+
 .block__text_left {
     margin-left: 15px;
     text-align: left;
@@ -30,9 +34,6 @@ $headline-line-height: $headline-font-size * 1.2;
     margin-right: 0;
     text-align: right;
 }
-
-// .block {
-// }
 
 .block__headline {
     font-weight: 700;
