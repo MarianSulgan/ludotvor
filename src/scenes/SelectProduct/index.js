@@ -15,7 +15,7 @@ import '../style.css';
 import './style.css';
 
 const SelectProduct = () => (
-  <div>
+  <div className="wrapper">
     <Grid className="page-content" fluid>
       <Row>
         <Col xs={ 3 } sm={ 2 }>

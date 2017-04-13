@@ -73,7 +73,7 @@ class SideNavigation extends Component {
                     </Link>
                     <Link to="/editor">
                         <button className="nav__item" aria-label="Item 4">
-                            <span className="nav__item-title">Generátor</span>
+                            <span className="nav__item-title">Editor</span>
                         </button>
                     </Link>
                     <Link to="/export">

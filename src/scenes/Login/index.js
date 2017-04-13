@@ -9,7 +9,7 @@ class Login extends Component {
     state = {  }
     render() {
         return (
-            <div>
+            <div className="wrapper">
                 <Grid className="page-content" fluid>
                     <Row className="block">
                         <h1 className="text block__headline block__headline_h1">Prihlásenie. Seba sa.</h1>

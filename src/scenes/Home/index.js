@@ -13,7 +13,7 @@ class Home extends Component {
 
   render() {
     return(
-      <div>
+      <div className="wrapper">
         <Grid className="page-content" fluid>
           <Row>
             <Col xs={ 12 } className="block">

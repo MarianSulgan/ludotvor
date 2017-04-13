@@ -14,7 +14,7 @@ class SelectPatterns extends Component {
             <ImageWithIcon key={ number.toString() }  />
         );
         return (
-            <div>
+            <div className="wrapper">
                 <Grid className="page-content" fluid>
                     <Row>
                         <Col xs={ 3 } sm={ 2 }>

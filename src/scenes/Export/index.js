@@ -9,7 +9,7 @@ import '../style.css';
 class Export extends Component {
     render() {
         return (
-            <div>
+            <div className="wrapper">
                 <Grid className="page-content" fluid>
                     <Row>
                         <Col xs={ 3 } sm={ 2 }>

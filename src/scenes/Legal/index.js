@@ -7,14 +7,16 @@ import '../style.css';
 class LegalTemplate extends Component {
     render() {
         return (
-            <Grid className="page-content">
-                <Row>
-                    <Col xs={12} className="block">
-                        <h1 className="text block__headline block__headline_h1">{this.props.headline}</h1>
-                        {this.props.text ? <p className="text block__text">{this.props.text}</p> : <Lorem className="text block__text"/>}
-                    </Col>
-                </Row>
-            </Grid>
+            <div className="wrapper">
+                <Grid className="page-content">
+                    <Row>
+                        <Col xs={12} className="block">
+                            <h1 className="text block__headline block__headline_h1">{this.props.headline}</h1>
+                            {this.props.text ? <p className="text block__text">{this.props.text}</p> : <Lorem className="text block__text"/>}
+                        </Col>
+                    </Row>
+                </Grid>
+            </div>
         );
     }
 }

@@ -7,3 +7,9 @@
  * input: Pattern
  * output: JSON
  */
+
+function generatePattern() {
+    console.log("Generating pattern");
+}
+
+export default generatePattern;

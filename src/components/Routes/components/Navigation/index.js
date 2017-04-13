@@ -10,6 +10,7 @@ import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import RouterNavItem from './components/RouterNavItem';
+import './style.css';
 
 class Navigation extends Component {
     render() {
@@ -24,7 +25,8 @@ class Navigation extends Component {
             <Navbar 
                 collapseOnSelect={ this.props.collapseOnSelect } 
                 fluid={ this.props.fluid }
-                fixedTop={ this.props.fixedTop }>
+                fixedTop={ this.props.fixedTop }
+                className="navigation navigation_bg_transparent">
                 <Navbar.Header>
                     <Navbar.Brand>
                         <Link to="/">Ľudotvor</Link>

@@ -1,9 +1,13 @@
 /**
  * App container with navigation, handling routing
+ * 
+ * @todo: change reference to db from global variable to something better,
+ * probably just rebuild app using Redux architecture
  */
 
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Datastore from 'nedb';
 
 
 import Home from '../../scenes/Home';
@@ -22,6 +26,8 @@ import NotFound from '../../scenes/NotFound';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 
+import database from '../../service/database'
+
 const navItems = [
     { to: "/select-product", name: "Tvoriť"},
     { to: "/about", name: "O projekte"},
@@ -32,6 +38,14 @@ const navItems = [
 
 // internal class for rendering app content and setting _cdu_
 class RoutesApp extends Component {
+
+    componentWillMount() {
+        // mount database
+        let db = new Datastore({ filename: './data.db', autoload: true });
+        // use global variable :-(
+        window.db = db;
+        database.populate();
+    }
 
     componentDidUpdate(prevProps, prevState) {
         window.scrollTo(0, 0)

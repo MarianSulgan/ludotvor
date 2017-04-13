@@ -7,11 +7,11 @@ used across scenes and components. Or very much general.
 
 @import './utils/variables.scss';
 
-$navbar-height: 70px; // header navbar + margin bottom
+$navbar-height: 50px; // header navbar + margin bottom
 
 body {
   margin: 0;
-  padding: 50px 0 0 0;
+  padding: 0;
   font-family: sans-serif;
 }
 
@@ -19,11 +19,15 @@ body {
   overflow: hidden;
 }
 
+.wrapper {
+  margin-top: $navbar-height;
+}
+
 // used by components/Routes and scenes/*
 .page-content {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - #{$navbar-height} + 20px);
+  min-height: calc(100vh - #{$navbar-height});
   padding-top: 20px;
   padding-bottom: 20px;
 }
