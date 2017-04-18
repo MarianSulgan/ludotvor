@@ -4,8 +4,6 @@
  * @todo: create database for basic shapes, so it is searchable for ID when fetching svgs from particular location
  */
 
-// import React from 'react';
-// import datastore from 'nedb-promise';
 import 'whatwg-fetch'; // fetch polyfill for IE and similar
 
 // Extension of String class, with replaceAll functionality
@@ -23,18 +21,18 @@ class BasicShape {
     }
 }
 
-const basicShapes = [
-    new BasicShape({
-        location: "Zvolenská Slatina",
-        tags: ["geometric", "simple", "black", "red", "white"],
-        id: "decor1"
-    }),
-    new BasicShape({
-        location: "Zvolenská Slatina",
-        tags: ["geometric", "simple", "black", "red", "white"],
-        id: "decor2"
-    })
-];
+// const basicShapes = [
+//     new BasicShape({
+//         location: "Zvolenská Slatina",
+//         tags: ["geometric", "simple", "black", "red", "white"],
+//         id: "decor1"
+//     }),
+//     new BasicShape({
+//         location: "Zvolenská Slatina",
+//         tags: ["geometric", "simple", "black", "red", "white"],
+//         id: "decor2"
+//     })
+// ];
 
 class ShapeContainer {
     constructor(obj) {
@@ -197,13 +195,14 @@ async function generatePattern(options, callback) {
 
             // determine margin for tile
             let margin = 40;
+            let patternMargin = 0;
 
             // calculate position for each tile
             let k = i % options.horizontalCount;
             let l = Math.floor(i / 4);
             shapeContainers[i].position = {
-                x: margin + k * (side + margin),
-                y: margin + l * (side + margin)
+                x: patternMargin + k * (side + margin),
+                y: patternMargin + l * (side + margin)
             }
 
             let index = arr[i];
@@ -232,7 +231,6 @@ async function generatePattern(options, callback) {
 
     // fetch all svgs from specified urls (in variable urls[])
     let staticSvgs = [];
-    let actualSvgContentString = "";
     const grabContent = url => fetch(url)
         .then(res => res.text())
         .then(data => {
