@@ -209,6 +209,11 @@ async function generatePattern(options, callback) {
             let index = arr[i];
             shapeContainers[i].shapeId = options.basicShapesIds[index];
             shapeContainers[i].index = index;
+
+            // create transforms
+            let transforms = ""
+            //  merge positioning and transforms
+            shapeContainers[i].transforms = `translate(${shapeContainers[i].position.x}, ${shapeContainers[i].position.y}) ` + transforms;
         }
 
     } else if (options.layoutType === "lines") {

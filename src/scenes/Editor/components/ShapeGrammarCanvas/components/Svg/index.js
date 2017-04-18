@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 class Svg extends Component {
 
     render() {
-        const {data, ...rest} = this.props;
+        // const {data, ...rest} = this.props;
         return (
-           <svg {...rest }>
-                { data }
+           <svg style={ this.props.transforms }>
+                { this.props.content }
             </svg>
         );
     }

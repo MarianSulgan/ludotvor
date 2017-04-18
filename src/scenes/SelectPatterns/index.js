@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import 'es6-shim';
 
 import SideNavigation from '../../components/SideNavigation';
 import ImageWithIcon from './components/ImageWithIcon';
