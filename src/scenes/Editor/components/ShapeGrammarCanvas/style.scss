@@ -1,5 +1,8 @@
 //  @todo: change values based on input product image, for example thsirt/bag/phone background...
 
+$max-canvas-width: 770px; //580 px for smaller heights
+$min-canvas-width: 450px; //580 px for smaller heights
+
 .canvas_editor {
     height: calc(100vh - 50px);
     width: 100%;
@@ -9,8 +12,8 @@
 
 .canvas__layer {
     width: 100%;
-    max-width: 770px; // otherwise, product image might be too big
-    min-width: 450px; // otherwise it gets shifted, shrinks
+    max-width: $max-canvas-width; // otherwise, product image might be too big
+    min-width: $min-canvas-width; // otherwise it gets shifted, shrinks
     position: absolute;
     background-repeat: no-repeat;
     background-position: bottom;

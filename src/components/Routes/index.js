@@ -3,10 +3,13 @@
  * 
  * @todo: change reference to db from global variable to something better,
  * probably just rebuild app using Redux architecture
+ * 
+ * @todo: consider moving Routes to main index.js to be more clear and strict
+ * in project folder organization
  */
 
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import Home from '../../scenes/Home';
 import About from '../../scenes/About';
@@ -20,6 +23,7 @@ import Export from '../../scenes/Export';
 import Styleguide from '../../scenes/Styleguide';
 import Legal from '../../scenes/Legal';
 import NotFound from '../../scenes/NotFound';
+import Dashboard from '../../scenes/Dashboard';
 
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
@@ -50,6 +54,8 @@ class RoutesApp extends Component {
                         <Route path="/about" component={ About } />
                         <Route path="/contact" component={ Contact } />
                         <Route path="/login" component={ Login } />
+                        {/*private sections*/}
+                        <PrivateRoute path="user/dashboard" component={ Dashboard } />
                         {/* main app flow routes*/}
                         <Route path="/select-product" component={ SelectProduct } />
                         <Route path="/select-layout" component={ SelectLayout } />
@@ -73,6 +79,31 @@ class RoutesApp extends Component {
     }
 
 }
+
+const fakeAuth = {
+  isAuthenticated: false,
+  authenticate(cb) {
+    this.isAuthenticated = true
+    setTimeout(cb, 100) // fake async
+  },
+  signout(cb) {
+    this.isAuthenticated = false
+    setTimeout(cb, 100)
+  }
+}
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    fakeAuth.isAuthenticated ? (
+      <Component {...props}/>
+    ) : (
+      <Redirect to={{
+        pathname: '/login',
+        state: { from: props.location }
+      }}/>
+    )
+  )}/>
+)
 
 // wrap in router
 const Routes = () => (

@@ -11,8 +11,9 @@ import ShapeGrammarCanvas from './components/ShapeGrammarCanvas';
 import './style.css';
 import '../style.css';
 
-import Products from './data/products.js';
-import api from './components/ShapeGrammarCanvas/api';
+import Products from 'data/products';
+import Generator from 'service/generator';
+import { Store } from 'service/store';
 
 class Editor extends Component {
 
@@ -29,9 +30,16 @@ class Editor extends Component {
         // default options selected through app flow,
         // for example user chose grid layout, two ornaments and
         // bag for pattern placement
+
+        // get variables
+        const userOpts = {
+            product: Store.get("options.product"),
+            layout: Store.get("options.layout")
+        }
+
         const options = {
-            productType: Products.Bag, 
-            layoutType: "grid",
+            productType: userOpts.product,
+            layoutType: userOpts.layout,
             horizontalCount: 4,
             verticalCount: 4,
             basicShapesIds: ["decor1", "decor2"]
@@ -42,9 +50,15 @@ class Editor extends Component {
     handleClick = () => {
         // these are new options from user inputs, for example
         // he drags a slider on Editor screen or changes layout type...
+
+        const userOpts = {
+            product: Store.get("options.product"),
+            layout: Store.get("options.layout")
+        }
+
         const newOptions = {
-            productType: Products.Bag, 
-            layoutType: "grid",
+           productType: userOpts.product,
+            layoutType: userOpts.layout,
             horizontalCount: 4,
             verticalCount: 4,
             basicShapesIds: ["decor2", "decor1"]
@@ -55,10 +69,10 @@ class Editor extends Component {
     renderPattern(options) {
         // validate options, if they are reasonable
         // ...
+        console.log("Options", options);
 
         // result is data container
-        api.generatePattern(options, (result) => {
-            console.log("Callback result: ", result);
+        Generator.generatePattern(options, (result) => {
             this.setState({ patternData: result, productType: options.productType });
         });
     }
@@ -75,8 +89,7 @@ class Editor extends Component {
                                     bsStyle="primary" 
                                     bsSize="large" 
                                     className="block__button button_margin button_on-top"
-                                    onClick={ this.handleClick }
-                                    >
+                                    onClick={ this.handleClick }>
                                     Generovať
                                 </Button>
                             </Row>

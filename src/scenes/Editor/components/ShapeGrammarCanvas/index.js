@@ -14,7 +14,7 @@ import ReactElementToString from 'react-element-to-string';
 
 import SvgWrapper from './components/SvgWrapper';
 import bagImage from './images/bag.jpg';
-import Products from '../../data/products.js';
+import Products from 'data/products';
 
 import './style.css';
 

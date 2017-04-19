@@ -1,10 +1,21 @@
 /**
- * API for shape generation
+ * Generator of shapes
+ * 
+ * Functions (possibly api) for generating shapes using shape grammar idea
  * 
  * @todo: create database for basic shapes, so it is searchable for ID when fetching svgs from particular location
+ * @todo: refactor
+ * @todo: create API (expose)
  */
 
 import 'whatwg-fetch'; // fetch polyfill for IE and similar
+
+import Layouts from 'data/layouts';
+
+const referenceSvgWidth = 200; // width of svg image (all redrawn ornaments should have this width!)
+const defautSideSize = 120; // default size of one svg ornament
+const maxSideSize = referenceSvgWidth;
+
 
 // Extension of String class, with replaceAll functionality
 // eslint-disable-next-line
@@ -20,19 +31,6 @@ class BasicShape {
         this.id = obj.id;
     }
 }
-
-// const basicShapes = [
-//     new BasicShape({
-//         location: "Zvolenská Slatina",
-//         tags: ["geometric", "simple", "black", "red", "white"],
-//         id: "decor1"
-//     }),
-//     new BasicShape({
-//         location: "Zvolenská Slatina",
-//         tags: ["geometric", "simple", "black", "red", "white"],
-//         id: "decor2"
-//     })
-// ];
 
 class ShapeContainer {
     constructor(obj) {
@@ -77,7 +75,10 @@ async function generatePattern(options, callback) {
 
     let shapeContainers = [];
 
-    if (options.layoutType === "grid") {
+    console.log(options.layoutType);
+    console.log(Layouts.Grid);
+
+    if (options.layoutType === Layouts.Grid) {
 
         let gridSize = options.horizontalCount * options.verticalCount;
         
@@ -191,15 +192,17 @@ async function generatePattern(options, callback) {
         for (let i = 0; i < gridSize; i++) {
 
             // determine size of tile
-            let side = 120;
+            let side = 90;
+            if (side > maxSideSize) 
+                side = defautSideSize;
 
             // determine margin for tile
-            let margin = 40;
+            let margin = 80;
             let patternMargin = 0;
 
             // calculate position for each tile
             let k = i % options.horizontalCount;
-            let l = Math.floor(i / 4);
+            let l = Math.floor(i / options.horizontalCount);
             shapeContainers[i].position = {
                 x: patternMargin + k * (side + margin),
                 y: patternMargin + l * (side + margin)
@@ -210,14 +213,19 @@ async function generatePattern(options, callback) {
             shapeContainers[i].index = index;
 
             // create transforms
-            let transforms = ""
+            let temp = (side / referenceSvgWidth) * (referenceSvgWidth / defautSideSize);
+            let transforms = `scale(${temp})`;
             //  merge positioning and transforms
             shapeContainers[i].transforms = `translate(${shapeContainers[i].position.x}, ${shapeContainers[i].position.y}) ` + transforms;
         }
 
-    } else if (options.layoutType === "lines") {
+    } else if (options.layoutType === Layouts.Lines) {
 
-    } else if (options.layoutType === "free") {
+        console.log("Lines SG");
+
+    } else if (options.layoutType === Layouts.Free) {
+
+        console.log("Free SG");
 
     } else {
         console.log("Unsupported layout type");
@@ -252,8 +260,8 @@ async function generatePattern(options, callback) {
 
 
 
-const api = {
+const Generator = {
     generatePattern: generatePattern
 }
 
-export default api;
+export default Generator;
