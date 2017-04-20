@@ -20,20 +20,29 @@ span.pattern-item {
     @include remove-effects();
     position: relative;
     cursor: pointer;
+    max-width: 6em;
+    padding: 12px;
 }
 
-.has-check {
-    &::before {
-        position: absolute;
-        left: calc(50% - 16px);
-        top: calc(50% - 22px);
-        content: "\f00c";
-        font-family: FontAwesome;
-        font-style: normal;
-        font-weight: normal;
-        text-decoration: none;
-        color: $brand-success;
-        font-size: 3.2rem;
-        @include animation('fadeIn 0.5s 1');
-    }
+span.pattern-item.has-check {
+    background: url(./images/select.svg) no-repeat;
+    background-size: cover;
+    
+    // &::before {
+    //     position: absolute;
+    //     left: calc(50% - 6px);
+    //     top: calc(50% - 16px);
+    //     content: "\f00c";
+    //     font-family: FontAwesome;
+    //     font-style: normal;
+    //     font-weight: normal;
+    //     text-decoration: none;
+    //     color: $brand-success;
+    //     font-size: 3.2rem;
+    //     @include animation('fadeIn 0.5s 1');
+    // }
+}
+
+.image_ornament {
+    float: left;
 }

@@ -2,7 +2,19 @@
 
 > „Ľudo, tvor. A ľud tvoril.“
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+##Usage
+How to use.
 
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+###Locally
+To use the development, offline, version, run these commands in local folder:
+```shell
+git clone https://github.com/MarianSulgan/ludotvor.git
+cd ludotvor
+npm run install
+npm start
+```
+
+###Online
+To use the application online, browse to the production version available at <http://ludotvor.herokuapp.com>.
+
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

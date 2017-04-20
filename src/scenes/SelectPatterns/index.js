@@ -5,15 +5,56 @@ import 'es6-shim';
 
 import SideNavigation from '../../components/SideNavigation';
 import ImageWithIcon from './components/ImageWithIcon';
+import Ornaments from 'data/ornaments';
+import { Store } from 'service/store';
 
-import '../style.css';
+import './style.css';
 
 class SelectPatterns extends Component {
-    render() {
-        const numberOfImages = 20;
-        const _images = [...Array(numberOfImages).keys()].map((number) => 
-            <ImageWithIcon key={ number.toString() }  />
+
+    constructor(props) {
+        super(props);
+        this.state = { images: null, ornaments: [] };
+    }
+    
+    handleClick(id, state) {
+        console.log(id, state);
+        console.log(this);
+        let temp = this.state.ornaments;
+        if (state) {
+            // add id to array
+            temp.push(id);
+        } else {
+            // remove id from array
+            let index = temp.indexOf(id);
+            temp.splice(index, 1);
+        }
+        this.setState({ ornaments: temp });
+    }
+
+    handleLinkClick() {
+        let ornamentIds = JSON.stringify(this.state.ornaments);
+        Store.set("options.ornaments", ornamentIds);
+    }
+    
+    componentWillMount () {
+        this.state = { ornaments: [] };
+    }
+    
+
+    componentDidMount() {
+        // add ornaments loading here
+        let _images = Ornaments.map((elem, index) => 
+            <ImageWithIcon
+                key={ index } 
+                src={ elem.url } 
+                ornamentId={ elem.id.toString() } 
+                handleClick={ (id, state) => this.handleClick(id, state) } />
         );
+        this.setState({ images: _images });
+    }
+    
+    render() {
         return (
             <div className="wrapper">
                 <Grid className="page-content" fluid>
@@ -33,11 +74,21 @@ class SelectPatterns extends Component {
                                 </p>
                             </Row>
                             <Row>
-                                { _images }
+                                <div className="row__ornament-selector">
+                                { 
+                                    /*show loading note or if loaded, display images*/
+                                    this.state.images || 
+                                    <Col xs={12} className="block">
+                                        <p className="block__info-text bg-info">Ornamenty sa načítavajú...</p>
+                                    </Col> 
+                                }
+                                </div>
                             </Row>
                             <Row>
-                                <Col xs={12} className="block text-center">
-                                    <Link className="btn btn-primary" to="/editor">Hotovo</Link>
+                                <Col xs={12} className="block">
+                                    <Link className="btn btn-secondary" to="/editor">Preskočiť</Link>
+                                    { ' ' }
+                                    <Link className="btn btn-primary" to="/editor" onClick={ () => this.handleLinkClick() }>Vybral som. Ďalej!</Link>
                                 </Col>
                             </Row>
                         </Col>

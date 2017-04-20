@@ -6,12 +6,12 @@ Indicator based on Codrops article, type: Zahi
  @import '../../utils/mixins.scss';
 
  .page-content_editor_theme .section--nav {
-     padding-top: 20px;
+     padding-top: 40px;
  }
 
 .section--nav {
 
-    margin-top: 17rem;
+    // margin-top: 3rem;
 
     @media (max-width: $screen-xs-max) {
         padding-top: 0;
@@ -21,17 +21,18 @@ Indicator based on Codrops article, type: Zahi
 
     .nav {
         position: relative;
-        width: 8em;
+        // width: 8em;
+        top: calc(50% - 150px);
 
-        &::before {
-            content: '';
-            position: absolute;
-            top: calc(-50vh);
-            left: 5px;
-            width: 2px;
-            height: 150vh;
-            background: $gray-light;
-        }
+        // &::before {
+        //     content: '';
+        //     position: absolute;
+        //     top: calc(-50vh);
+        //     left: 5px;
+        //     width: 2px;
+        //     height: 150vh;
+        //     background: $gray-lighterer;
+        // }
 
         a {
             @include remove-effects();
@@ -43,13 +44,13 @@ Indicator based on Codrops article, type: Zahi
         line-height: 1.6;
         position: relative;
         display: block;
-        margin: 0;
+        margin: 1.6rem 0;
         padding: 0;
         letter-spacing: 0;
         color: currentColor;
         border: 0;
         background: none;
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        -webkit-tap-highlighter-color: rgba(0,0,0,0);
     }
 
     .nav__item:focus {
@@ -59,8 +60,8 @@ Indicator based on Codrops article, type: Zahi
     // "Zahi" indicatior specific styling
 
     .nav--zahi .nav__item {
-        width: 6em;
-        margin-bottom: 6em;
+        // width: 6em;
+        // margin-bottom: 6em;
         text-align: left;
     }
 
@@ -77,7 +78,7 @@ Indicator based on Codrops article, type: Zahi
         width: 2px;
         // height: calc(2em - 12px);
         height: 200px;
-        background: $gray-light;
+        background: $gray-lighter;
     }
 
     .nav--zahi .nav__item::after {
@@ -86,10 +87,9 @@ Indicator based on Codrops article, type: Zahi
         width: 12px;
         height: 12px;
         margin: -5px 0 0 0;
-        border: 2px solid $gray-light;
+        border: 2px solid $gray-base;
         border-radius: 50%;
-        background: $gray-lighter;
-        -webkit-transition: -webkit-transform 0.3s, border-color 0.3s, border-width 0.3s, background 0.3s;
+        background: transparent;
         transition: transform 0.3s, border-color 0.3s, border-width 0.3s, background 0.3s;
     }
 
@@ -100,17 +100,17 @@ Indicator based on Codrops article, type: Zahi
 
     .nav--zahi .nav__item--current::after {
         border-width: 1px;
-        border-color: $gray-light;
+        border-color: $gray-base;
         -webkit-transform: scale3d(1.6,1.6,1);
         transform: scale3d(1.6,1.6,1);
-        background: $brand-info;
+        background: $gray-lighter;
         @include animation('sidebar_btn .3s 1');
     }
 
     .nav--zahi .nav__item:not(.nav__item--current):focus::after,
     .nav--zahi .nav__item:not(.nav__item--current):hover::after {
-        border-color: $gray-light;
-        background: $brand-info;
+        // border-color: $gray-lighterer;
+        background: $gray-lighter;
     }
 
     .nav--zahi .nav__item-title {
@@ -120,12 +120,13 @@ Indicator based on Codrops article, type: Zahi
         padding: 0 0 0 1.6em;
         white-space: nowrap;
         opacity: 0.3;
-        color: $gray-dark;
+        color: $text-color;
         -webkit-transition: opacity 0.3s, color 0.3s;
         transition: opacity 0.3s, color 0.3s;
+        // text-transform: uppercase;
 
-        @media (max-width: 540px) {
-            display: none;
+        @media (max-width: 1100px) {
+            visibility: hidden;
         }
     }
 
@@ -136,7 +137,9 @@ Indicator based on Codrops article, type: Zahi
 
     .nav--zahi .nav__item--current .nav__item-title {
         opacity: 1;
-        color: $gray-dark;
+        color: $text-color;
+        // text-decoration: underline;
+        // font-weight: 700;
     }
 
 }

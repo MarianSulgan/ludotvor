@@ -52,7 +52,6 @@ class Canvas extends Component {
         }
         const tempComponent = React.createElement('svg', attr, svgDataElement);
         const svgDataString = ReactElementToString(tempComponent);
-        console.log(svgDataString);
 
         let productImageUrl;
 

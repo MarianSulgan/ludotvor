@@ -20,6 +20,8 @@ class ImageWithIcon extends Component {
         this.setState({
             isActive: !this.state.isActive
         });
+        // console.log(this.props.ornamentId);
+        this.props.handleClick(this.props.ornamentId, !this.state.isActive);
     }
 
     isActive(value) {
@@ -27,15 +29,9 @@ class ImageWithIcon extends Component {
     }
     
     render() {
-
-        const imgStyle = {
-            padding: 10 + 'px',
-            float: 'left'
-        }
-
         return(
-            <span {...this.props} className={`pattern-item ${this.state.isActive ? 'has-check' : ''}`} onClick={ (e) => this.handleClick(e) }>
-                <Image style={ imgStyle } src="http://placehold.it/60x60" responsive />
+            <span className={`pattern-item ${this.state.isActive ? 'has-check' : ''}`} onClick={ (e) => this.handleClick(e) }>
+                <Image className="image image_ornament" src={ this.props.src } responsive />
             </span>
         );
     }
