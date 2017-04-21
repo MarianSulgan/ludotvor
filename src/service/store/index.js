@@ -10,11 +10,21 @@ function get(key) {
     return localStorage.getItem(key);
 }
 
+function getArr(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+
 function set(key, value) {
     return localStorage.setItem(key, value);
 }
 
+function setArr(key, arr) {
+    return localStorage.setItem(key, JSON.stringify(arr));
+}
+
 export const Store = {
     set: set,
-    get: get
+    get: get,
+    setArr: setArr,
+    getArr: getArr
 }

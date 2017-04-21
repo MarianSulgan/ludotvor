@@ -24,6 +24,7 @@ import Styleguide from '../../scenes/Styleguide';
 import Legal from '../../scenes/Legal';
 import NotFound from '../../scenes/NotFound';
 import Dashboard from '../../scenes/Dashboard';
+import Showcase from '../../scenes/Showcase';
 
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
@@ -62,6 +63,7 @@ class RoutesApp extends Component {
                         <Route path="/select-patterns" component={ SelectPatterns } />
                         <Route path="/editor" component={ Editor } />
                         <Route path="/export" component={ Export } />
+                        <Route path="/showcase" component={ Showcase } />
                         {/* footer links routes, legal info */}
                         <Route path="/legal-conditions" component={ Legal.Conditions } />
                         <Route path="/return-conditions" component={ Legal.Return } />

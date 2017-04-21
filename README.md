@@ -17,4 +17,6 @@ npm start
 ### Online
 To use the application online, browse to the production version available at <http://ludotvor.herokuapp.com>.
 
+
+## Credits
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

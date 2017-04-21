@@ -21,7 +21,7 @@ Indicator based on Codrops article, type: Zahi
 
     .nav {
         position: relative;
-        // width: 8em;
+        z-index: 2;
         top: calc(50% - 150px);
 
         // &::before {

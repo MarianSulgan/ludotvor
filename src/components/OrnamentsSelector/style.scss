@@ -1,0 +1,32 @@
+@import '../../utils/variables.scss';
+
+.block__info-text {
+    padding: 15px;
+    margin: 0;
+}
+
+.info-text__text {
+    position: relative;
+    top: 2px;
+}
+
+.row__ornament-selector {
+    display: block;
+    background-color: $gray-lighter;
+    margin: 0;
+    padding: 0 !important;
+    max-width: 51.2rem;
+}
+
+.row__ornament-selector_standalone {
+    margin: 0 auto 15px 15px;
+    padding: 5px;
+}
+
+.ornament-selector-block {
+    margin-left: 15px;
+
+    & > .row {
+        margin-right: 15px;
+    }
+}

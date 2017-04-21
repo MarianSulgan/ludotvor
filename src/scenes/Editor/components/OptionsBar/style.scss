@@ -1,12 +1,62 @@
-.block_sidebar {
+@import '../../../../utils/variables.scss';
+
+.sidebar {
     height: calc(100vh - 50px);
     padding: 1em;
 }
 
 .sidebar__block {
     margin-top: 1.6rem;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 
 .block__button {
     margin-top: 1.6rem;
+}
+
+.block__button_main {
+    min-width: 100%;
+}
+
+$slider-color-1: $brand-primary;
+
+.rc-slider-handle {
+    width: 22px;
+    height: 22px;
+    margin-left: -11px;
+    margin-top: -10px;
+    border-color: $slider-color-1;
+
+    &:hover {
+        border-color: $slider-color-1;
+    }
+}
+
+.rc-slider-track {
+    background-color: $brand-primary;
+}
+
+.rc-slider-dot-active {
+    border-color: $brand-primary;
+}
+
+.circle-picker {
+    width: auto !important;
+    z-index: 1;
+    position: relative;
+
+    & > span:last-of-type > div {
+        box-shadow: rgb(200, 200, 200) 0px 0px 0px 3px inset;
+        border-radius: 50%;
+
+        // &:after {
+        //     content: "\2A2F";
+        //     position: absolute;
+        //     left: 6px;
+        //     top: -3px;
+        //     font-size: 1.6em;
+        //     color: rgb(200,200,200);
+        // }
+    }
 }

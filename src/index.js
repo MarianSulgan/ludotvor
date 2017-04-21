@@ -6,6 +6,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'es6-shim';
 
 import Routes from './components/Routes';
 

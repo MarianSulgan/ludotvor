@@ -10,11 +10,13 @@
  */
 
 import React, { Component } from 'react';
-import ReactElementToString from 'react-element-to-string';
+// import ReactElementToString from 'react-element-to-string';
 
 import SvgWrapper from './components/SvgWrapper';
-import bagImage from './images/bag.jpg';
 import Products from 'data/products';
+
+import bagImage from './images/bag.jpg';
+import tshirtImage from './images/tshirt.png';
 
 import './style.css';
 
@@ -45,30 +47,38 @@ class Canvas extends Component {
             svgDataElement = _svgDataElement;
         }
 
-        const attr = { 
-            version:"1.1",
-            baseProfile:"full",
-            xmlns:"http://www.w3.org/2000/svg"
-        }
-        const tempComponent = React.createElement('svg', attr, svgDataElement);
-        const svgDataString = ReactElementToString(tempComponent);
+        // const attr = { 
+        //     version:"1.1",
+        //     baseProfile:"full",
+        //     xmlns:"http://www.w3.org/2000/svg"
+        // }
+        // const tempComponent = React.createElement('svg', attr, svgDataElement);
+        // const svgDataString = ReactElementToString(tempComponent);
 
-        let productImageUrl;
+        let productImageUrl, productClass;
 
         switch (productType) {
             case Products.Bag: 
-                productImageUrl = bagImage; 
+                productImageUrl = bagImage;
+                productClass = "product__bag";
+                break;
+            case Products.Tshirt: 
+                productImageUrl = tshirtImage; 
+                productClass = "product__tshirt";
+                break;
+            case Products.Digital: 
+                // productImageUrl = digitalImage; 
+                productClass = "product__digital";
                 break;
             default: 
                 productImageUrl = "";
         }
 
-        const canvas__layer_product__style = {
-            backgroundImage: 'url(' + productImageUrl + ')'
-        };
+        const canvas__layer_product__style = 
+        (productType == Products.Digital) ? {} : { backgroundImage: 'url(' + productImageUrl + ')' };
 
         return (
-            <div className="canvas canvas_editor">
+            <div className={`canvas canvas_editor ${productClass}`}>
                 <div style={ canvas__layer_product__style } className="canvas__layer canvas__layer_product"></div>
                 <div className="canvas__layer canvas__layer_svg">
                     <SvgWrapper content={ svgDataElement } />

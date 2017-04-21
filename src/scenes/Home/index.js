@@ -59,6 +59,11 @@ class Home extends Component {
               <Image className="block__image block__image_showcase" src="http://placehold.it/350x150" responsive />
             </Col>
           </Row>
+          <Row className="text-center">
+            <Link to="/showcase">
+              <Button bsStyle="default" bsSize="large" className="block__button">Chcem si prezrieť výtvory</Button>
+            </Link>
+          </Row>
         </Grid>
       </div>
     )

@@ -135,6 +135,7 @@ async function generatePattern(options, callback) {
                 break;
             default:
                 console.log('Sorry for party rocking.');
+                return;
         }
 
         let str = "0";

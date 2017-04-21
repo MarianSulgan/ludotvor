@@ -38,6 +38,7 @@ class Editor extends Component {
             verticalCount: 4,
             basicShapesIds: JSON.parse(Store.get("options.ornaments"))
         }
+        this.renderProduct(options.productType);
         this.renderPattern(options);
     }
 
@@ -51,7 +52,12 @@ class Editor extends Component {
             verticalCount: 4,
             basicShapesIds: JSON.parse(Store.get("options.ornaments"))
         }
+        this.renderProduct(newOptions.productType);
         this.renderPattern(newOptions);
+    }
+
+    renderProduct(type) {
+        this.setState({ productType: type });
     }
 
     renderPattern(options) {
@@ -60,7 +66,7 @@ class Editor extends Component {
 
         // result is data container
         Generator.generatePattern(options, (result) => {
-            this.setState({ patternData: result, productType: options.productType });
+            this.setState({ patternData: result });
         });
     }
 

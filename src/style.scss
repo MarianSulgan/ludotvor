@@ -5,7 +5,8 @@ Styles placed here are meant to be somehow shared,
 used across scenes and components. Or very much general.
 */
 
-@import './utils/variables.scss';
+@import 'utils/variables.scss';
+@import 'utils/mixins.scss';
 
 $navbar-height: 50px; // header navbar + margin bottom
 
@@ -52,4 +53,12 @@ body {
 
 div > .section--nav {
   height: calc(100vh - #{$navbar-height});
+}
+
+.button_unstyled {
+  @include remove-effects();
+
+  &:hover, &:focus, &:active, &:active:focus, &:visited {
+    @include remove-effects();
+  }
 }

@@ -10,24 +10,117 @@ $min-canvas-width: 390px; //580 px for smaller heights
     bottom: 0;
 }
 
-.canvas__layer {
-    width: 100%;
-    max-width: $max-canvas-width; // otherwise, product image might be too big
-    min-width: $min-canvas-width; // otherwise it gets shifted, shrinks
-    position: absolute;
-    background-repeat: no-repeat;
-    background-position: bottom;
+.product__bag {
+
+    .canvas__layer {
+        width: 100%;
+        max-width: $max-canvas-width; // otherwise, product image might be too big
+        min-width: $min-canvas-width; // otherwise it gets shifted, shrinks
+        position: absolute;
+        background-repeat: no-repeat;
+        background-position: bottom;
+    }
+
+    .canvas__layer_product {
+        // background-image is set programatically
+        background-size: cover;
+        top: -50px;
+        height: calc(100vh);
+        position: relative;
+        margin: 0 auto;
+        margin-bottom: calc(-100vh + -50px);
+    }
+
+    .canvas__layer_svg {
+        // background-image is set programatically
+        /* bottom: 750px; */
+        /* padding: 6em 5.2em 6em 4em; */
+        position: relative;
+        margin: 0 auto;
+        z-index: 1;
+        height: calc(100vh);
+        min-width: 470px;
+        /* margin-bottom: -100vh; */
+    }
+
 }
 
-.canvas__layer_product {
-    // background-image is set programatically
-    background-size: cover;
-    top: -50px;
-    height: calc(100vh);
+.product__tshirt {
+
+    .canvas__layer {
+        width: 100%;
+        max-width: $max-canvas-width; // otherwise, product image might be too big
+        min-width: $min-canvas-width; // otherwise it gets shifted, shrinks
+        position: absolute;
+        background-repeat: no-repeat;
+        background-position: bottom;
+    }
+
+    .canvas__layer_product {
+        // background-image is set programatically
+        background-size: cover;
+        top: -50px;
+        height: calc(100vh);
+        margin: 0 auto;
+        margin-bottom: calc(-100vh + -50px);
+        max-width: 900px;
+        min-width: 765px;
+        position: absolute;
+        right: -50px;
+    }
+
+    .canvas__layer_svg {
+        position: absolute;
+        margin: 0 auto;
+        z-index: 1;
+        height: calc(100vh);
+        max-width: 900px;
+        min-width: 765px;
+        right: -50px;
+    }
+
+    .layer__svg {
+        padding: 0 12em 23em 15em;
+    }
+
 }
 
-.canvas__layer_svg {
-    // background-image is set programatically
-    bottom: 50px;
-    padding: 6em 5.2em 6em 4em;
+.product__digital {
+
+    .canvas__layer {
+        width: 100%;
+        max-width: $max-canvas-width; // otherwise, product image might be too big
+        min-width: $min-canvas-width; // otherwise it gets shifted, shrinks
+        position: absolute;
+        background-repeat: no-repeat;
+        background-position: bottom;
+    }
+
+    .canvas__layer_product {
+        // background-image is set programatically
+        background-size: cover;
+        top: -50px;
+        height: calc(100vh);
+        position: relative;
+        margin: 0 auto;
+        margin-bottom: calc(-100vh + -50px);
+    }
+
+    .canvas__layer_svg {
+        // background-image is set programatically
+        /* bottom: 750px; */
+        /* padding: 6em 5.2em 6em 4em; */
+        position: relative;
+        margin: 0 auto;
+        z-index: 1;
+        height: calc(100vh);
+        /* margin-bottom: -100vh; */
+        display: flex;
+        align-items: center;
+    }
+
+    .layer__svg {
+        bottom: inherit;
+    }
+
 }
