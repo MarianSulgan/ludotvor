@@ -15,7 +15,7 @@ import ImageBag from './images/bag.svg';
 import ImageTshirt from './images/tshirt.svg';
 import ImageDigital from './images/digital.svg';
 
-import Ornaments from 'data/ornaments';
+import Ornaments from '../../data/ornaments';
 import { Store } from 'service/store';
 import Products from 'data/products';
 
