@@ -5,7 +5,7 @@
  * @todo: remove after rebuilding with redux
  */
 
- const Layouts = {
+const Layouts = {
     Grid: "0",
     Lines: "1",
     Free: "2"

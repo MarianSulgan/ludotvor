@@ -66,7 +66,11 @@ $min-canvas-width: 390px; //580 px for smaller heights
         max-width: 900px;
         min-width: 765px;
         position: absolute;
-        right: -50px;
+        @media screen and (max-width: 1100px) {
+            & {
+                right: -50px;
+            }
+        }
     }
 
     .canvas__layer_svg {
@@ -76,7 +80,16 @@ $min-canvas-width: 390px; //580 px for smaller heights
         height: calc(100vh);
         max-width: 900px;
         min-width: 765px;
-        right: -50px;
+        @media screen and (min-width: 800px) {
+            & {
+                transform: scale(0.95);
+            }
+        }
+        @media screen and (max-width: 1100px) {
+            & {
+                right: -50px;
+            }
+        }
     }
 
     .layer__svg {
