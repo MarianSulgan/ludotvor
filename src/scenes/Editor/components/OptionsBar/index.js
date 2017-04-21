@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Toggle from 'react-toggle';
-import 'utils/toggle.css';
+import '../../../../utils/toggle.css';
 import { CirclePicker } from 'react-color';
 
 import OrnamentsSelector from 'components/OrnamentsSelector';
