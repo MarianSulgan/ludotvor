@@ -46,12 +46,12 @@ class Editor extends Component {
                 basicShapesIds: JSON.parse(Store.get("options.ornaments")),
                 blackandwhite: false,
                 chaos: false,
-                color: false,
+                color: "transparent",
                 marginValue: 8,
                 transform: false,
                 canvasHeight: canvasHeight,
                 canvasWidth: canvasWidth,
-                svgSide: svgSide
+                svgSide: svgSide,
             }
         }
     }
@@ -90,7 +90,7 @@ class Editor extends Component {
         }})
 
         // result is data container
-        Generator.generatePattern(options, (result) => {
+        Generator.generatePattern(options, (result, viewBox) => {
             this.setState({ patternData: result });
         });
     }
@@ -112,7 +112,7 @@ class Editor extends Component {
                 transform: opts.transform,
                 canvasHeight: canvasHeight,
                 canvasWidth: canvasWidth,
-                svgSide: svgSide
+                svgSide: svgSide,
             }
         })
         // render
@@ -141,7 +141,9 @@ class Editor extends Component {
                                         productType={ this.state.productType }
                                         patternData={this.state.patternData } 
                                         width={ this.state.options.canvasWidth } 
-                                        height={ this.state.options.canvasHeight } />
+                                        height={ this.state.options.canvasHeight } 
+                                        patternBorderSize={ 60 }
+                                        backgroundColor={ this.state.options.color }/>
                                 </Col>
                             </Row>
                         </Col>

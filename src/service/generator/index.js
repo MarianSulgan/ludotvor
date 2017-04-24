@@ -75,7 +75,7 @@ async function generatePattern(options, callback) {
     */
 
     let shapeContainers = [];
-    let viewBox = "0 0 800 800";
+    // let viewBox = "0 0 800 800";
 
     // console.log(options.layoutType);
     // console.log(Layouts.Grid);
@@ -280,7 +280,7 @@ async function generatePattern(options, callback) {
             callback({
                 staticSvgs: staticSvgs, 
                 shapeContainers: shapeContainers
-            }, viewBox);
+            });
         });
 }
 

@@ -22,7 +22,8 @@ const colorSwatches = [
     "#3f51b5", "#2196f3", "#03a9f4", "#00bcd4", 
     "#009688", "#4caf50", "#8bc34a", "#cddc39", 
     "#ffeb3b", "#ffc107", "#ff9800", "#ff5722", 
-    "#795548", "#607d8b", "#000000", "ffffff"
+    "#795548", "#607d8b", "#ffffff",
+    "#fffff1" // this is temp color used to simulate button inside color swatches
 ];
 
 class OptionsBar extends Component {
@@ -81,7 +82,12 @@ class OptionsBar extends Component {
     }
 
     onColorPicked = (color, e) => {
-        this.setState({ color: color.hex }, () => {
+        let col;
+        if (color.hex === "#fffff1")
+            col = "transparent";
+        else
+            col = color.hex;
+        this.setState({ color: col }, () => {
             this.handleOptionsChange();
         });
     }

@@ -21,6 +21,21 @@
     min-width: 100%;
 }
 
+.color-span {
+  width: 28px; 
+  height: 28px; 
+  margin-right: 14px; 
+  margin-bottom: 14px; 
+  transform: scale(1); 
+  transition: transform 100ms ease;
+}
+
+
+/* *********************************************** */
+/* RC SLIDER */
+/* *********************************************** */
+
+
 $slider-color-1: $brand-primary;
 
 .rc-slider-handle {
@@ -43,30 +58,48 @@ $slider-color-1: $brand-primary;
     border-color: $brand-primary;
 }
 
+/* *********************************************** */
+/* CIRCLE PICKER */
+/* *********************************************** */
+
 .circle-picker {
     width: auto !important;
     z-index: 1;
     position: relative;
 
-    & > span:last-of-type > div {
-        box-shadow: rgb(200, 200, 200) 0px 0px 0px 3px inset;
+    & > span:nth-last-of-type(2) > div {
+        // box-shadow: rgb(200, 200, 200) 0px 0px 0px 3px inset;
         border-radius: 50%;
+        border: 3px solid #333;
+    }
 
-        // &:after {
-        //     content: "\2A2F";
-        //     position: absolute;
-        //     left: 6px;
-        //     top: -3px;
-        //     font-size: 1.6em;
-        //     color: rgb(200,200,200);
-        // }
+    & > span:nth-last-of-type(1) > div {
+        // box-shadow: rgb(20, 20, 20) 0px 0px 0px 3px inset;
+        border-radius: 50%;
+        position: relative;
+
+        &:before {
+            content: "\2A2F";
+            position: absolute;
+            left: 6px;
+            top: -2px;
+            font-size: 1.6em;
+            color: rgb(20,20,20);
+            cursor: pointer;
+            z-index: -999;
+        }
+    }
+
+    div[title="#fffff1"] {
+      // visibility: hidden;
+      box-shadow: none !important;
     }
 }
 
 
-/* **************************************************** */
-/* TOGGLE.CSS */
-/* **************************************************** */
+/* *********************************************** */
+/* TOGGLE */
+/* *********************************************** */
 
 
 .react-toggle {

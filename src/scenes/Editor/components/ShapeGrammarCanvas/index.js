@@ -84,7 +84,9 @@ class Canvas extends Component {
                     <SvgWrapper 
                         content={ svgDataElement } 
                         width={ this.props.width } 
-                        height={ this.props.height } />
+                        height={ this.props.height } 
+                        patternBorderSize={ this.props.patternBorderSize } 
+                        backgroundColor={ this.props.backgroundColor }/>
                 </div>
             </div>
         );

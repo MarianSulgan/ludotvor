@@ -34,7 +34,7 @@ class Home extends Component {
             </Col>
           </Row>
         </Grid>
-        <Grid className="page-content page-content_gray" fluid>
+        {/*<Grid className="page-content page-content_gray" fluid>
           <Row>
             <Col xs={12} className="block">
               <h1 className="text block__headline block__headline_h1">Ľudo, tvor! A ľud tvoril.</h1>
@@ -64,7 +64,7 @@ class Home extends Component {
               <Button bsStyle="default" bsSize="large" className="block__button">Chcem si prezrieť výtvory</Button>
             </Link>
           </Row>
-        </Grid>
+        </Grid>*/}
       </div>
     )
   };
