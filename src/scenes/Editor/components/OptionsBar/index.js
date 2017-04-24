@@ -8,12 +8,11 @@ import { Link } from 'react-router-dom';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Toggle from 'react-toggle';
-// import '../../../../utils/toggle.css';
 import { CirclePicker } from 'react-color';
 
-import OrnamentsSelector from 'components/OrnamentsSelector';
-import { Store } from 'service/store';
-import Ornaments from 'data/ornaments';
+// import OrnamentsSelector from 'components/OrnamentsSelector';
+// import { Store } from 'service/store';
+// import Ornaments from 'data/ornaments';
 import FontAwesome from 'react-fontawesome';
 
 import './style.css';
@@ -32,16 +31,18 @@ class OptionsBar extends Component {
         super(props);
         this.state = {
             blockCount: 4,
-            marginValue: 0,
+            marginValue: 8,
             blackandwhite: false,
             chaos: false,
-            trnasform: false,
+            transform: false,
             color: "ffffff"
         }
     }
 
     handleOptionsChange() {
-        console.log("options changed");
+        this.props.handleOptionsChange(this.state);
+        // console.log("options changed");
+        console.log(this.state);
     }
 
     handleClick() {
@@ -49,37 +50,40 @@ class OptionsBar extends Component {
     }
 
     onBlockSliderChange = (val) => {
-        this.setState({ blockCount: val });
-        this.handleOptionsChange();
+        this.setState({ blockCount: val }, () => {
+            this.handleOptionsChange();
+        });
+        
     }
 
     onMarginSliderChange = (val) => {
-        this.setState({ marginValue: val });
-        this.handleOptionsChange();
+        this.setState({ marginValue: val }, () => {
+            this.handleOptionsChange();
+        });
     }
 
     onColorSettingChange = (e) => {
-        // this.setState({ blackandwhite: e.target.checked });
-        // console.log("black and white: ", e.target.checked);
-        // this.handleOptionsChange();
+        this.setState({ blackandwhite: e.target.checked }, () => {
+            this.handleOptionsChange();
+        });
     }
 
     onChaosSettingChange = (e) => {
-        // this.setState({ chaos: !e.target.checked });
-        // console.log("randomness in generation: ", e.target.checked);
-        // this.handleOptionsChange();
+        this.setState({ chaos: !e.target.checked }, () => {
+            this.handleOptionsChange();
+        });
     }
 
     onTransformSettingChange = (e) => {
-        // this.setState({ transform: e.target.checked });
-        // console.log("use transformations: ", e.target.checked);
-        // this.handleOptionsChange();
+        this.setState({ transform: e.target.checked }, () => {
+            this.handleOptionsChange();
+        });
     }
 
     onColorPicked = (color, e) => {
-        this.setState({ color: color.hex });
-        console.log("picked color: ", color);
-        this.handleOptionsChange();
+        this.setState({ color: color.hex }, () => {
+            this.handleOptionsChange();
+        });
     }
 
     render() {
@@ -99,13 +103,13 @@ class OptionsBar extends Component {
                     <OrnamentsSelector ornamentsArr={ tempArr } isStandalone={ false } />
                 </Row>*/}
 
-                <Row>
+                {/*<Row>
                     <h2 className="block__headline block__headline_left">
                         Nastavenia
                         {' '}
                         <Button className="button button_unstyled"><FontAwesome name="close" size="2x"/></Button>
                     </h2>
-                </Row>
+                </Row>*/}
 
                 <Row className="sidebar__block">
                     <p>
@@ -117,17 +121,17 @@ class OptionsBar extends Component {
                         max={10}
                         dots
                         defaultValue={4}
-                        onChange={ this.onBlockSliderChange }/>
+                        onAfterChange={ this.onBlockSliderChange }/>
                     
                 </Row>
 
                 <Row className="sidebar__block">
                     <p>Medzery medzi blokmi</p>
                     <Slider 
-                        min={1}
-                        max={10}
+                        min={0}
+                        max={9}
                         defaultValue={8}
-                        onChange={ this.onMarginSliderChange }/>
+                        onAfterChange={ this.onMarginSliderChange }/>
                 </Row>
 
                 {/*<Row className="sidebar__block">
@@ -181,6 +185,14 @@ class OptionsBar extends Component {
                     <br />
                     {/*next page button, save, buy, export*/}
                     <Link className="block__button block__button_main btn btn-success" to="/export">Hotovo. Ďalej!</Link>
+                </Row>
+
+                <Row className="sidebar__block text-center">
+                    <p className="small">
+                        Máte nápad na niečo iné?&#8200;
+                        <Link to="/contact">Napíšte nám.</Link> 
+                        &#8200;Spravíme Vám niečo na mieru.&#8200;<em>Vzor aj softvér.</em>
+                    </p>
                 </Row>
             </Col>         
         );

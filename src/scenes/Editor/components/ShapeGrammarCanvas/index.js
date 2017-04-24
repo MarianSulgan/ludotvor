@@ -15,7 +15,7 @@ import React, { Component } from 'react';
 import SvgWrapper from './components/SvgWrapper';
 import Products from 'data/products';
 
-import bagImage from './images/bag.jpg';
+import bagImage from './images/bag.png';
 import tshirtImage from './images/tshirt.png';
 
 import './style.css';
@@ -75,13 +75,16 @@ class Canvas extends Component {
         }
 
         const canvas__layer_product__style = 
-        (productType == Products.Digital) ? {} : { backgroundImage: 'url(' + productImageUrl + ')' };
+        (productType === Products.Digital) ? {} : { backgroundImage: 'url(' + productImageUrl + ')' };
 
         return (
             <div className={`canvas canvas_editor ${productClass}`}>
                 <div style={ canvas__layer_product__style } className="canvas__layer canvas__layer_product"></div>
                 <div className="canvas__layer canvas__layer_svg">
-                    <SvgWrapper content={ svgDataElement } />
+                    <SvgWrapper 
+                        content={ svgDataElement } 
+                        width={ this.props.width } 
+                        height={ this.props.height } />
                 </div>
             </div>
         );

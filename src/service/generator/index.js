@@ -6,6 +6,7 @@
  * @todo: create database for basic shapes, so it is searchable for ID when fetching svgs from particular location
  * @todo: refactor
  * @todo: create API (expose)
+ * @todo: clean code
  */
 
 import 'whatwg-fetch'; // fetch polyfill for IE and similar
@@ -74,9 +75,10 @@ async function generatePattern(options, callback) {
     */
 
     let shapeContainers = [];
+    let viewBox = "0 0 800 800";
 
-    console.log(options.layoutType);
-    console.log(Layouts.Grid);
+    // console.log(options.layoutType);
+    // console.log(Layouts.Grid);
 
     if (options.layoutType === Layouts.Grid) {
 
@@ -178,7 +180,7 @@ async function generatePattern(options, callback) {
 
         } while(str.length < gridSize)
 
-        console.log(str);
+        // console.log(str);
 
         /**
          * Render structure from string
@@ -188,18 +190,30 @@ async function generatePattern(options, callback) {
         Array.prototype.map.call(str, function(x) {
             arr.push(x.charCodeAt(0) - "A".charCodeAt(0));
         });
-        console.log(arr);
+        // console.log(arr);
 
+        console.log(options);
+        let viewBoxParams = [40, 40, 680, 680];
+        let side = options.svgSide;
+
+        // @todo: move up all static variables from FOR cycle to speed up
         for (let i = 0; i < gridSize; i++) {
 
-            // determine size of tile
-            let side = 90;
-            if (side > maxSideSize) 
-                side = defautSideSize;
-
             // determine margin for tile
-            let margin = 80;
-            let patternMargin = 0;
+            const margin = options.marginValue * 10;
+            // offset to [0,0]
+            // const patternMargin = -margin/2;
+            const patternMargin = 0;
+
+            // determine size of tile
+            const refW = options.canvasWidth;
+            const n = options.horizontalCount;
+            // let side = (refW - (n - 1) * margin) / n;
+            
+            console.log(side);
+            // let side = 90;
+            // if (side > maxSideSize) 
+            //     side = defautSideSize;
 
             // calculate position for each tile
             let k = i % options.horizontalCount;
@@ -213,11 +227,22 @@ async function generatePattern(options, callback) {
             shapeContainers[i].shapeId = options.basicShapesIds[index];
             shapeContainers[i].index = index;
 
-            // create transforms
-            let temp = (side / referenceSvgWidth) * (referenceSvgWidth / defautSideSize);
-            let transforms = `scale(${temp})`;
+            // create transforms 
+            // ! NOTE: transforms work from RIGHT to LEFT !
+            // let temp = (side / referenceSvgWidth) * (referenceSvgWidth / defautSideSize);
+            // let transforms = `scale(${temp})`;
+            // let transforms = "";
+            // let a, b, c, d;
+            // a = b = temp * viewBoxParams[0];
+            // b = temp * viewBoxParams[1];
+            // c = d = 680;
+            // d = temp * viewBoxParams[3];
+            // viewBox = `${temp * viewBoxParams[0]} ${temp * viewBoxParams[1]} ${viewBoxParams[2]} ${viewBoxParams[3]}`;
+            // viewBox = `${a} ${b} ${c} ${d}`
             //  merge positioning and transforms
-            shapeContainers[i].transforms = `translate(${shapeContainers[i].position.x}, ${shapeContainers[i].position.y}) ` + transforms;
+            let val = refW / (n * side + (n - 1) * margin);
+            let transforms = `scale(${val}) `;
+            shapeContainers[i].transforms = transforms + `translate(${shapeContainers[i].position.x}, ${shapeContainers[i].position.y})`;
         }
 
     } else if (options.layoutType === Layouts.Lines) {
@@ -250,12 +275,12 @@ async function generatePattern(options, callback) {
     Promise
         .all(urls.map(grabContent))
         .then(() => {
-            console.log(`Urls ${urls} were grabbed`);
+            // console.log(`Urls ${urls} were grabbed`);
             // pass relevant data as callback in scenes/Editor
             callback({
                 staticSvgs: staticSvgs, 
                 shapeContainers: shapeContainers
-            });
+            }, viewBox);
         });
 }
 

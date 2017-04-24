@@ -1,10 +1,13 @@
+/**
+ * Select Pattern (=Ornament) Page
+ */
+
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import SideNavigation from '../../components/SideNavigation';
 import OrnamentsSelector from 'components/OrnamentsSelector'
-import { Store } from 'service/store';
 
 import './style.css';
 

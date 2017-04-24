@@ -1,0 +1,14 @@
+@import '../../utils/material.scss';
+
+.page__alert {
+    position: absolute;
+    min-width: 70%;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 2;
+    cursor: pointer;
+}
+
+.alert-dismissable .close, .alert-dismissible .close {
+    top: 1px !important;
+}

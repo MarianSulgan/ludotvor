@@ -43,6 +43,15 @@ $min-canvas-width: 390px; //580 px for smaller heights
         /* margin-bottom: -100vh; */
     }
 
+    .layer__svg {
+        padding: 4em;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: auto;
+    }
+
 }
 
 .product__tshirt {
@@ -80,11 +89,6 @@ $min-canvas-width: 390px; //580 px for smaller heights
         height: calc(100vh);
         max-width: 900px;
         min-width: 765px;
-        @media screen and (min-width: 800px) {
-            & {
-                transform: scale(0.95);
-            }
-        }
         @media screen and (max-width: 1100px) {
             & {
                 right: -50px;
@@ -93,7 +97,12 @@ $min-canvas-width: 390px; //580 px for smaller heights
     }
 
     .layer__svg {
-        padding: 0 12em 23em 15em;
+        position: absolute;
+        left: 0;
+        bottom: 10em;
+        width: 100%;
+        height: auto;
+        padding: 14em;
     }
 
 }

@@ -3,15 +3,15 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="200px" height="200px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
-<!--<rect width="200" height="200"/>-->
-<path fill="#FFFFFF" d="M120,40H80H40v40v40v40h40h40h40v-40V80V40H120z M120,120H80V80h40V120z"/>
-<rect x="80" y="80" fill="#ED1C24" width="40" height="40"/>
-<circle cx="60" cy="60" r="10"/>
-<circle cx="100" cy="60" r="10"/>
-<circle cx="140" cy="60" r="10"/>
-<circle cx="60" cy="140" r="10"/>
-<circle cx="100" cy="140" r="10"/>
-<circle cx="140" cy="140" r="10"/>
-<circle cx="140" cy="100" r="10"/>
-<circle cx="60" cy="100" r="10"/>
+<path fill="#FFFFFF" d="M133.333,0H66.667H0v66.667v66.667V200h66.667h66.667H200v-66.667V66.667V0H133.333z M133.333,133.333
+	H66.667V66.667h66.667V133.333z"/>
+<rect x="66.667" y="66.667" fill="#ED1C24" width="66.667" height="66.667"/>
+<circle cx="33.333" cy="33.333" r="16.667"/>
+<circle cx="100" cy="33.333" r="16.667"/>
+<circle cx="166.667" cy="33.333" r="16.667"/>
+<circle cx="33.333" cy="166.667" r="16.667"/>
+<circle cx="100" cy="166.667" r="16.667"/>
+<circle cx="166.667" cy="166.667" r="16.667"/>
+<circle cx="166.667" cy="100" r="16.667"/>
+<circle cx="33.333" cy="100" r="16.667"/>
 </svg>
