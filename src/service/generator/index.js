@@ -7,16 +7,12 @@
  * @todo: refactor
  * @todo: create API (expose)
  * @todo: clean code
+ * @todo: create sets of rules
  */
 
 import 'whatwg-fetch'; // fetch polyfill for IE and similar
 
 import Layouts from 'data/layouts';
-
-const referenceSvgWidth = 200; // width of svg image (all redrawn ornaments should have this width!)
-const defautSideSize = 120; // default size of one svg ornament
-const maxSideSize = referenceSvgWidth;
-
 
 // Extension of String class, with replaceAll functionality
 // eslint-disable-next-line
@@ -61,24 +57,11 @@ class ShapeContainer {
  */
 async function generatePattern(options, callback) {
 
-    /*
-    let DB = datastore({
-        filename: 'db.json',
-        autoload: true
-    });
-    
-    // DEBUG ONLY!!!
-    // erase line below, it deletes db so there is insert 
-    await DB.remove({}, { multi: true });
-    // populate database
-    await DB.insert(basicShapes);
-    */
-
     let shapeContainers = [];
-    // let viewBox = "0 0 800 800";
 
-    // console.log(options.layoutType);
-    // console.log(Layouts.Grid);
+    /**
+     * GRID
+     */
 
     if (options.layoutType === Layouts.Grid) {
 
@@ -109,7 +92,8 @@ async function generatePattern(options, callback) {
                     { left: "A", right: "AB" },
                     { left: "B", right: "BA" },
                     { left: "A", right: "AA" },
-                    { left: "B", right: "BB" }
+                    { left: "B", right: "BB" },
+                    { left: "AA", right: "ABAB"}
                 ];
                 break;
             case 3:
@@ -128,6 +112,16 @@ async function generatePattern(options, callback) {
                 break;
             case 4:
                 console.log("Rule set 4");
+                rules = [
+                    { left: "0", right: "A" },
+                    { left: "0", right: "B" },
+                    { left: "0", right: "C" },
+                    { left: "0", right: "D" },
+                    { left: "A", right: "AACC" },
+                    { left: "B", right: "BA" },
+                    { left: "C", right: "CCDD" },
+                    { left: "D", right: "ABCD" },
+                ]
                 break;
             case 5:
                 console.log("Rule set 5");
@@ -144,7 +138,7 @@ async function generatePattern(options, callback) {
         let lastRule = null;
         do {
 
-            // find all apliable rules
+            // find all appliable rules
             let nowRules = [];
             for (let i = 0; i < rules.length; i++) {
                 if (str.includes(rules[i].left))
@@ -190,7 +184,6 @@ async function generatePattern(options, callback) {
         Array.prototype.map.call(str, function(x) {
             arr.push(x.charCodeAt(0) - "A".charCodeAt(0));
         });
-        // console.log(arr);
 
         console.log(options);
         let viewBoxParams = [40, 40, 680, 680];
@@ -202,19 +195,12 @@ async function generatePattern(options, callback) {
             // determine margin for tile
             const margin = options.marginValue * 10;
             // offset to [0,0]
-            // const patternMargin = -margin/2;
             const patternMargin = 0;
 
             // determine size of tile
             const refW = options.canvasWidth;
             const n = options.horizontalCount;
-            // let side = (refW - (n - 1) * margin) / n;
             
-            console.log(side);
-            // let side = 90;
-            // if (side > maxSideSize) 
-            //     side = defautSideSize;
-
             // calculate position for each tile
             let k = i % options.horizontalCount;
             let l = Math.floor(i / options.horizontalCount);
@@ -228,20 +214,10 @@ async function generatePattern(options, callback) {
             shapeContainers[i].index = index;
 
             // create transforms 
-            // ! NOTE: transforms work from RIGHT to LEFT !
-            // let temp = (side / referenceSvgWidth) * (referenceSvgWidth / defautSideSize);
-            // let transforms = `scale(${temp})`;
-            // let transforms = "";
-            // let a, b, c, d;
-            // a = b = temp * viewBoxParams[0];
-            // b = temp * viewBoxParams[1];
-            // c = d = 680;
-            // d = temp * viewBoxParams[3];
-            // viewBox = `${temp * viewBoxParams[0]} ${temp * viewBoxParams[1]} ${viewBoxParams[2]} ${viewBoxParams[3]}`;
-            // viewBox = `${a} ${b} ${c} ${d}`
-            //  merge positioning and transforms
             let val = refW / (n * side + (n - 1) * margin);
             let transforms = `scale(${val}) `;
+            //  merge positioning and transforms
+            // ! NOTE: transforms work from RIGHT to LEFT !
             shapeContainers[i].transforms = transforms + `translate(${shapeContainers[i].position.x}, ${shapeContainers[i].position.y})`;
         }
 

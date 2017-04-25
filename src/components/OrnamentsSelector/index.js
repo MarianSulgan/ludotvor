@@ -48,7 +48,8 @@ class OrnamentsSelector extends Component {
                 key={ index } 
                 src={ elem.url } 
                 ornamentId={ elem.id.toString() } 
-                handleClick={ (id, state) => this.handleClick(id, state) } />
+                handleClick={ (id, state) => this.handleClick(id, state) } 
+                elemData={ Ornaments[index] }/>
         );
         this.setState({ images: _images });
     }

@@ -6,8 +6,10 @@ import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import SideNavigation from '../../components/SideNavigation';
+import SideNavigation from 'components/SideNavigation';
 import OrnamentsSelector from 'components/OrnamentsSelector'
+
+import Filter from './components/Filter';
 
 import './style.css';
 
@@ -31,6 +33,9 @@ class SelectPatterns extends Component {
                                 <p className="text block__text_left">
                                     <small>Ak chceš pridať aj prvky svojho obľúbeného vzoru a nie sú tu, <Link to="/contact">napíš nám</Link>. Pridáme.</small>
                                 </p>
+                            </Row>
+                            <Row>
+                                {/*<Filter />*/}
                             </Row>
                             <Row>
                                 <OrnamentsSelector all isStandalone={ true } />

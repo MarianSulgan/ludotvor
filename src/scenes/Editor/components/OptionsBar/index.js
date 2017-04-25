@@ -22,7 +22,7 @@ const colorSwatches = [
     "#3f51b5", "#2196f3", "#03a9f4", "#00bcd4", 
     "#009688", "#4caf50", "#8bc34a", "#cddc39", 
     "#ffeb3b", "#ffc107", "#ff9800", "#ff5722", 
-    "#795548", "#607d8b", "#ffffff",
+    "#795548", "#607d8b", "#212121", "#ffffff",
     "#fffff1" // this is temp color used to simulate button inside color swatches
 ];
 
@@ -36,7 +36,7 @@ class OptionsBar extends Component {
             blackandwhite: false,
             chaos: false,
             transform: false,
-            color: "ffffff"
+            color: "transparent"
         }
     }
 
