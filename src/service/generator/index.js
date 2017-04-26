@@ -206,7 +206,7 @@ async function generatePattern(options, callback) {
         const refW = options.canvasWidth;
         const refH = options.canvasHeight;
 
-        let arr = Randomizer.generateNonoverlappingArray(refW - _side * 100, refH - _side * 100, _side * 180, 30);
+        let arr = Randomizer.generateNonoverlappingArray(refW - _side * 100, refH - _side * 100, _side * 200, 30);
         for (let i = 0; i < elementCount; i++) {
             shapeContainers[i] = new ShapeContainer();
             let p = Randomizer.getNextPosition(arr);
@@ -214,7 +214,7 @@ async function generatePattern(options, callback) {
                 // random position on canvas
                 shapeContainers[i].position = p;
                 // random shape to be placed at position
-                let index = 0;
+                let index = i % options.basicShapesIds.length;
                 shapeContainers[i].shapeId = options.basicShapesIds[index];
                 shapeContainers[i].index = index;
                 // move shape to position + add transformations

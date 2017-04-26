@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Grid, Row, Button, Col, Image } from 'react-bootstrap';
+import { Grid, Row, Button, Col } from 'react-bootstrap';
 
 import './style.css';
 import '../style.css';

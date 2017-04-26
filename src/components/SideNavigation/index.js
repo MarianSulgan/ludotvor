@@ -76,11 +76,11 @@ class SideNavigation extends Component {
                             <span className="nav__item-title">Editor</span>
                         </button>
                     </Link>
-                    <Link to="/export">
+                    {/*<Link to="/export">
                         <button className="nav__item" aria-label="Item 5">
                             <span className="nav__item-title">Hotovo!</span>
                         </button>
-                    </Link>
+                    </Link>*/}
                 </nav>
             </section>
         );

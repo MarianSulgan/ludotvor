@@ -10,7 +10,7 @@ $min-canvas-width: 390px; //580 px for smaller heights
     bottom: 0;
 }
 
-.product__bag {
+.product_bag {
 
     .canvas__layer {
         width: 100%;
@@ -54,7 +54,7 @@ $min-canvas-width: 390px; //580 px for smaller heights
 
 }
 
-.product__tshirt {
+.product_tshirt {
 
     .canvas__layer {
         width: 100%;
@@ -112,7 +112,7 @@ $min-canvas-width: 390px; //580 px for smaller heights
 
 }
 
-.product__digital {
+.product_digital {
 
     .canvas__layer {
         width: 100%;
@@ -153,9 +153,23 @@ $min-canvas-width: 390px; //580 px for smaller heights
 
 }
 
-.layout_free {
-    .layer__svg {
-        bottom: 0;
-        padding: 0 16em 6em 16em;
+.product_tshirt.layout_free .layer__svg {
+
+    bottom: 0;
+    padding: 0 16em 6em 16em;
+
+    @media screen and (min-width: 1100px) {
+        & {
+            transform: scale(0.9);
+        }
     }
+}
+
+.product_digital.layout_free .layer__svg {
+    
+    padding: 8em;
+}
+
+.product_bag.layout_free {
+
 }

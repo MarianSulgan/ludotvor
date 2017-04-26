@@ -21,9 +21,8 @@ import '../style.css';
 import Generator from 'service/generator';
 import { Store } from 'service/store';
 import Layouts from 'data/layouts';
+import Products from 'data/products';
 
-const canvasWidth = 800;
-const canvasHeight = 800;
 const svgSide = 200;
 const patternBorderSize = 60;
 
@@ -122,7 +121,24 @@ class Editor extends Component {
         })
     }
 
+    handleFinishedClicked() {
+        // Store.set("canvas", this.canvas);
+        // console.log(this.canvas);
+    }
+
     render() {
+
+        const canvas = 
+            <ShapeGrammarCanvas 
+                patternUrl={ this.state.patternUrl }
+                productType={ this.state.options.productType }
+                layoutType={ this.state.options.layoutType }
+                patternData={this.state.patternData } 
+                width={ this.state.options.canvasWidth } 
+                height={ this.state.options.canvasHeight } 
+                patternBorderSize={ patternBorderSize }
+                backgroundColor={ this.state.options.color }/>;
+
         return (
             <div className="wrapper">
                 <Grid className="page-content page-content_editor_theme" fluid>
@@ -138,15 +154,7 @@ class Editor extends Component {
                         <Col xs={ 11 } sm={ 8 } className="block">
                             <Row>
                                 <Col xs={12} className="block text-center">
-                                    <ShapeGrammarCanvas 
-                                        patternUrl={ this.state.patternUrl }
-                                        productType={ this.state.options.productType }
-                                        layoutType={ this.state.options.layoutType }
-                                        patternData={this.state.patternData } 
-                                        width={ this.state.options.canvasWidth } 
-                                        height={ this.state.options.canvasHeight } 
-                                        patternBorderSize={ patternBorderSize }
-                                        backgroundColor={ this.state.options.color }/>
+                                    { canvas }
                                 </Col>
                             </Row>
                         </Col>
@@ -155,7 +163,8 @@ class Editor extends Component {
                             xs={ 12 } sm={ 3 } 
                             type={ this.state.options.layoutType }
                             handleRenderClick={ () => this.handleClick() }
-                            handleOptionsChange={ (options) => this.handleOptionsChange(options) }/>
+                            handleOptionsChange={ (options) => this.handleOptionsChange(options) }
+                            handleFinishedClicked={ () => this.handleFinishedClicked() } />
                     </Row>
                 </Grid>
             </div>
@@ -180,7 +189,10 @@ function _canvasHeight(layout) {
         case Layouts.Lines:
             return 800;
         case Layouts.Free:
-            return 1700;
+            if (Store.get("options.product") === Products.Bag)
+                return 800;
+            else
+                return 1500;
         default:
             return 800;
     }

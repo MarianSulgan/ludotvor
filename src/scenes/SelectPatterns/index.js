@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import SideNavigation from 'components/SideNavigation';
 import OrnamentsSelector from 'components/OrnamentsSelector'
 
-import Filter from './components/Filter';
+// import Filter from './components/Filter';
 
 import './style.css';
 

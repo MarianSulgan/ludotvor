@@ -9,7 +9,7 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Toggle from 'react-toggle';
 import { CirclePicker } from 'react-color';
-import FontAwesome from 'react-fontawesome';
+// import FontAwesome from 'react-fontawesome';
 import Mousetrap from 'mousetrap';
 
 import Layouts from 'data/layouts';
@@ -103,6 +103,10 @@ class OptionsBar extends Component {
         })
     }
 
+    handleFinishedClicked() {
+        this.props.handleFinishedClicked();
+    }
+
     componentDidMount () {
         Mousetrap.bind(['space','g'], () => {
             let _this = this;
@@ -115,7 +119,6 @@ class OptionsBar extends Component {
         Mousetrap.unbind(['space','g']);
     }
     
-
     render() {
         return (
             <Col xs={ this.props.xs } sm={ this.props.sm } className="sidebar" >
@@ -235,13 +238,18 @@ class OptionsBar extends Component {
                     </OverlayTrigger>
                     <br />
                     {/*next page button, save, buy, export*/}
-                    <Link className="block__button block__button_main btn btn-success" to="/export">Hotovo. Ďalej!</Link>
+                    <Link 
+                        className="block__button block__button_main btn btn-success" 
+                        to="/export" 
+                        onClick={ () => this.handleFinishedClicked() }>
+                        Hotovo. Ďalej!
+                    </Link>
                 </Row>
 
                 <Row className="sidebar__block text-center">
                     <p className="small">
                         Máte nápad na niečo iné?&#8200;
-                        <Link to="/contact">Napíšte nám.</Link> 
+                        <Link to="/contact" onClick={ () => this.handleFinishedClicked() }>Napíšte nám.</Link> 
                         &#8200;Spravíme Vám niečo na mieru.&#8200;<em>Vzor aj softvér.</em>
                     </p>
                 </Row>

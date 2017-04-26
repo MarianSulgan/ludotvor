@@ -61,15 +61,15 @@ class Canvas extends Component {
         switch (productType) {
             case Products.Bag: 
                 productImageUrl = bagImage;
-                productClass = "product__bag";
+                productClass = "product_bag";
                 break;
             case Products.Tshirt: 
                 productImageUrl = tshirtImage; 
-                productClass = "product__tshirt";
+                productClass = "product_tshirt";
                 break;
             case Products.Digital: 
                 // productImageUrl = digitalImage; 
-                productClass = "product__digital";
+                productClass = "product_digital";
                 break;
             default: 
                 productImageUrl = "";
@@ -78,17 +78,20 @@ class Canvas extends Component {
         const canvas__layer_product__style = 
         (productType === Products.Digital) ? {} : { backgroundImage: 'url(' + productImageUrl + ')' };
 
+        const _svg = window.svg = 
+            <SvgWrapper 
+                content={ svgDataElement } 
+                width={ this.props.width } 
+                height={ this.props.height } 
+                patternBorderSize={ this.props.patternBorderSize } 
+                backgroundColor={ this.props.backgroundColor }
+                layoutType={ this.props.layoutType } />
+
         return (
             <div className={`canvas canvas_editor ${productClass} ${layoutClass}`}>
                 <div style={ canvas__layer_product__style } className="canvas__layer canvas__layer_product"></div>
                 <div className="canvas__layer canvas__layer_svg">
-                    <SvgWrapper 
-                        content={ svgDataElement } 
-                        width={ this.props.width } 
-                        height={ this.props.height } 
-                        patternBorderSize={ this.props.patternBorderSize } 
-                        backgroundColor={ this.props.backgroundColor }
-                        layoutType={ this.props.layoutType } />
+                    { _svg }
                 </div>
             </div>
         );
