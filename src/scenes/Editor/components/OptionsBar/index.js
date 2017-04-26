@@ -3,18 +3,16 @@
  */
 
 import React, { Component } from 'react';
-import { Col, Row, Button, Label } from 'react-bootstrap';
+import { Col, Row, Button, Label, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import Toggle from 'react-toggle';
 import { CirclePicker } from 'react-color';
-
-// import OrnamentsSelector from 'components/OrnamentsSelector';
-// import { Store } from 'service/store';
-// import Ornaments from 'data/ornaments';
 import FontAwesome from 'react-fontawesome';
+import Mousetrap from 'mousetrap';
 
+import Layouts from 'data/layouts';
 import './style.css';
 
 const colorSwatches = [
@@ -36,7 +34,9 @@ class OptionsBar extends Component {
             blackandwhite: false,
             chaos: false,
             transform: false,
-            color: "transparent"
+            color: "transparent",
+            freeSide: 200,
+            freeCount: 5
         }
     }
 
@@ -54,7 +54,6 @@ class OptionsBar extends Component {
         this.setState({ blockCount: val }, () => {
             this.handleOptionsChange();
         });
-        
     }
 
     onMarginSliderChange = (val) => {
@@ -92,53 +91,92 @@ class OptionsBar extends Component {
         });
     }
 
+    onFreeSideChange = (val) => {
+        this.setState({ freeSide: val }, () => {
+            this.handleOptionsChange();
+        })
+    }
+
+    onFreeCountChange = (val) => {
+        this.setState({ freeCount: val }, () => {
+            this.handleOptionsChange();
+        })
+    }
+
+    componentDidMount () {
+        Mousetrap.bind(['space','g'], () => {
+            let _this = this;
+            _this.handleClick();
+            return false;
+        });
+    }
+
+    componentWillUnmount() {
+        Mousetrap.unbind(['space','g']);
+    }
+    
+
     render() {
-        // get ornaments
-        // let tempArr = [], tempIds = Store.getArr("options.ornaments");
-        // for (let i = 0; i < tempIds.length; i++) {
-        //     for(let j = 0; j < Ornaments.length; j++) {
-        //         if (tempIds[i] === Ornaments[j].id)
-        //             tempArr.push(Ornaments[j]);
-        //     }
-        // }
         return (
-            <Col xs={ this.props.xs } sm={ this.props.sm } className="sidebar">
+            <Col xs={ this.props.xs } sm={ this.props.sm } className="sidebar" >
 
-                {/*<Row className="sidebar__block">
-                    <h4>Vzory <Button><FontAwesome name="plus" /></Button></h4>
-                    <OrnamentsSelector ornamentsArr={ tempArr } isStandalone={ false } />
-                </Row>*/}
+                {   
+                    (this.props.type === Layouts.Free) &&
+                    <Row className="sidebar__block">
+                        <p>
+                            Počet vzorov:{' '}
+                            <Label bsStyle="primary">{this.state.freeCount}</Label>
+                        </p>
+                        <Slider 
+                            min={1}
+                            max={12}
+                            dots
+                            defaultValue={5}
+                            onAfterChange={ this.onFreeCountChange }/>
+                    </Row>
+                }
 
-                {/*<Row>
-                    <h2 className="block__headline block__headline_left">
-                        Nastavenia
-                        {' '}
-                        <Button className="button button_unstyled"><FontAwesome name="close" size="2x"/></Button>
-                    </h2>
-                </Row>*/}
+                {   
+                    (this.props.type === Layouts.Free) &&
+                    <Row className="sidebar__block">
+                        <p>Veľkosť vzoru:{' '}</p>
+                        <Slider 
+                            min={100}
+                            max={400}
+                            defaultValue={200}
+                            onAfterChange={ this.onFreeSideChange }/>
+                        
+                    </Row>
+                }
 
-                <Row className="sidebar__block">
-                    <p>
-                        Počet blokov:{' '}
-                        <Label bsStyle="primary">{this.state.blockCount}x{this.state.blockCount}</Label>
-                    </p>
-                    <Slider 
-                        min={1}
-                        max={10}
-                        dots
-                        defaultValue={4}
-                        onAfterChange={ this.onBlockSliderChange }/>
-                    
-                </Row>
+                {   
+                    (this.props.type === Layouts.Grid) &&
+                    <Row className="sidebar__block">
+                        <p>
+                            Počet blokov:{' '}
+                            <Label bsStyle="primary">{this.state.blockCount}x{this.state.blockCount}</Label>
+                        </p>
+                        <Slider 
+                            min={1}
+                            max={10}
+                            dots
+                            defaultValue={4}
+                            onAfterChange={ this.onBlockSliderChange }/>
+                        
+                    </Row>
+                }
 
-                <Row className="sidebar__block">
-                    <p>Medzery medzi blokmi</p>
-                    <Slider 
-                        min={0}
-                        max={9}
-                        defaultValue={8}
-                        onAfterChange={ this.onMarginSliderChange }/>
-                </Row>
+                {   
+                    (this.props.type === Layouts.Grid) &&
+                    <Row className="sidebar__block">
+                        <p>Medzery medzi blokmi</p>
+                        <Slider 
+                            min={0}
+                            max={9}
+                            defaultValue={8}
+                            onAfterChange={ this.onMarginSliderChange }/>
+                    </Row>
+                }
 
                 {/*<Row className="sidebar__block">
                     <h4>Produkty</h4>
@@ -154,14 +192,17 @@ class OptionsBar extends Component {
                         className="block__toggle pull-right"/>
                 </Row>
 
-                <Row className="sidebar__block">
-                    <span>Pravidelne</span>
-                    {' '}
-                    <Toggle
-                        defaultChecked={ false }
-                        onChange={ (e) => this.onChaosSettingChange(e) } 
-                        className="block__toggle pull-right"/>
-                </Row>
+                {   
+                    (this.props.type === Layouts.Grid) &&
+                    <Row className="sidebar__block">
+                        <span>Pravidelne</span>
+                        {' '}
+                        <Toggle
+                            defaultChecked={ false }
+                            onChange={ (e) => this.onChaosSettingChange(e) } 
+                            className="block__toggle pull-right"/>
+                    </Row>
+                }
 
                 <Row className="sidebar__block">
                     <span>Transformácie</span>
@@ -182,12 +223,16 @@ class OptionsBar extends Component {
 
                 <Row className="sidebar__block text-center">
                     {/*generate new pattern button*/}
-                    <Button 
-                        bsStyle="primary" 
-                        onClick={ () => this.handleClick() }
-                        className="block__button block__button_main">
-                        Generovať
-                    </Button>
+                    <OverlayTrigger 
+                        placement="top"
+                        overlay={ <Tooltip id="id--generator--button">Namiesto klikania môžeš stlačiť <em>medzerník</em> alebo písmeno <em>g</em>.</Tooltip>}>
+                        <Button 
+                            bsStyle="primary" 
+                            onClick={ () => this.handleClick() }
+                            className="block__button block__button_main">
+                            Generovať
+                        </Button>
+                    </OverlayTrigger>
                     <br />
                     {/*next page button, save, buy, export*/}
                     <Link className="block__button block__button_main btn btn-success" to="/export">Hotovo. Ďalej!</Link>

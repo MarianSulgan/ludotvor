@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
+
+import Layouts from 'data/layouts';
 import './style.css';
 
 class SvgWrapper extends Component {
     render() {
         let a, b, c, d;
-        a = b = -this.props.patternBorderSize;
-        c = d = this.props.width + 2 * this.props.patternBorderSize;
+        if (this.props.layoutType === Layouts.Grid) {
+            a = -this.props.patternBorderSize;
+            b = -this.props.patternBorderSize;
+            c = this.props.width + 2 * this.props.patternBorderSize;
+            d = this.props.width + 2 * this.props.patternBorderSize;
+        } else if (this.props.layoutType === Layouts.Free) {
+            a = b = this.props.patternBorderSize;
+            c = this.props.width + this.props.patternBorderSize;
+            d = this.props.height + this.props.patternBorderSize;
+        } else if (this.props.layoutType === Layouts.Lines) {
+            a = 0;
+            b = 0;
+            c = 800;
+            d = 800;
+        }
         return(
             <svg 
                 version="1.1"

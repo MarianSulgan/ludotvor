@@ -14,6 +14,7 @@ import React, { Component } from 'react';
 
 import SvgWrapper from './components/SvgWrapper';
 import Products from 'data/products';
+import Layouts from 'data/layouts';
 
 import bagImage from './images/bag.png';
 import tshirtImage from './images/tshirt.png';
@@ -55,7 +56,7 @@ class Canvas extends Component {
         // const tempComponent = React.createElement('svg', attr, svgDataElement);
         // const svgDataString = ReactElementToString(tempComponent);
 
-        let productImageUrl, productClass;
+        let productImageUrl, productClass, layoutClass = "layout_" + Layouts.toString(this.props.layoutType);
 
         switch (productType) {
             case Products.Bag: 
@@ -78,7 +79,7 @@ class Canvas extends Component {
         (productType === Products.Digital) ? {} : { backgroundImage: 'url(' + productImageUrl + ')' };
 
         return (
-            <div className={`canvas canvas_editor ${productClass}`}>
+            <div className={`canvas canvas_editor ${productClass} ${layoutClass}`}>
                 <div style={ canvas__layer_product__style } className="canvas__layer canvas__layer_product"></div>
                 <div className="canvas__layer canvas__layer_svg">
                     <SvgWrapper 
@@ -86,7 +87,8 @@ class Canvas extends Component {
                         width={ this.props.width } 
                         height={ this.props.height } 
                         patternBorderSize={ this.props.patternBorderSize } 
-                        backgroundColor={ this.props.backgroundColor }/>
+                        backgroundColor={ this.props.backgroundColor }
+                        layoutType={ this.props.layoutType } />
                 </div>
             </div>
         );

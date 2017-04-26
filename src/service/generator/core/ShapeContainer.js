@@ -14,10 +14,18 @@
  * - free_siblings (info on free neighbour tiles to be filled with shape)
  */
 
-class ShapeContainer {
-    constructor(shapeId, transformations, position) {
-        this.shapeId = shapeId;
-        this.transformations = transformations;
-        this.position = position;
+export default class ShapeContainer {
+
+    constructor(obj) {
+        if (typeof(obj) === "undefined") {
+            this.shapeId = "";
+            this.transforms = "";
+            this.position = { x: 0, y: 0};
+        } else {
+            this.shapeId = obj.shapeId;
+            this.transforms = obj.transforms;
+            this.position = obj.position;
+        }
+        
     }
 }

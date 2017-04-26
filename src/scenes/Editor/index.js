@@ -20,10 +20,12 @@ import '../style.css';
 
 import Generator from 'service/generator';
 import { Store } from 'service/store';
+import Layouts from 'data/layouts';
 
 const canvasWidth = 800;
 const canvasHeight = 800;
 const svgSide = 200;
+const patternBorderSize = 60;
 
 class Editor extends Component {
 
@@ -31,7 +33,7 @@ class Editor extends Component {
         super();
         this.state = {
             patternUrl: null,
-            productType: null,
+            // productType: null,
             patternData: null,
             message: {
                 text: "",
@@ -49,9 +51,11 @@ class Editor extends Component {
                 color: "transparent",
                 marginValue: 8,
                 transform: false,
-                canvasHeight: canvasHeight,
-                canvasWidth: canvasWidth,
+                canvasHeight: _canvasHeight(Store.get("options.layout")),
+                canvasWidth: _canvasWidth(Store.get("options.layout")),
                 svgSide: svgSide,
+                freeSide: 200,
+                freeCount: 5
             }
         }
     }
@@ -96,8 +100,7 @@ class Editor extends Component {
     }
 
     handleOptionsChange(opts) {
-        // convert from options in Options Bar to this options
-        // console.log(opts);
+        // convert from options in Options Bar to _this_ options
         this.setState({
             options: { 
                 productType: Store.get("options.product"),
@@ -110,14 +113,13 @@ class Editor extends Component {
                 color: opts.color,
                 marginValue: opts.marginValue,
                 transform: opts.transform,
-                canvasHeight: canvasHeight,
-                canvasWidth: canvasWidth,
+                canvasHeight: _canvasHeight(Store.get("options.layout")),
+                canvasWidth: _canvasWidth(Store.get("options.layout")),
                 svgSide: svgSide,
+                freeSide: opts.freeSide,
+                freeCount: opts.freeCount
             }
         })
-        // render
-        // this.renderProduct(this.state.options.productType);
-        // this.renderPattern(this.state.options);
     }
 
     render() {
@@ -138,11 +140,12 @@ class Editor extends Component {
                                 <Col xs={12} className="block text-center">
                                     <ShapeGrammarCanvas 
                                         patternUrl={ this.state.patternUrl }
-                                        productType={ this.state.productType }
+                                        productType={ this.state.options.productType }
+                                        layoutType={ this.state.options.layoutType }
                                         patternData={this.state.patternData } 
                                         width={ this.state.options.canvasWidth } 
                                         height={ this.state.options.canvasHeight } 
-                                        patternBorderSize={ 60 }
+                                        patternBorderSize={ patternBorderSize }
                                         backgroundColor={ this.state.options.color }/>
                                 </Col>
                             </Row>
@@ -150,6 +153,7 @@ class Editor extends Component {
                         {/*settings, here user can change generation options*/}
                         <OptionsBar 
                             xs={ 12 } sm={ 3 } 
+                            type={ this.state.options.layoutType }
                             handleRenderClick={ () => this.handleClick() }
                             handleOptionsChange={ (options) => this.handleOptionsChange(options) }/>
                     </Row>
@@ -160,4 +164,42 @@ class Editor extends Component {
 }
 
 export default Editor;
+
+/**
+ * COnvert layout to canvas dimensions
+ */
+
+/**
+ * Get height based on layout type
+ * @param {*} layout 
+ */
+function _canvasHeight(layout) {
+    switch(layout) {
+        case Layouts.Grid:
+            return 800;
+        case Layouts.Lines:
+            return 800;
+        case Layouts.Free:
+            return 1700;
+        default:
+            return 800;
+    }
+}
+
+/**
+ * Get width based on layout type
+ * @param {*} layout 
+ */
+function _canvasWidth(layout) {
+    switch(layout) {
+        case Layouts.Grid:
+            return 800;
+        case Layouts.Lines:
+            return 800;
+        case Layouts.Free:
+            return 800;
+        default:
+            return 800;
+    }
+}
 

@@ -10,45 +10,12 @@
  * @todo: create sets of rules
  */
 
-import 'whatwg-fetch'; // fetch polyfill for IE and similar
+import 'whatwg-fetch'; // _fetch_ polyfill for IE and similar
 
 import Layouts from 'data/layouts';
-
-// Extension of String class, with replaceAll functionality
-// eslint-disable-next-line
-String.prototype.replaceAll = function(search, replacement) {
-    var target = this;
-    return target.replace(new RegExp(search, 'g'), replacement);
-};
-
-class BasicShape {
-    constructor(obj) {
-        this.location = obj.location;
-        this.tags = obj.tags;
-        this.id = obj.id;
-    }
-}
-
-class ShapeContainer {
-    constructor(obj) {
-        this.shapeId = obj.shapeId;
-        this.transforms = obj.transforms;
-        this.position = obj.position;
-    }
-}
-
-// class ShapePattern {
-//     constructor(obj) {
-//         this.elems = obj;
-//     }
-// }
-
-// class Rule {
-//     constructor(left, right) {
-//         this.left = left;
-//         this.right = right;
-//     }
-// }
+import 'utils/functions';
+import ShapeContainer from './core/ShapeContainer';
+import Randomizer from './core/Randomizer';
 
 /**
  * Main function for generating SVG pattern
@@ -59,14 +26,16 @@ async function generatePattern(options, callback) {
 
     let shapeContainers = [];
 
-    /**
-     * GRID
-     */
 
     if (options.layoutType === Layouts.Grid) {
 
+        /**
+         * Layout: GRID
+         */
+
         let gridSize = options.horizontalCount * options.verticalCount;
         
+        // create empty grid representation
         for (let i = 0; i < gridSize; i++) {
             shapeContainers.push(new ShapeContainer({
                 shapeId: null,
@@ -75,6 +44,9 @@ async function generatePattern(options, callback) {
             }));
         }
 
+        /**
+         * Rules assignment
+         */
         let rules = [];
         switch (options.basicShapesIds.length) {
             case 1:
@@ -134,6 +106,9 @@ async function generatePattern(options, callback) {
                 return;
         }
 
+        /**
+         * Generation
+         */
         let str = "0";
         let lastRule = null;
         do {
@@ -174,32 +149,25 @@ async function generatePattern(options, callback) {
 
         } while(str.length < gridSize)
 
-        // console.log(str);
-
-        /**
-         * Render structure from string
-         */
+        // string to array        
         let arr = [];
-        
         Array.prototype.map.call(str, function(x) {
             arr.push(x.charCodeAt(0) - "A".charCodeAt(0));
         });
 
-        console.log(options);
-        let viewBoxParams = [40, 40, 680, 680];
+        /**
+         * Visualization
+         */
         let side = options.svgSide;
+        // determine margin for tile
+        const margin = options.marginValue * 10;
+        // offset to [0,0]
+        const patternMargin = 0;
+        // determine size of tile
+        const refW = options.canvasWidth;
+        const n = options.horizontalCount;
 
-        // @todo: move up all static variables from FOR cycle to speed up
         for (let i = 0; i < gridSize; i++) {
-
-            // determine margin for tile
-            const margin = options.marginValue * 10;
-            // offset to [0,0]
-            const patternMargin = 0;
-
-            // determine size of tile
-            const refW = options.canvasWidth;
-            const n = options.horizontalCount;
             
             // calculate position for each tile
             let k = i % options.horizontalCount;
@@ -208,7 +176,6 @@ async function generatePattern(options, callback) {
                 x: patternMargin + k * (side + margin),
                 y: patternMargin + l * (side + margin)
             }
-
             let index = arr[i];
             shapeContainers[i].shapeId = options.basicShapesIds[index];
             shapeContainers[i].index = index;
@@ -218,7 +185,9 @@ async function generatePattern(options, callback) {
             let transforms = `scale(${val}) `;
             //  merge positioning and transforms
             // ! NOTE: transforms work from RIGHT to LEFT !
-            shapeContainers[i].transforms = transforms + `translate(${shapeContainers[i].position.x}, ${shapeContainers[i].position.y})`;
+            shapeContainers[i].transforms = 
+                transforms + 
+                `translate(${shapeContainers[i].position.x}, ${shapeContainers[i].position.y})`;
         }
 
     } else if (options.layoutType === Layouts.Lines) {
@@ -229,8 +198,34 @@ async function generatePattern(options, callback) {
 
         console.log("Free SG");
 
+        const elementCount = options.freeCount;
+        const elementSize = options.freeSide;
+        const refSide = 200;
+        // const _side = 200;
+        let _side = (elementSize / refSide);
+        const refW = options.canvasWidth;
+        const refH = options.canvasHeight;
+
+        let arr = Randomizer.generateNonoverlappingArray(refW - _side * 100, refH - _side * 100, _side * 180, 30);
+        for (let i = 0; i < elementCount; i++) {
+            shapeContainers[i] = new ShapeContainer();
+            let p = Randomizer.getNextPosition(arr);
+            if (p) {
+                // random position on canvas
+                shapeContainers[i].position = p;
+                // random shape to be placed at position
+                let index = 0;
+                shapeContainers[i].shapeId = options.basicShapesIds[index];
+                shapeContainers[i].index = index;
+                // move shape to position + add transformations
+                let transforms = ` scale(${_side}) `;
+                shapeContainers[i].transforms = 
+                    ` translate(${shapeContainers[i].position.x}, ${shapeContainers[i].position.y}) ` + transforms; 
+            }
+        }
+
     } else {
-        console.log("Unsupported layout type");
+        console.error("Unsupported layout type");
     }
 
     // build urls
@@ -251,7 +246,6 @@ async function generatePattern(options, callback) {
     Promise
         .all(urls.map(grabContent))
         .then(() => {
-            // console.log(`Urls ${urls} were grabbed`);
             // pass relevant data as callback in scenes/Editor
             callback({
                 staticSvgs: staticSvgs, 

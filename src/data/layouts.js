@@ -8,7 +8,18 @@
 const Layouts = {
     Grid: "0",
     Lines: "1",
-    Free: "2"
+    Free: "2",
+    toString: toString
+}
+
+function toString(str) {
+    if (str === Layouts.Grid)
+        return "grid";
+    else if (str === Layouts.Lines)
+        return "lines";
+    else if (str === Layouts.Free)
+        return "free";
+    return null;
 }
 
 export default Layouts;
