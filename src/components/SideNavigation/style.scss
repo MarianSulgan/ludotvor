@@ -11,6 +11,8 @@ Indicator based on Codrops article, type: Zahi
 
 .section--nav {
 
+    font-family: $font-family-nav;
+
     // margin-top: 3rem;
 
     @media (max-width: $screen-xs-max) {
@@ -99,18 +101,19 @@ Indicator based on Codrops article, type: Zahi
     }
 
     .nav--zahi .nav__item--current::after {
-        border-width: 1px;
-        border-color: $gray-base;
-        -webkit-transform: scale3d(1.6,1.6,1);
-        transform: scale3d(1.6,1.6,1);
-        background: $gray-lighter;
-        @include animation('sidebar_btn .3s 1');
+        background-color: $gray-base;
+        // border-width: 1px;
+        // border-color: $gray-base;
+        // -webkit-transform: scale3d(1.6,1.6,1);
+        // transform: scale3d(1.6,1.6,1);
+        // background: $gray-lighter;
+        // @include animation('sidebar_btn .3s 1');
     }
 
     .nav--zahi .nav__item:not(.nav__item--current):focus::after,
     .nav--zahi .nav__item:not(.nav__item--current):hover::after {
         // border-color: $gray-lighterer;
-        background: $gray-lighter;
+        background: $gray-light;
     }
 
     .nav--zahi .nav__item-title {

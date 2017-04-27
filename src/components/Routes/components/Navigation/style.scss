@@ -1,5 +1,17 @@
+@import '../../../../utils/variables.scss';
+
 .navigation {
     border: none !important;
+    font-family: $font-family-nav;
+    
+
+    & .nav.navbar-nav li > a {
+        color: $text-color;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
 .navigation_bg_transparent {

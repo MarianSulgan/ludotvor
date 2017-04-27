@@ -1,3 +1,16 @@
+
+// project own variables
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&subset=latin-ext');
+
+$font-family-headline: 'Montserrat', sans-serif;
+$font-family-text: Georgia, Times, "Times New Roman", serif;
+$font-family-controls: $font-family-headline;
+$font-family-nav: $font-family-headline;
+
+
+// bootstrap
+
 $bootstrap-sass-asset-helper: false !default;
 //
 // Variables

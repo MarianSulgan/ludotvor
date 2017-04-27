@@ -56,6 +56,7 @@ class OrnamentsSelector extends Component {
     
 
     render() {
+        let disableButton = this.state.ornaments.length === 0;
         return (
             <div className="ornament-selector-block">
                 <Row>
@@ -80,10 +81,10 @@ class OrnamentsSelector extends Component {
                 </Row>
                 {
                     this.props.isStandalone &&
-                    <Row>
-                        <Link className="btn btn-secondary" to="/editor">Preskočiť</Link>
+                    <Row className="ornament-selector-block__row">
+                        <Link className="button btn btn-secondary" to="/editor">Preskočiť</Link>
                         { ' ' }
-                        <Link className="btn btn-primary" to="/editor" onClick={ () => this.handleLinkClick() }>Vybral som. Ďalej!</Link>
+                        <Link className={`button btn btn-primary ${ disableButton ? "disabled" : "" }`} to="/editor" onClick={ () => this.handleLinkClick() }>Vybral som. Ďalej!</Link>
                     </Row>
                 }
             </div>

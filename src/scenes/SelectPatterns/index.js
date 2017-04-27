@@ -30,8 +30,8 @@ class SelectPatterns extends Component {
                                     Veliké preveliké bohatstvo sa ukrýva v neprebernom množstve ľudových vzorov. 
                                     Vyber si, ktoré sa hodia práve teraz, práve tebe. Budú pribúdať!
                                 </p>
-                                <p className="text block__text_left">
-                                    <small>Ak chceš pridať aj prvky svojho obľúbeného vzoru a nie sú tu, <Link to="/contact">napíš nám</Link>. Pridáme.</small>
+                                <p className="text block__text block__text_left">
+                                    Ak chceš pridať aj prvky svojho obľúbeného vzoru a nie sú tu, <Link to="/contact">napíš nám</Link>. Pridáme.
                                 </p>
                             </Row>
                             <Row>

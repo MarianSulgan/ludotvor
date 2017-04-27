@@ -55,6 +55,13 @@ div > .section--nav {
   height: calc(100vh - #{$navbar-height});
 }
 
+.button, .block__button {
+  font-family: $font-family-controls;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05rem;
+}
+
 .button_unstyled {
   @include remove-effects();
 

@@ -62,21 +62,21 @@ class SelectProduct extends Component {
                 <Col xs={6} sm={4} className="block block_product">
                   <Link to="/select-layout" className="block__link block__link_unstyled" onClick={ () => this.handleClick(Products.Tshirt)}>
                     <Image src={ ImageTshirt } responsive className="block__image block__image_product" />
-                    <h2 className="text block__headline block__headline_h2">Tričko</h2>
+                    <h2 className="block__headline block__headline_h2">Tričko</h2>
                     <p className="text block__text">Klasika. Parádne tričko zo stopercentnej bavlny. Krásne a pohodlné.</p>
                   </Link>
                 </Col>
                 <Col xs={6} sm={4} className="block block_product">
                   <Link to="/select-layout" className="block__link block__link_unstyled" onClick={ () => this.handleClick(Products.Bag)}>
                     <Image src={ ImageBag } responsive className="block__image block__image_product" />
-                    <h2 className="text block__headline block__headline_h2">Taška</h2>
+                    <h2 className="block__headline block__headline_h2">Taška</h2>
                     <p className="text block__text">Fajnová plátená taška na nákupy, nech nenosíš tie patizóny v&nbsp;igelitke.</p>
                   </Link>
                 </Col>
                 <Col xs={6} sm={4} className="block block_product">
                   <Link to="/select-layout" className="block__link block__link_unstyled" onClick={ () => this.handleClick(Products.Digital)}>
                     <Image src={ ImageDigital } responsive className="block__image block__image_product" />
-                    <h2 className="text block__headline block__headline_h2">Digitálne</h2>
+                    <h2 className="block__headline block__headline_h2">Digitálne</h2>
                     <p className="text block__text">Nemôžeš to chytiť, ale pekné to je aj tak. Pozadie na tvoj smartfoun, laptop alebo len tak, obrázok.</p>
                   </Link>
                 </Col>

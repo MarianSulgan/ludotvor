@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from 'react';
-import { Grid, Row, Col, Image } from 'react-bootstrap';
+import { Grid, Row, Col, Image, Clearfix } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import SideNavigation from '../../components/SideNavigation';
@@ -19,6 +19,7 @@ import Layouts from 'data/layouts';
 import { Store } from 'service/store';
 
 import '../style.css';
+import './style.css';
 
 class SelectLayout extends Component {
 
@@ -71,6 +72,7 @@ class SelectLayout extends Component {
                                         <p className="text block__text">Vzory usporiadané do riadkov. Jeden riadok, druhý riadok...</p>
                                     </Link>
                                 </Col>
+                                <Clearfix visibleXsBlock/>
                                 <Col xs={6} sm={4} className="block block_layout">
                                     <Link to="/select-patterns" className="block__link block__link_unstyled" onClick={ () => this.handleClick(Layouts.Free)}>
                                         <Image src={ ImageFree } responsive className="block__image block__image_product" />

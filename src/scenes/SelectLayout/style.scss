@@ -1,3 +1,23 @@
+@import '../../utils/variables.scss';
+
 .block_layout {
     padding: 15px;
+}
+
+.block_layout .block__text {
+    @media screen and (max-width: $screen-xs-max) {
+        display: none;
+    }
+}
+
+.block_layout .block__headline {
+    @media screen and (max-width: $screen-xs-max) {
+        text-align: center;
+    }
+}
+
+.block_layout .block__image {
+    @media screen and (max-width: $screen-xs-max) {
+        margin: 0;
+    }
 }
