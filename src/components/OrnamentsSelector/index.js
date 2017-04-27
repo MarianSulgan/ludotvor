@@ -13,7 +13,7 @@ class OrnamentsSelector extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { images: null, ornaments: [] };
+        this.state = { images: null, ornaments: Store.getArr("options.ornaments") };
     }
 
     handleLinkClick() {
@@ -32,7 +32,9 @@ class OrnamentsSelector extends Component {
             let index = temp.indexOf(id);
             temp.splice(index, 1);
         }
-        this.setState({ ornaments: temp });
+        this.setState({ ornaments: temp }, () => {
+            Store.setArr("options.ornaments", this.state.ornaments);
+        });
     }
 
     componentDidMount () {
@@ -42,6 +44,10 @@ class OrnamentsSelector extends Component {
         else if (this.props.ornamentsArr)
             arr = this.props.ornamentsArr;
 
+        // get currently selected ornaments
+        let temp = Store.getArr("options.ornaments");
+        console.log(temp);
+
         if (arr.length > 0)
             _images = arr.map((elem, index) => 
             <ImageWithIcon
@@ -49,7 +55,8 @@ class OrnamentsSelector extends Component {
                 src={ elem.url } 
                 ornamentId={ elem.id.toString() } 
                 handleClick={ (id, state) => this.handleClick(id, state) } 
-                elemData={ Ornaments[index] }/>
+                elemData={ Ornaments[index] }
+                isActive={ temp.includes(elem.id.toString()) } />
         );
         this.setState({ images: _images });
     }
@@ -82,7 +89,7 @@ class OrnamentsSelector extends Component {
                 {
                     this.props.isStandalone &&
                     <Row className="ornament-selector-block__row">
-                        <Link className="button btn btn-secondary" to="/editor">Preskočiť</Link>
+                        <Link className={`button btn btn-secondary ${ disableButton ? "" : "disabled" }`} to="/editor">Preskočiť</Link>
                         { ' ' }
                         <Link className={`button btn btn-primary ${ disableButton ? "disabled" : "" }`} to="/editor" onClick={ () => this.handleLinkClick() }>Vybral som. Ďalej!</Link>
                     </Row>

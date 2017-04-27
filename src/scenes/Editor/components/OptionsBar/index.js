@@ -233,7 +233,7 @@ class OptionsBar extends Component {
                             bsStyle="primary" 
                             onClick={ () => this.handleClick() }
                             className="block__button block__button_main">
-                            Generovať
+                            Zrob nový vzor
                         </Button>
                     </OverlayTrigger>
                     <br />
@@ -242,7 +242,7 @@ class OptionsBar extends Component {
                         className="block__button block__button_main btn btn-success" 
                         to="/export" 
                         onClick={ () => this.handleFinishedClicked() }>
-                        Hotovo. Ďalej!
+                        Hotovo, ďalej!
                     </Link>
                 </Row>
 

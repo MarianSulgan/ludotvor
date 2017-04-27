@@ -8,12 +8,12 @@ class ImageWithIcon extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isActive: false
+            isActive: this.props.isActive
         }
     }
 
     componentWillMount() {
-        this.setState({ isActive: false });
+        this.setState({ isActive: this.props.isActive });
     }
 
     handleClick(e) {

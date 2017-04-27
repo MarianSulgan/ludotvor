@@ -225,7 +225,8 @@ async function generatePattern(options, callback) {
         }
 
     } else {
-        console.error("Unsupported layout type");
+        console.log("Unsupported layout type");
+        return;
     }
 
     // build urls

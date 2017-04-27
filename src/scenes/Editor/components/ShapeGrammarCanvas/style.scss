@@ -173,3 +173,19 @@ $min-canvas-width: 390px; //580 px for smaller heights
 .product_bag.layout_free {
 
 }
+
+.message {
+
+}
+
+.message_centered {
+    height: calc(100vh - 50px);
+}
+
+.message_centered .text {
+    position: relative;
+    top: calc(50% - 50px);
+    transform: translateY(-50%);
+    max-width: 80%;
+    opacity: 0.5;
+}

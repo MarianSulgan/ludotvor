@@ -60,8 +60,31 @@ class Editor extends Component {
     }
 
     componentWillMount() {
-        this.renderProduct(this.state.options.productType);
-        this.renderPattern(this.state.options);
+        // console.log(window.isCanvasRendered);
+        // console.log(typeof window.isCanvasRendered !== "undefined");
+        if (Store.get("sg_canvas") === null || JSON.parse(Store.get("isChange")) === true) {
+            // first time render canvas
+            if (Store.get("showMessageOnce") === null) {
+                this.setState({ message: {
+                    text: "Človečina, očúvaj. Keď zmeníš nastavenie v bočnom paneli, vygeneruje sa nový, úplne iný vzor. Takže ak sa ti tentok páči, neposúvaj posuvníky!",
+                    show: true,
+                    type: "info"
+                }});
+                Store.set("showMessageOnce", false);
+            }
+            console.log("rendering...");
+            this.renderProduct(this.state.options.productType);
+            this.renderPattern(this.state.options, () => {
+                // save state to variable
+                Store.setArr("sg_canvas", this.state);
+                Store.set("isChange", false);
+                console.log("state saved...");
+            });
+            window.isCanvasRendered = true;
+        } else {
+            // load rendered canvas from variable (where previous state was stored)
+            this.setState(Store.getArr("sg_canvas"));
+        }
     }
 
     handleClick = () => {
@@ -75,26 +98,28 @@ class Editor extends Component {
         //     basicShapesIds: JSON.parse(Store.get("options.ornaments"))
         // }
         this.renderProduct(this.state.options.productType);
-        this.renderPattern(this.state.options);
+        this.renderPattern(this.state.options, () => {
+            Store.setArr("sg_canvas", this.state);
+            Store.setArr("isChange", false);
+        });
     }
 
     renderProduct(type) {
         this.setState({ productType: type });
     }
 
-    renderPattern(options) {
+    renderPattern(options, callback) {
         // validate options, if they are reasonable
         // ...
 
-        if (false) this.setState({ message: {
-            text: "Ahoj ty nula",
-            show: true,
-            type: "info"
-        }})
+        
 
         // result is data container
         Generator.generatePattern(options, (result, viewBox) => {
-            this.setState({ patternData: result });
+            this.setState({ patternData: result }, () => {
+                if (callback)
+                    callback();
+            });
         });
     }
 

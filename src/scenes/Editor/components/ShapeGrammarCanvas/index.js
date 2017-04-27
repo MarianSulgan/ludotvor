@@ -10,11 +10,13 @@
  */
 
 import React, { Component } from 'react';
+import FontAwesome from 'react-fontawesome';
 // import ReactElementToString from 'react-element-to-string';
 
 import SvgWrapper from './components/SvgWrapper';
 import Products from 'data/products';
 import Layouts from 'data/layouts';
+import { Store } from 'service/store';
 
 import bagImage from './images/bag.png';
 import tshirtImage from './images/tshirt.png';
@@ -88,11 +90,24 @@ class Canvas extends Component {
                 layoutType={ this.props.layoutType } />
 
         return (
-            <div className={`canvas canvas_editor ${productClass} ${layoutClass}`}>
-                <div style={ canvas__layer_product__style } className="canvas__layer canvas__layer_product"></div>
-                <div className="canvas__layer canvas__layer_svg">
-                    { _svg }
-                </div>
+            <div className="block">
+                { 
+                    (Store.get("options.ornaments") || Store.get("options.product") || Store.get("options.layout")) ?
+                    <div className={`canvas canvas_editor ${productClass} ${layoutClass}`}>
+                        <div style={ canvas__layer_product__style } className="canvas__layer canvas__layer_product"></div>
+                        <div className="canvas__layer canvas__layer_svg">
+                            { _svg }
+                        </div> 
+                    </div>
+                    :
+                    <div className="message message_centered">
+                        <p className="text block__text">
+                            <FontAwesome name="frown-o" size="2x" />
+                            <br /><br />
+                            Prázdno tu je. Šak oné, hybaj a <em>povyberaj nejaké vecičky, vzory, rozloženie</em>. Potom sa tu vygeneruje všetko ako má. Šup!
+                        </p>
+                    </div>
+                }
             </div>
         );
     }

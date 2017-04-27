@@ -15,10 +15,15 @@ function getArr(key) {
 }
 
 function set(key, value) {
+    // if (key === "options.product")
+    localStorage.setItem("isChange", true);
+    console.log("isChange set to true");
     return localStorage.setItem(key, value);
 }
 
 function setArr(key, arr) {
+    localStorage.setItem("isChange", true);
+    console.log("(arr) isChange set to true");
     return localStorage.setItem(key, JSON.stringify(arr));
 }
 
