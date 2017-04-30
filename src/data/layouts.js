@@ -19,7 +19,8 @@ function toString(str) {
         return "lines";
     else if (str === Layouts.Free)
         return "free";
-    return null;
+    
+    return "undefined";
 }
 
 export default Layouts;

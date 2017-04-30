@@ -55,30 +55,29 @@ class Editor extends Component {
                 svgSide: svgSide,
                 freeSide: 200,
                 freeCount: 5
-            }
+            },
+            counter: 0
         }
     }
 
     componentWillMount() {
-        // console.log(window.isCanvasRendered);
-        // console.log(typeof window.isCanvasRendered !== "undefined");
         if (Store.get("sg_canvas") === null || JSON.parse(Store.get("isChange")) === true) {
+            
             // first time render canvas
-            if (Store.get("showMessageOnce") === null) {
-                this.setState({ message: {
-                    text: "Človečina, očúvaj. Keď zmeníš nastavenie v bočnom paneli, vygeneruje sa nový, úplne iný vzor. Takže ak sa ti tentok páči, neposúvaj posuvníky!",
-                    show: true,
-                    type: "info"
-                }});
-                Store.set("showMessageOnce", false);
-            }
-            console.log("rendering...");
+            // if (Store.get("showMessageOnce") === null) {
+            //     this.setState({ message: {
+            //         text: "Človečina, očúvaj. Keď zmeníš nastavenie v bočnom paneli, vygeneruje sa nový, úplne iný vzor. Takže ak sa ti tentok páči, neposúvaj posuvníky!",
+            //         show: true,
+            //         type: "info"
+            //     }});
+            //     Store.set("showMessageOnce", false);
+            // }
+            Store.setArr("sg_canvas_prev", this.state);
             this.renderProduct(this.state.options.productType);
             this.renderPattern(this.state.options, () => {
                 // save state to variable
                 Store.setArr("sg_canvas", this.state);
                 Store.set("isChange", false);
-                console.log("state saved...");
             });
             window.isCanvasRendered = true;
         } else {
@@ -87,16 +86,8 @@ class Editor extends Component {
         }
     }
 
-    handleClick = () => {
-        // these are new options from user inputs, for example
-        // he drags a slider on Editor screen or changes layout type...
-        // const newOptions = {
-        //     productType: Store.get("options.product"),
-        //     layoutType: Store.get("options.layout"),
-        //     horizontalCount: 4,
-        //     verticalCount: 4,
-        //     basicShapesIds: JSON.parse(Store.get("options.ornaments"))
-        // }
+    handleRenderClick = () => {
+        Store.setArr("sg_canvas_prev", this.state);
         this.renderProduct(this.state.options.productType);
         this.renderPattern(this.state.options, () => {
             Store.setArr("sg_canvas", this.state);
@@ -111,8 +102,6 @@ class Editor extends Component {
     renderPattern(options, callback) {
         // validate options, if they are reasonable
         // ...
-
-        
 
         // result is data container
         Generator.generatePattern(options, (result, viewBox) => {
@@ -143,12 +132,27 @@ class Editor extends Component {
                 freeSide: opts.freeSide,
                 freeCount: opts.freeCount
             }
+        }, () => {
+            Store.setArr("sg_canvas_prev", this.state);
+            this.renderPattern(this.state.options, () => {
+                Store.setArr("sg_canvas", this.state);
+                Store.setArr("isChange", false);
+            });
         })
     }
 
     handleFinishedClicked() {
         // Store.set("canvas", this.canvas);
         // console.log(this.canvas);
+    }
+
+    handleBackClick() {
+        // one step back
+        this.setState(Store.getArr("sg_canvas_prev"));
+    }
+
+    handleForwardClick() {
+        // one step forward, if back was pressed
     }
 
     render() {
@@ -187,9 +191,12 @@ class Editor extends Component {
                         <OptionsBar 
                             xs={ 12 } sm={ 3 } 
                             type={ this.state.options.layoutType }
-                            handleRenderClick={ () => this.handleClick() }
+                            handleRenderClick={ () => this.handleRenderClick() }
                             handleOptionsChange={ (options) => this.handleOptionsChange(options) }
-                            handleFinishedClicked={ () => this.handleFinishedClicked() } />
+                            handleFinishedClicked={ () => this.handleFinishedClicked() } 
+                            handleBackClick={ () => this.handleBackClick() } 
+                            handleForwardClick={ () => this.handleForwardClick() } 
+                            options={ this.state.options } />
                     </Row>
                 </Grid>
             </div>

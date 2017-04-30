@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from 'react';
-import FontAwesome from 'react-fontawesome';
+// import FontAwesome from 'react-fontawesome';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -15,13 +15,13 @@ class Footer extends Component {
         return (
             <footer className="footer">
                 <Grid>
-                    <Row className="footer__block footer__block--social text-center">
+                    {/*<Row className="footer__block footer__block--social text-center">
                         <FontAwesome name="facebook" size="lg" />
                         <FontAwesome name="twitter" size="lg" />
-                    </Row>
+                    </Row>*/}
                     <Row className="footer__block footer__block--links">
                         <Col xs={ 12 } sm={ 6 }>
-                            <ul className="list list_footer list_unstyled">
+                            <ul className="list list_footer list_unstyled text-right">
                                 <li>
                                     <Link to="/legal-conditions">
                                         Obchodné podmienky
@@ -40,7 +40,7 @@ class Footer extends Component {
                             </ul>
                         </Col>
                         <Col xs={ 12 } sm={ 6 }>
-                            <ul className="list list_footer list_unstyled">
+                            <ul className="list list_footer list_unstyled text-left">
                                 <li>
                                     <Link to="/how-to-shop">
                                         Ako nakupovať

@@ -13,11 +13,18 @@ class OrnamentsSelector extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { images: null, ornaments: Store.getArr("options.ornaments") };
+        let temp = Store.getArr("options.ornaments");
+        this.state = { 
+            images: [ null ],
+            regions: [], 
+            ornaments: temp === null ? [] : temp 
+        };
     }
 
     handleLinkClick() {
-        Store.setArr("options.ornaments", this.state.ornaments);
+        // let temp = this.state.ornaments;
+        // console.log("handle... ", temp);
+        // Store.setArr("options.ornaments", temp.length === 0 ? null : temp);
     }
 
     handleClick(id, state) {
@@ -33,7 +40,8 @@ class OrnamentsSelector extends Component {
             temp.splice(index, 1);
         }
         this.setState({ ornaments: temp }, () => {
-            Store.setArr("options.ornaments", this.state.ornaments);
+            let x = this.state.ornaments;
+            Store.setArr("options.ornaments", x.length === 0 ? null : x);
         });
     }
 
@@ -45,10 +53,57 @@ class OrnamentsSelector extends Component {
             arr = this.props.ornamentsArr;
 
         // get currently selected ornaments
-        let temp = Store.getArr("options.ornaments");
-        console.log(temp);
+        let temp, _ornaments = Store.getArr("options.ornaments");
+        if (_ornaments != null) {
+            temp = _ornaments
+        } else {
+            temp = [];
+        }
 
-        if (arr.length > 0)
+        // get ornaments regions
+        let regions = [];
+        for (let i = 0; i < Ornaments.length; i++) {
+            if (!regions.includes(Ornaments[i].region)) 
+                regions.push(Ornaments[i].region);
+        }
+        this.setState({ regions: regions });
+
+        // get all ornaments by regions to arrays
+        let ornamentsByRegion = [];
+        for (let i = 0; i < regions.length; i++) {
+            let temp = [];
+            for (let j = 0; j < Ornaments.length; j++) {
+                if (Ornaments[j].region === regions[i]) {
+                    temp.push(Ornaments[j]);
+                }
+            }
+            ornamentsByRegion.push({
+                // region: regions[i],
+                ornaments: temp
+            });
+        }
+
+        // console.log(ornamentsByRegion[0].ornaments);
+        // console.log(Ornaments);
+        let content = [];
+        for (let i = 0; i < ornamentsByRegion.length; i++) {
+            let images;
+            if (arr.length > 0) {
+                images = ornamentsByRegion[i].ornaments.map((elem, index) => 
+                    <ImageWithIcon
+                        key={ index } 
+                        src={ elem.url } 
+                        ornamentId={ elem.id.toString() } 
+                        handleClick={ (id, state) => this.handleClick(id, state) } 
+                        elemData={ ornamentsByRegion[i].ornaments[index] }
+                        isActive={ temp.includes(elem.id.toString()) } />
+                    )
+            };
+            content.push(images)
+        }
+        console.log(content);
+
+        /*if (arr.length > 0)
             _images = arr.map((elem, index) => 
             <ImageWithIcon
                 key={ index } 
@@ -57,35 +112,44 @@ class OrnamentsSelector extends Component {
                 handleClick={ (id, state) => this.handleClick(id, state) } 
                 elemData={ Ornaments[index] }
                 isActive={ temp.includes(elem.id.toString()) } />
-        );
-        this.setState({ images: _images });
+        );*/
+
+        this.setState({ images: content });
     }
     
 
     render() {
-        let disableButton = this.state.ornaments.length === 0;
+        let disableButton;
+        if (this.state.ornaments) 
+            disableButton= this.state.ornaments.length === 0;
+
+        const rowsWithOrnaments = this.state.images.map((elem, index) => 
+            <Row key={ index }>
+                <h2 className="block__headline block__headline_h2 block__headline_left">{ this.state.regions[index] }</h2>
+                <Col xs={12} className={`block row__ornament-selector ${this.props.isStandalone && "row__ornament-selector_standalone"}`}>
+                {   
+                    this.props.isStandalone ?
+                        (elem || 
+                        <p className="block__info-text">
+                            <FontAwesome className="info-text__icon" name="circle-o-notch" size="lg" spin />
+                            { ' ' }
+                            <span className="info-text__text">Ornamenty sa načítavajú...</span>
+                        </p>)
+                    :
+                        (elem || 
+                        <p className="block__info-text">
+                            Pridaj vzor (tým pluskom ↑)
+                        </p>)
+                }
+                </Col>
+            </Row>
+        );
+
         return (
             <div className="ornament-selector-block">
-                <Row>
-                    {/*/*show loading note or if loaded, display images*/}
-                    <Col xs={12} className={`block row__ornament-selector ${this.props.isStandalone && "row__ornament-selector_standalone"}`}>
-                    {   
-                        this.props.isStandalone ?
-                            (this.state.images || 
-                            <p className="block__info-text">
-                                <FontAwesome className="info-text__icon" name="circle-o-notch" size="lg" spin />
-                                { ' ' }
-                                <span className="info-text__text">Ornamenty sa načítavajú...</span>
-                            </p>)
-                        :
-                            (this.state.images || 
-                            <p className="block__info-text">
-                                Pridaj vzor (tým pluskom ↑)
-                            </p>)
-                    }
-                    </Col>
-                        
-                </Row>
+                
+                { rowsWithOrnaments }
+
                 {
                     this.props.isStandalone &&
                     <Row className="ornament-selector-block__row">

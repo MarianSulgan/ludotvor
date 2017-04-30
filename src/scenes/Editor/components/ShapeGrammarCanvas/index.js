@@ -11,7 +11,7 @@
 
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
-// import ReactElementToString from 'react-element-to-string';
+import { Link } from 'react-router-dom';
 
 import SvgWrapper from './components/SvgWrapper';
 import Products from 'data/products';
@@ -48,7 +48,8 @@ class Canvas extends Component {
                 <g key={ index } transform={ elem.transforms }  dangerouslySetInnerHTML={{ __html: patternData.staticSvgs[elem.index] }} />
             );
             svgDataElement = _svgDataElement;
-        }
+        } 
+        // else return null;
 
         // const attr = { 
         //     version:"1.1",
@@ -75,6 +76,7 @@ class Canvas extends Component {
                 break;
             default: 
                 productImageUrl = "";
+                productClass = "product_undefined"
         }
 
         const canvas__layer_product__style = 
@@ -92,7 +94,7 @@ class Canvas extends Component {
         return (
             <div className="block">
                 { 
-                    (Store.get("options.ornaments") || Store.get("options.product") || Store.get("options.layout")) ?
+                    (Store.getArr("options.ornaments") || Store.get("options.product") || Store.get("options.layout")) ?
                     <div className={`canvas canvas_editor ${productClass} ${layoutClass}`}>
                         <div style={ canvas__layer_product__style } className="canvas__layer canvas__layer_product"></div>
                         <div className="canvas__layer canvas__layer_svg">
@@ -104,7 +106,7 @@ class Canvas extends Component {
                         <p className="text block__text">
                             <FontAwesome name="frown-o" size="2x" />
                             <br /><br />
-                            Prázdno tu je. Šak oné, hybaj a <em>povyberaj nejaké vecičky, vzory, rozloženie</em>. Potom sa tu vygeneruje všetko ako má. Šup!
+                            Prázdno tu je. Šak oné, hybaj a <em><Link to="/select-product">povyberaj nejaké vecičky, vzory, rozloženie</Link></em>. Potom sa tu vygeneruje všetko ako má. Šup!
                         </p>
                     </div>
                 }

@@ -9,7 +9,7 @@
  */
 
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Home from '../../scenes/Home';
 import About from '../../scenes/About';
@@ -30,14 +30,15 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 
 const navItems = [
-    { to: "/select-product", name: "Tvoriť"},
-    { to: "/about", name: "O projekte"},
-    { to: "/contact", name: "Kontakt"},
-    { to: "/login", name: "Prihlásiť"}
+    { to: "/select-product", name: "Tvoriť", className: "button"},
+    { to: "/about", name: "O projekte", className: "button"},
+    { to: "/contact", name: "Kontakt", className: "button"},
+    // { to: "/login", name: "Prihlásiť", className: "button button_nav"}
+    // ^^^ this is moved to Navigation
 ];
 
 
-// internal class for rendering app content and setting _cdu_
+// internal class for rendering app content
 class RoutesApp extends Component {
 
     componentDidUpdate(prevProps, prevState) {
@@ -56,7 +57,7 @@ class RoutesApp extends Component {
                         <Route path="/contact" component={ Contact } />
                         <Route path="/login" component={ Login } />
                         {/*private sections*/}
-                        <PrivateRoute path="user/dashboard" component={ Dashboard } />
+                        <Route path="/dashboard" component={ Dashboard } />
                         {/* main app flow routes*/}
                         <Route path="/select-product" component={ SelectProduct } />
                         <Route path="/select-layout" component={ SelectLayout } />
@@ -81,31 +82,6 @@ class RoutesApp extends Component {
     }
 
 }
-
-const fakeAuth = {
-  isAuthenticated: false,
-  authenticate(cb) {
-    this.isAuthenticated = true
-    setTimeout(cb, 100) // fake async
-  },
-  signout(cb) {
-    this.isAuthenticated = false
-    setTimeout(cb, 100)
-  }
-}
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => (
-    fakeAuth.isAuthenticated ? (
-      <Component {...props}/>
-    ) : (
-      <Redirect to={{
-        pathname: '/login',
-        state: { from: props.location }
-      }}/>
-    )
-  )}/>
-)
 
 // wrap in router
 const Routes = () => (

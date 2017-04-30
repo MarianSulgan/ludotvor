@@ -1,19 +1,44 @@
 @import '../../../../utils/variables.scss';
 
+$nav-item-color-bg: transparent;
+
 .navigation {
     border: none !important;
     font-family: $font-family-nav;
     
 
-    & .nav.navbar-nav li > a {
-        color: $text-color;
+    & .nav.navbar-nav li {
+        background-color: $nav-item-color-bg;
 
-        &:hover {
-            text-decoration: underline;
+        &.button_nav > a {
+            border: 3px solid;
+            line-height: 0px;
+            padding: 15px 15px;
+            margin: 7px;
+            background-color: $nav-item-color-bg;
+
+            &:hover {
+                background-color: $gray-lighter;
+                text-decoration: none;
+            }
+        }
+    
+        & > a {
+            color: $text-color;
+        
+
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 }
 
-.navigation_bg_transparent {
-    background-color: transparent !important;
+.navigation_bg {
+    // background-color: transparent !important;
+    background-color: #fff !important;
+}
+
+.button_nav > a[role=button] {
+    
 }

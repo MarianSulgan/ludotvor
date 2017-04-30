@@ -170,13 +170,39 @@ $min-canvas-width: 390px; //580 px for smaller heights
     padding: 8em;
 }
 
-.product_bag.layout_free {
+.product_undefined {
+    
+    .canvas__layer {
+        width: 100%;
+        position: absolute;
+    }
 
+    .canvas__layer_svg {
+        position: relative;
+        margin: 0 auto;
+        z-index: 1;
+        height: 100vh;
+        top: -50px;
+    }
+
+    .layer__svg {
+        padding: 4em;
+        position: absolute;
+        width: 100%;
+        height: auto;
+        top: 50%;
+        left: 0;
+        transform: translateY(calc(-50% + 0px))
+    }
 }
 
-.message {
+// .product_bag.layout_free {
 
-}
+// }
+
+// .message {
+
+// }
 
 .message_centered {
     height: calc(100vh - 50px);
@@ -186,6 +212,7 @@ $min-canvas-width: 390px; //580 px for smaller heights
     position: relative;
     top: calc(50% - 50px);
     transform: translateY(-50%);
-    max-width: 80%;
+    width: 80%;
+    max-width: 30em;
     opacity: 0.5;
 }

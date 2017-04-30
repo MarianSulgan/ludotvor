@@ -9,12 +9,22 @@ import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-// import SideNavigation from 'components/SideNavigation';
+import { Store } from 'service/store';
 
 import '../style.css';
 import './style.css';
 
 class Export extends Component {
+
+    handleClick() {
+        console.log("hello");
+        // clean start, remove saved data
+        Store.remove("options.product");
+        Store.remove("options.layout");
+        Store.remove("options.ornaments");
+        Store.remove("sgCanvasArr");
+    }
+
     render() {
         return (
             <div className="wrapper">
@@ -34,7 +44,7 @@ class Export extends Component {
                             </Row>
                             <Row>
                                 <Col xs={12} className="block text-center">
-                                    <Link className="btn btn-primary" to="/">Domov</Link>
+                                    <Link className="button block__button btn btn-primary" to="/" onClick={ () => this.handleClick() }>Domov</Link>
                                 </Col>
                             </Row>
                         </Col>

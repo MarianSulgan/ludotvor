@@ -9,3 +9,9 @@
 .block__social-icon:hover {
     color: $brand-info;
 }
+
+.form_login {
+    max-width: 30rem;
+    margin: 1.6rem auto;
+    font-family: $font-family-controls;
+}

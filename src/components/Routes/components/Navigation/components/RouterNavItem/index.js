@@ -24,9 +24,8 @@ class NavItemWithoutRouter extends Component {
     
     handleLink(path) {
         this.props.history.push(path);
-        // this.setState({
-        //     isActive: !this.state.isActive
-        // })
+        if (this.props.logout)
+            this.props.logout();
     }
 
     render() {
@@ -36,8 +35,7 @@ class NavItemWithoutRouter extends Component {
                 eventKey={ eventKey } 
                 onSelect={ onSelect } 
                 onClick={ () => this.handleLink(to) }
-                // className={ `${this.state.isActive ? 'has-check' : ''}` }>
-                >
+                className={ this.props.className } >
                 { children }
             </NavItem>
         );

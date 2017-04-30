@@ -6,27 +6,38 @@
  */
 
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import RouterNavItem from './components/RouterNavItem';
+import Auth from 'service/auth';
 import './style.css';
 
 class Navigation extends Component {
+
+    handleLogoutClicked = () => {
+        Auth.logout();
+    }
+
     render() {
 
         const navItems = this.props.navItems.map((item, index) =>
-            <RouterNavItem key={ index } to={ item.to }>
+            <RouterNavItem key={ index } to={ item.to } className={ item.className }>
                 {item.name}
             </RouterNavItem>
         );
+
+        const otherMenuItems = [
+            <RouterNavItem key={1} to="/dashboard" className="button">Moje</RouterNavItem>,
+            <RouterNavItem key={2} to={ location.pathname } className="button" logout={ this.handleLogoutClicked }>Odhlásiť</RouterNavItem>
+        ]
 
         return (
             <Navbar 
                 collapseOnSelect={ this.props.collapseOnSelect } 
                 fluid={ this.props.fluid }
                 fixedTop={ this.props.fixedTop }
-                className="navigation navigation_bg_transparent">
+                className="navigation navigation_bg">
                 <Navbar.Header>
                     <Navbar.Brand>
                         <Link to="/">Ľudotvor</Link>
@@ -36,7 +47,11 @@ class Navigation extends Component {
                 <Navbar.Collapse>
                     <Nav pullRight>
                         { navItems }
-                        <NavItem>EN</NavItem>
+                        { 
+                            Auth.isLoggedIn() ? 
+                            otherMenuItems :
+                            <RouterNavItem to="/login" className="button button_nav">Prihlásiť</RouterNavItem>
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>            
