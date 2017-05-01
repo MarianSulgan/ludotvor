@@ -25,20 +25,6 @@ class SelectLayout extends Component {
 
     handleClick(layout) {
         Store.set("options.layout", layout);
-        // switch(layout) {
-        //     case Layouts.Grid:
-        //         console.log("grid");
-        //         break;
-        //     case Layouts.Lines:
-        //         console.log("lines");
-        //         break;
-        //     case Layouts.Free:
-        //         console.log("free");
-        //         break;
-        //     default:
-        //         console.log("Unknown layout type selected? Weird.");
-        //         break;
-        // }
     }
 
     render() {

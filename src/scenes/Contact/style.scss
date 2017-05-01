@@ -1,0 +1,21 @@
+@import '../../utils/mixins.scss';
+@import '../../utils/variables.scss';
+
+.form {
+    margin-top: 3.2rem;
+    max-width: $max-width;
+    font-family: $font-family-controls;
+    line-height: 1.6rem;
+}
+
+.form input {
+    height: 6.4rem;
+}
+
+.form textarea {
+    min-height: 11.2rem;
+}
+
+.form__counter {
+    font-weight: 700;
+}

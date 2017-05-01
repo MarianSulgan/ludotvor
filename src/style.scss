@@ -69,3 +69,7 @@ div > .section--nav {
     @include remove-effects();
   }
 }
+
+.label {
+  font-family: $font-family-controls;
+}

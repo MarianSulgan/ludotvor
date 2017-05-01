@@ -28,10 +28,11 @@ class OrnamentsSelector extends Component {
     }
 
     handleClick(id, state) {
-        console.log(id, state);
-        console.log(this);
         let temp = this.state.ornaments;
         if (state) {
+            // do not select ornament, if max count is selected
+            if (temp.length >= this.props.maxCount)
+                return false;
             // add id to array
             temp.push(id);
         } else {
@@ -39,10 +40,13 @@ class OrnamentsSelector extends Component {
             let index = temp.indexOf(id);
             temp.splice(index, 1);
         }
+
         this.setState({ ornaments: temp }, () => {
             let x = this.state.ornaments;
             Store.setArr("options.ornaments", x.length === 0 ? null : x);
+            this.props.handleSelectedCount(x.length);
         });
+        return true;
     }
 
     componentDidMount () {
@@ -59,6 +63,9 @@ class OrnamentsSelector extends Component {
         } else {
             temp = [];
         }
+
+        // send length to parent
+        this.props.onRender(temp.length);
 
         // get ornaments regions
         let regions = [];
@@ -126,7 +133,7 @@ class OrnamentsSelector extends Component {
         const rowsWithOrnaments = this.state.images.map((elem, index) => 
             <Row key={ index }>
                 <h2 className="block__headline block__headline_h2 block__headline_left">{ this.state.regions[index] }</h2>
-                <Col xs={12} className={`block row__ornament-selector ${this.props.isStandalone && "row__ornament-selector_standalone"}`}>
+                <Col xs={12} disabled className={`block row__ornament-selector ${this.props.isStandalone && "row__ornament-selector_standalone"}`}>
                 {   
                     this.props.isStandalone ?
                         (elem || 

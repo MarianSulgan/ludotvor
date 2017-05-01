@@ -17,11 +17,11 @@ class ImageWithIcon extends Component {
     }
 
     handleClick(e) {
-        this.setState({
-            isActive: !this.state.isActive
-        });
-        // console.log(this.props.ornamentId);
-        this.props.handleClick(this.props.ornamentId, !this.state.isActive);
+        if (this.props.handleClick(this.props.ornamentId, !this.state.isActive)) {
+            this.setState({
+                isActive: !this.state.isActive
+            });
+        }
     }
 
     isActive(value) {

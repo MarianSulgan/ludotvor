@@ -18,7 +18,7 @@ $headline-line-height: $headline-font-size * 1.2;
     font-size: $base-font-size;
     // max-width: 40 * $base-font-size;
     // should be circa 65 ems based on research by SmashingMagazine
-    max-width: 60rem;
+    max-width: $max-width;
     margin-left: auto;
     margin-right: auto;
 }
