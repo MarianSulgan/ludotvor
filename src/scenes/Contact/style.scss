@@ -1,18 +1,18 @@
 @import '../../utils/mixins.scss';
 @import '../../utils/variables.scss';
 
-.form {
+.form_contact {
     margin-top: 3.2rem;
     max-width: $max-width;
     font-family: $font-family-controls;
     line-height: 1.6rem;
 }
 
-.form input {
+.form_contact input {
     height: 6.4rem;
 }
 
-.form textarea {
+.form_contact textarea {
     min-height: 11.2rem;
 }
 

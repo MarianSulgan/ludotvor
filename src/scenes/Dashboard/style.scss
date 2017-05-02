@@ -7,4 +7,14 @@
     justify-content: center;
     margin-bottom: 1.6rem;
     font-family: $font-family-controls;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.form_dashboard {
+    font-family: $font-family-controls;
+}
+
+.form.form_dashboard.form-horizontal label.control-label {
+    text-align: left;
 }

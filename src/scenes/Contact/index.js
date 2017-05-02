@@ -180,7 +180,7 @@ class Contact extends Component {
                                         <strong>Tadá!</strong> Správu už nesú poštové holuby.
                                     </Alert> 
                                  ) :
-                                <form className="form text" onSubmit={ this.onSubmit }>
+                                <form className="form form_contact text" onSubmit={ this.onSubmit }>
                                     <span className="form__counter pull-right">{ this.state.step + 1}/{ steps.length }</span>
                                     { steps[this.state.step] }
                                 </form>

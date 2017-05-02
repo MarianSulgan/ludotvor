@@ -1,0 +1,41 @@
+[
+    {
+        "username": "peto.placka",
+        "name": "Peter Placka",
+        "email": "peto.placka@email.sk",
+        "phone": "258963333",
+        "address": {
+            "streetAddress": "21 2nd Street",
+            "city": "New York",
+            "state": "NY",
+            "postalCode": "10021"
+        },
+        "password": "123"
+    },
+    {
+        "username": "mirka.maslo",
+        "name": "Miroslava Maslova",
+        "email": "mirka.maslova@email.sk",
+        "phone": "258963333",
+        "address": {
+            "streetAddress": "Wilsonova 85",
+            "city": "Brno",
+            "state": "Česká republika",
+            "postalCode": "60200"
+        },
+        "password": "jane"
+    },
+    {
+        "username": "duro.mrkvicka",
+        "name": "Juraj Mrkva",
+        "email": "duro.mrkvicka@email.sk",
+        "phone": "0902123456",
+        "address": {
+            "streetAddress": "Priateľov mieru 22",
+            "city": "Piešťany",
+            "state": "Slovensko",
+            "postalCode": "92101"
+        },
+        "password": "janosik"
+    }
+]

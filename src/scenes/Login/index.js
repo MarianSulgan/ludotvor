@@ -66,7 +66,8 @@ class Login extends Component {
                                 <h1 className="text block__headline block__headline_h1">Prihlásiť. Seba sa.</h1>
                                 <p className="text text__block">Prihlás sa cez svoj účet. Po prihlásení sa tvoje výtvory samé ukladajú do profilu a máš ich vždy po ruke. To dá rozum.</p>
                                 <p className="text text__block">
-                                    <em>Toto je len prototyp prihlasovania. Pre testovacie účely použi meno <strong>john.doe</strong> a heslo <strong>123</strong>. Vďaka za pochopenie.</em>
+                                    <em>Pre testovacie účely sa používa meno <strong>duro.mrkvicka</strong> a heslo <strong>janosik</strong>. 
+                                    Podobnosť s reálnymi osobami je vskutku náhodná. Vďaka za pochopenie.</em>
                                 </p>
                             </Col>
                             <Col xs={12}>
@@ -77,7 +78,6 @@ class Login extends Component {
                                       <strong>Ľaľa!</strong> Nedobre si zadal meno či heslo.
                                     </Alert>
                                 }
-                                
                                 <form className="form form_login">
                                     <FieldGroup
                                         id="formControlsText"

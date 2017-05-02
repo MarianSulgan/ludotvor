@@ -272,12 +272,16 @@ class OptionsBar extends Component {
                     </OverlayTrigger>
                     <br />
                     {/*next page button, save, buy, export*/}
-                    <Link 
-                        className="block__button block__button_main btn btn-success" 
-                        to="/export" 
-                        onClick={ () => this.handleFinishedClicked() }>
-                        Hotovo, ďalej!
-                    </Link>
+                    <OverlayTrigger 
+                        placement="left"
+                        overlay={ <Tooltip id="id--next--button">Výtvor sa po kliknutí <strong>automaticky uloží</strong> do profilu. Môžeš si ho neskôr znovu objednať alebo upraviť.</Tooltip>}>
+                        <Link 
+                            className="block__button block__button_main btn btn-success" 
+                            to="/export" 
+                            onClick={ () => this.handleFinishedClicked() }>
+                            Hotovo, ďalej!
+                        </Link>
+                    </OverlayTrigger>
                 </Row>
 
                 <Row className="sidebar__block text-center">

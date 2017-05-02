@@ -1,8 +1,28 @@
-.items-container {
-    
+
+
+// .items-container {
+// }
+
+.items-container__wrapper {
+    max-width: 30em;
+    margin-right: 0;
+    margin-left: auto;
 }
 
 .items-container svg {
     height: 100%;
     width: 100%;
+}
+
+// .order-form-container {
+//     font-size: 
+// }
+
+.form .form__control.form__control_buttongroup > * {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.number-selector {
+    max-width: 10em;
 }
