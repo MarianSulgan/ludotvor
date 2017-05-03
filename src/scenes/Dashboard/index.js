@@ -15,6 +15,9 @@ import Auth from 'service/auth';
 import { Redirect } from 'react-router-dom';
 
 import TabAboutMe from './components/TabAboutMe';
+import ArtworkAndProduct from 'components/ArtworkAndProduct';
+import { Store } from 'service/store';
+import Products from 'data/products';
 
 import './style.css';
 
@@ -37,6 +40,23 @@ class Dashboard extends Component {
     }
 
     render() {
+
+        // parse usefull data from storage and map to items
+        let data = Store.getArr("user.created");
+        let createdItems;
+        if (data && data.length > 0) {
+            createdItems = data.map((elem, index) => (
+                <ArtworkAndProduct 
+                    key={ index }
+                    idKey={ index }
+                    product={ elem.productType }
+                    pattern={ elem.patternData } 
+                    layout={ elem.options.layoutType }
+                    className={`aap-item ${Products.toString(elem.productType)}`}
+                    isLink
+                />
+            ));
+        }
 
         return (
             <div className="wrapper">
@@ -63,16 +83,17 @@ class Dashboard extends Component {
                                     id="controlled-tab-1"
                                     animation={ false }
                                     bsStyle="pills" 
-                                    className="tabs">
+                                    className="tabs tabs_dashboard">
 
                                     <Tab eventKey={1} title="Výtvory" className="tab">
-                                        <div className="tab__content">
-                                            <Lorem seed={1} className="text block__text"/>
+                                        <div className="tab__content content_1">
+                                            { /* display previously created artworks + products */ }
+                                            { createdItems }
                                         </div>
                                     </Tab>
 
                                     <Tab eventKey={2} title="Objednávky" className="tab">
-                                        <div className="tab__content">
+                                        <div className="tab__content content_2">
                                             <Lorem seed={2} className="text block__text"/>
                                         </div>
                                     </Tab>

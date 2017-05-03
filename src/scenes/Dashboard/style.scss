@@ -11,10 +11,37 @@
     font-weight: 700;
 }
 
+.tab__content.content_1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .form_dashboard {
     font-family: $font-family-controls;
 }
 
 .form.form_dashboard.form-horizontal label.control-label {
     text-align: left;
+}
+
+.tabs_dashboard .aap-item {
+    margin: 1em auto;
+}
+
+$tshirt-width: 20vw;
+$bag-width: 12vw;
+
+.aap-item.tshirt {
+    width: $tshirt-width;
+    height: calc(#{$tshirt-width} * 1.214);
+    min-width: 200px;
+    min-height: 240px;
+}
+
+.aap-item.bag {
+    width: $bag-width;
+    height: calc(#{$bag-width} * 2.05);
+    min-width: 150px;
+    min-height: 300px;
 }

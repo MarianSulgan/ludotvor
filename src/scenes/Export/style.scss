@@ -4,7 +4,7 @@
 // }
 
 .items-container__wrapper {
-    max-width: 30em;
+    max-width: 22em;
     margin-right: 0;
     margin-left: auto;
 }
@@ -14,15 +14,25 @@
     width: 100%;
 }
 
-// .order-form-container {
-//     font-size: 
-// }
+.order-form-container {
+    // max-width: 20em;
+}
 
 .form .form__control.form__control_buttongroup > * {
     text-transform: uppercase;
     font-weight: 700;
 }
 
-.number-selector {
-    max-width: 10em;
+.form__section_number-selector {
+    max-width: 9.4em;
+}
+
+.form__section_price {
+    padding-top: 1.6rem;
+    border-top: 3px solid;
+}
+
+.form__section .result-price {
+    font-weight: 700;
+    font-size: 3.2rem;
 }

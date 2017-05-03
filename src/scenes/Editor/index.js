@@ -61,18 +61,10 @@ class Editor extends Component {
     }
 
     componentWillMount() {
-        if (Store.get("sg_canvas") === null || JSON.parse(Store.get("isChange")) === true) {
-            
-            // first time render canvas
-            // if (Store.get("showMessageOnce") === null) {
-            //     this.setState({ message: {
-            //         text: "Človečina, očúvaj. Keď zmeníš nastavenie v bočnom paneli, vygeneruje sa nový, úplne iný vzor. Takže ak sa ti tentok páči, neposúvaj posuvníky!",
-            //         show: true,
-            //         type: "info"
-            //     }});
-            //     Store.set("showMessageOnce", false);
-            // }
-            Store.setArr("sg_canvas_prev", this.state);
+        let _canvas = Store.get("sg_canvas");
+        let _change = JSON.parse(Store.get("isChange"));
+
+        if (_canvas === null || _change === true) {
             this.renderProduct(this.state.options.productType);
             this.renderPattern(this.state.options, () => {
                 // save state to variable
@@ -87,7 +79,6 @@ class Editor extends Component {
     }
 
     handleRenderClick = () => {
-        Store.setArr("sg_canvas_prev", this.state);
         this.renderProduct(this.state.options.productType);
         this.renderPattern(this.state.options, () => {
             Store.setArr("sg_canvas", this.state);
@@ -133,7 +124,6 @@ class Editor extends Component {
                 freeCount: opts.freeCount
             }
         }, () => {
-            Store.setArr("sg_canvas_prev", this.state);
             this.renderPattern(this.state.options, () => {
                 Store.setArr("sg_canvas", this.state);
                 Store.setArr("isChange", false);
@@ -141,14 +131,34 @@ class Editor extends Component {
         })
     }
 
-    handleFinishedClicked() {
-        // Store.set("canvas", this.canvas);
-        // console.log(this.canvas);
+    // @todo: replace with Storage functionality
+    // -> when used, it reloads unpredictably, fix
+    handleFinishedClicked = () => {
+
+        // load array from storage
+        let arr = null;
+        try {
+            arr = JSON.parse(localStorage.getItem("user.created"));
+        } catch (error) {
+            console.log("Error while saving this.state");            
+        }
+        if (arr == null)
+            arr = [];
+        
+        // detect if not already saved in storage
+        let thisString = JSON.stringify(this.state);
+        for (let i = 0; i < arr.length; i++) {
+            if (JSON.stringify(arr[i]) === thisString)
+                return;
+        }
+
+        // save new state to storage
+        arr.push(this.state);
+        localStorage.setItem("user.created", JSON.stringify(arr));
     }
 
     handleBackClick() {
         // one step back
-        this.setState(Store.getArr("sg_canvas_prev"));
     }
 
     handleForwardClick() {
@@ -193,7 +203,7 @@ class Editor extends Component {
                             type={ this.state.options.layoutType }
                             handleRenderClick={ () => this.handleRenderClick() }
                             handleOptionsChange={ (options) => this.handleOptionsChange(options) }
-                            handleFinishedClicked={ () => this.handleFinishedClicked() } 
+                            handleFinishedClicked={ this.handleFinishedClicked } 
                             handleBackClick={ () => this.handleBackClick() } 
                             handleForwardClick={ () => this.handleForwardClick() } 
                             options={ this.state.options } />

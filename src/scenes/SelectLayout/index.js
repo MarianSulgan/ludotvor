@@ -25,6 +25,7 @@ class SelectLayout extends Component {
 
     handleClick(layout) {
         Store.set("options.layout", layout);
+        Store.set("isChange", true);
     }
 
     render() {

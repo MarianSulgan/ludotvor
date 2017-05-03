@@ -35,14 +35,10 @@ class SelectPatterns extends Component {
             this.setState({});
         }
 
-        console.log("this.state.counter A: ", this.state.counter);
-        console.log("val: ", val);
         let temp = this.state.counter - val;
         this.setState({
             counter: ((temp) < 0) ? 0 : temp
-        }, () => {
-            console.log("this.state.counter ", this.state.counter);
-        })
+        });
     }
 
     componentWillMount () {
@@ -51,7 +47,10 @@ class SelectPatterns extends Component {
             let len = temp.length;
             if (len > layoutToPatternCount())
                 temp = temp.slice(0, layoutToPatternCount());
+                let check = JSON.parse(Store.get("isChange"));
                 Store.setArr("options.ornaments", temp);
+                if (!check)
+                    Store.set("isChange", false);
         }
     }
 

@@ -10,16 +10,17 @@
  */
 
 import React, { Component } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router-dom';
 
-import SvgWrapper from './components/SvgWrapper';
+import SvgWrapper from 'components/SvgWrapper';
 import Products from 'data/products';
 import Layouts from 'data/layouts';
 import { Store } from 'service/store';
 
-import bagImage from './images/bag.png';
-import tshirtImage from './images/tshirt.png';
+import bagImage from 'data/images/bag.png';
+import tshirtImage from 'data/images/tshirt.png';
 
 import './style.css';
 
@@ -82,19 +83,31 @@ class Canvas extends Component {
         const canvas__layer_product__style = 
         (productType === Products.Digital) ? {} : { backgroundImage: 'url(' + productImageUrl + ')' };
 
-        const _svg = window.svg = 
-            <SvgWrapper 
-                content={ svgDataElement } 
-                width={ this.props.width } 
-                height={ this.props.height } 
-                patternBorderSize={ this.props.patternBorderSize } 
-                backgroundColor={ this.props.backgroundColor }
-                layoutType={ this.props.layoutType } />
+        const args =  {
+            content: svgDataElement,
+            width: this.props.width, 
+            height: this.props.height,
+            patternBorderSize: this.props.patternBorderSize,
+            backgroundColor: this.props.backgroundColor,
+            layoutType:  this.props.layoutType,
+        }
+
+        const _svg =
+            <SvgWrapper {...args} />
+
+        // save svg content to storage to be used later        
+        try {
+            let x = ReactDOMServer.renderToStaticMarkup(_svg);
+            Store.set("orderSvg", x);
+            Store.set("isChange", false);
+        } catch (error) {
+            console.log("Unable to render static markup.");
+        }
 
         return (
             <div className="block">
                 { 
-                    (Store.getArr("options.ornaments") || Store.get("options.product") || Store.get("options.layout")) ?
+                    (Store.getArr("options.ornaments") || Store.get("options.product") || Store.get("options.layout")) || Store.get("sg_canvas") ?
                     <div className={`canvas canvas_editor ${productClass} ${layoutClass}`}>
                         <div style={ canvas__layer_product__style } className="canvas__layer canvas__layer_product"></div>
                         <div className="canvas__layer canvas__layer_svg">
