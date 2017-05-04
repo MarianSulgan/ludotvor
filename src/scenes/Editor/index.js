@@ -66,6 +66,7 @@ class Editor extends Component {
 
         if (_canvas === null || _change === true) {
             this.renderProduct(this.state.options.productType);
+            console.log("Editor", this.state.options);
             this.renderPattern(this.state.options, () => {
                 // save state to variable
                 Store.setArr("sg_canvas", this.state);
@@ -140,7 +141,7 @@ class Editor extends Component {
         try {
             arr = JSON.parse(localStorage.getItem("user.created"));
         } catch (error) {
-            console.log("Error while saving this.state");            
+            console.err("Error while saving this.state");            
         }
         if (arr == null)
             arr = [];

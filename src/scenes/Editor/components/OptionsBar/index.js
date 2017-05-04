@@ -279,7 +279,7 @@ class OptionsBar extends Component {
                             className="block__button block__button_main btn btn-success" 
                             to="/export" 
                             onClick={ () => this.handleFinishedClicked() }>
-                            Hotovo, ďalej!
+                            Uložiť a ďalej!
                         </Link>
                     </OverlayTrigger>
                 </Row>

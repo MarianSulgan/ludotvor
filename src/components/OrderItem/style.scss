@@ -1,0 +1,27 @@
+
+@import '../../utils/variables.scss';
+
+.orders__item {
+    flex-direction: column;
+}
+
+.orders__item-data {
+    line-height: 1.6rem * 1.6;
+    position: relative;
+}
+
+.orders__item-data::before {
+    content: "⸺";
+}
+
+.orders__item-data .item__label {
+    font-family: $font-family-controls;
+}
+
+.orders__item-data .item__label .label-main {
+    font-weight: 700;
+}
+
+.orders__item-data .item__label > .label-lg {
+    font-size: 1.6rem;
+}

@@ -17,6 +17,26 @@
     justify-content: center;
 }
 
+.tab__content.content_1 > div {
+    display: flex;
+    align-items: center;
+}
+
+.tab__content.content_1 > div > a {
+    display: flex;
+}
+
+.tab__content.content_2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tab__content.content_2 > div {
+    display: flex;
+    align-items: center;
+}
+
 .form_dashboard {
     font-family: $font-family-controls;
 }
@@ -26,22 +46,22 @@
 }
 
 .tabs_dashboard .aap-item {
-    margin: 1em auto;
+    margin: 1em;
 }
 
-$tshirt-width: 20vw;
-$bag-width: 12vw;
-
-.aap-item.tshirt {
-    width: $tshirt-width;
-    height: calc(#{$tshirt-width} * 1.214);
-    min-width: 200px;
-    min-height: 240px;
+.container_delete-button .button_delete {
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-top: 6em;
 }
 
-.aap-item.bag {
-    width: $bag-width;
-    height: calc(#{$bag-width} * 2.05);
-    min-width: 150px;
-    min-height: 300px;
+.container_delete-button .button_delete:hover {
+    color: $brand-danger;
+}
+
+.container_delete-button {
+    // position: absolute;
+    bottom: 1em;
+    left: 0;
+    right: 0;
 }

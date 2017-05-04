@@ -24,6 +24,9 @@ class ArtworkAndProduct extends Component {
         let data = Store.getArr("user.created");
         if (data) {
             Store.setArr("sg_canvas", data[this.props.idKey]);
+            Store.set("options.product", this.props.product)
+            Store.set("options.layout", this.props.layout)
+            Store.setArr("options.ornaments", this.props.options.basicShapesIds);
             Store.set("isChange", false);
         }
     }
@@ -31,13 +34,13 @@ class ArtworkAndProduct extends Component {
     render() {
 
         const svgDataElement = this.props.pattern.shapeContainers.map((elem, index) =>            
-            <g key={ index } transform={ elem.transforms }  dangerouslySetInnerHTML={{ __html: this.props.pattern.staticSvgs[elem.index] }} />
+            <g key={ index } transform={ elem.transforms } dangerouslySetInnerHTML={{ __html: this.props.pattern.staticSvgs[elem.index] }} />
         );
 
         const args =  {
             content: svgDataElement,
-            width: 800,
-            height: 800,
+            width: this.props.options.canvasWidth,
+            height: this.props.options.canvasHeight,
             patternBorderSize: 60,
             backgroundColor: "transparent",
             layoutType:  this.props.layout,
@@ -51,7 +54,7 @@ class ArtworkAndProduct extends Component {
         }
 
         const artworkAndProduct = 
-            <div className={ this.props.className }>
+            <div className={`aap-item ${this.props.className}`}>
                 <div className="aap-wrapper">
                     {/*Product Image*/}
                     <div className="product-wrapper">

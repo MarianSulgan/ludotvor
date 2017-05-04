@@ -25,6 +25,7 @@ import Randomizer from './core/Randomizer';
 async function generatePattern(options, callback) {
 
     let shapeContainers = [];
+    console.log("Generator ", options.layoutType);
 
     switch(options.layoutType) {
 
@@ -74,7 +75,7 @@ async function generatePattern(options, callback) {
         } break;
         
         case Layouts.Grid:
-            
+
             /**
              * default is GRID, code is intentionally placed in _default_ case a
              * and _break;_ omitted to use fallthrough principle in switch
@@ -86,6 +87,8 @@ async function generatePattern(options, callback) {
             /**
              * Layout: GRID
              */
+
+            console.log("Grid SG");
             
             if (options.basicShapesIds === null || options.basicShapesIds.length === 0)
                 return;

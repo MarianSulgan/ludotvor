@@ -9,8 +9,7 @@
  */
 
 import React, { Component } from 'react';
-import { Grid, Row, Col, Tab, Tabs} from 'react-bootstrap';
-import Lorem from 'react-lorem-component';
+import { Grid, Row, Col, Tab, Tabs } from 'react-bootstrap';
 import Auth from 'service/auth';
 import { Redirect } from 'react-router-dom';
 
@@ -18,6 +17,8 @@ import TabAboutMe from './components/TabAboutMe';
 import ArtworkAndProduct from 'components/ArtworkAndProduct';
 import { Store } from 'service/store';
 import Products from 'data/products';
+import Layouts from 'data/layouts';
+import OrderItem from 'components/OrderItem';
 
 import './style.css';
 
@@ -39,6 +40,11 @@ class Dashboard extends Component {
         return false;
     }
 
+    handleDeleteAll = () => {
+        Store.remove("user.created");
+        this.setState({});
+    }
+
     render() {
 
         // parse usefull data from storage and map to items
@@ -52,7 +58,27 @@ class Dashboard extends Component {
                     product={ elem.productType }
                     pattern={ elem.patternData } 
                     layout={ elem.options.layoutType }
-                    className={`aap-item ${Products.toString(elem.productType)}`}
+                    className={`${Products.toString(elem.productType)} ${Layouts.toString(elem.options.layoutType)}`}
+                    options={ elem.options }
+                    isLink
+                />
+            ));
+        }
+
+        // parse ordered items from storage and map to components
+        let orders = Store.getArr("user.orders");
+        let orderedItems;
+        if (orders && orders.length > 0) {
+            orderedItems = orders.map((elem, index) => (
+                <OrderItem 
+                    key={ index }
+                    idKey={ index }
+                    product={ elem.productType }
+                    pattern={ elem.patternData } 
+                    layout={ elem.options.layoutType }
+                    className={`${Products.toString(elem.productType)} ${Layouts.toString(elem.options.layoutType)}`}
+                    options={ elem.options }
+                    orderData={ elem.orderData }
                     isLink
                 />
             ));
@@ -90,11 +116,13 @@ class Dashboard extends Component {
                                             { /* display previously created artworks + products */ }
                                             { createdItems }
                                         </div>
+                                        
                                     </Tab>
 
                                     <Tab eventKey={2} title="Objednávky" className="tab">
-                                        <div className="tab__content content_2">
-                                            <Lorem seed={2} className="text block__text"/>
+                                        <div className="tab__content content_2 orders">
+                                            {/*ordered items*/}
+                                            { orderedItems }
                                         </div>
                                     </Tab>
 
@@ -106,8 +134,18 @@ class Dashboard extends Component {
                             </Col>
                         </Row>
 
+                        {
+                            (data && data.length > 0) ?
+                            <div className="container_delete-button text-center">
+                                <span
+                                    className="btn btn-secondary button block__button button_delete"
+                                    onClick={ this.handleDeleteAll }>
+                                    Zmazať výtvory :(
+                                </span>
+                            </div>:
+                            null
+                        }
                         
-
                     </Grid> :
                     <Redirect to="/login" />
                 }

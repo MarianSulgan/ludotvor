@@ -82,6 +82,28 @@ class Export extends Component {
         this.setState({
             finished: true,
             alertVisible: true
+        }, () => {
+
+            // Save order data
+
+            // load array from storage
+            let arr = null;
+            try {
+                arr = JSON.parse(localStorage.getItem("user.orders"));
+            } catch (error) {
+                console.err("Error while loading orders");            
+            }
+            if (arr == null)
+                arr = [];
+
+            // save actual canvas to storage
+            let temp = JSON.parse(Store.get("sg_canvas"));
+            temp.orderData = {
+                price: this.state.price,
+                pieces: this.state.number
+            }
+            arr.push(temp);
+            localStorage.setItem("user.orders", JSON.stringify(arr));
         })
     }
 
@@ -95,7 +117,8 @@ class Export extends Component {
     render() {
 
         let sizes;
-        if (Store.get("options.product") === Products.Tshirt) {
+        let product = Store.get("options.product");
+        if (product === Products.Tshirt) {
             sizes = tshirtSizes.map((size, index) => 
                 <SizeButton 
                     key={ index }
@@ -106,9 +129,12 @@ class Export extends Component {
             );
         }
 
+        console.log(Products.toString(product));
+        console.log(Products.toString(Products.Digital));
+
         // convert string (saved svg) to html and insert
-        const orderSvgString = Store.get("orderSvg");
-        const orderSvgElement = <div dangerouslySetInnerHTML={{__html: orderSvgString }} />
+        // const orderSvgString = Store.get("orderSvg");
+        // const orderSvgElement = <div dangerouslySetInnerHTML={{__html: orderSvgString }} />
 
 
         let add = Auth.getCurrentUser().address;
@@ -166,73 +192,100 @@ class Export extends Component {
                                     {/*<Col xs={12} sm={6}>*/}
                                     <Col xs={12}>
                                         <div className="order-form-container">
-                                            <form className="form text">
+                                            { 
+                                                product !== Products.Digital ?
 
-                                                <FormGroup className="form__section">
-                                                    <ControlLabel>Vyber veľkosť:</ControlLabel><br />
-                                                    <ButtonGroup className="form__control form__control_buttongroup">
-                                                        {sizes}
-                                                    </ButtonGroup>
-                                                </FormGroup>
+                                                <form className="form text">
+                                                    <FormGroup className="form__section">
+                                                        <ControlLabel>Vyber veľkosť:</ControlLabel><br />
+                                                        <ButtonGroup className="form__control form__control_buttongroup">
+                                                            {sizes}
+                                                        </ButtonGroup>
+                                                    </FormGroup>
 
-                                                <FormGroup
-                                                    className="form__section form__section_number-selector"
-                                                    controlId="formItemsNumber"
-                                                    validationState={this.getNumberValidationState()}>
-                                                    <ControlLabel>Počet kusov:</ControlLabel><br />
-                                                    <FormControl
-                                                        type="number"
-                                                        value={this.state.number}
-                                                        placeholder="Počet kusov"
-                                                        onChange={this.handleNumberChange}
-                                                    />
-                                                    <FormControl.Feedback />
-                                                </FormGroup>
+                                                    <FormGroup
+                                                        className="form__section form__section_number-selector"
+                                                        controlId="formItemsNumber"
+                                                        validationState={this.getNumberValidationState()}>
+                                                        <ControlLabel>Počet kusov:</ControlLabel><br />
+                                                        <FormControl
+                                                            type="number"
+                                                            value={this.state.number}
+                                                            placeholder="Počet kusov"
+                                                            onChange={this.handleNumberChange}
+                                                        />
+                                                        <FormControl.Feedback />
+                                                    </FormGroup>
 
-                                                <FormGroup>
-                                                <ControlLabel>Spôsob dopravy:</ControlLabel>
-                                                <FormControl 
-                                                    componentClass="select" 
-                                                    placeholder="Vyber ako ti doručíme balíček"
-                                                    onChange={ this.handleShippingChange } >
-                                                    <option value="post">Klasika, balík poštou. Slovenskou poštou.</option>
-                                                    <option value="inperson">Oné, prídem si po to sám</option>
-                                                </FormControl>
-                                                </FormGroup>
-
-                                                {
-                                                    this.state.shipping === "inperson" ?
-                                                    <p className="text block__text">V tom prípade ťa bude balíček čakať za 14 dní na <a href="https://goo.gl/maps/PTNsQNe7vB72">tejto adrese.</a></p> :
-                                                    null
-                                                }
-
-                                                <FormGroup>
-                                                <ControlLabel>A ešte zaplatiť. Ako sa ti to hodí?</ControlLabel>
-                                                <FormControl 
-                                                    componentClass="select" 
-                                                    placeholder="Spôsob platby"
-                                                    onChange={ this.handlePaymentChange }>
-                                                    {/*<option value="post">No veď na dobierku...</option>*/}
-                                                    <option value="bankwire">Prevodom na účet</option>
-                                                    { this.state.shipping === "inperson" ? <option value="bankwire">V hotovosti</option> : "" }
-                                                </FormControl>
-                                                </FormGroup>
-
-                                                <FormGroup>
-                                                    <ControlLabel>Adresa:</ControlLabel>
+                                                    <FormGroup>
+                                                    <ControlLabel>Spôsob dopravy:</ControlLabel>
                                                     <FormControl 
-                                                    componentClass="textarea" 
-                                                    placeholder="Adresa, napríklad Jánošíkova 15, 921 01 Piešťany" 
-                                                    defaultValue={ address } />
-                                                </FormGroup>
+                                                        componentClass="select" 
+                                                        placeholder="Vyber ako ti doručíme balíček"
+                                                        onChange={ this.handleShippingChange } >
+                                                        <option value="post">Klasika, balík poštou. Slovenskou poštou.</option>
+                                                        <option value="inperson">Oné, prídem si po to sám</option>
+                                                    </FormControl>
+                                                    </FormGroup>
 
-                                                <FormGroup className="form__section form__section_price">
-                                                    <ControlLabel>Cena:</ControlLabel><br/>
-                                                    <span className="result-price">{ this.state.price } &euro;</span>
-                                                </FormGroup>
+                                                    {
+                                                        this.state.shipping === "inperson" ?
+                                                        <p className="text block__text">V tom prípade ťa bude balíček čakať za 14 dní na <a href="https://goo.gl/maps/PTNsQNe7vB72">tejto adrese.</a></p> :
+                                                        null
+                                                    }
 
+                                                    <FormGroup>
+                                                    <ControlLabel>A ešte zaplatiť. Ako sa ti to hodí?</ControlLabel>
+                                                    <FormControl 
+                                                        componentClass="select" 
+                                                        placeholder="Spôsob platby"
+                                                        onChange={ this.handlePaymentChange }>
+                                                        {/*<option value="post">No veď na dobierku...</option>*/}
+                                                        <option value="bankwire">Prevodom na účet</option>
+                                                        { this.state.shipping === "inperson" ? <option value="bankwire">V hotovosti</option> : "" }
+                                                    </FormControl>
+                                                    </FormGroup>
+
+                                                    <FormGroup>
+                                                        <ControlLabel>Adresa:</ControlLabel>
+                                                        <FormControl 
+                                                        componentClass="textarea" 
+                                                        placeholder="Adresa, napríklad Jánošíkova 15, 921 01 Piešťany" 
+                                                        defaultValue={ address } />
+                                                    </FormGroup>
+
+                                                    <FormGroup className="form__section form__section_price">
+                                                        <ControlLabel>Cena:</ControlLabel><br/>
+                                                        <span className="result-price">{ this.state.price } &euro;</span>
+                                                    </FormGroup>
+                                                </form>
+
+                                                :
+
+                                                <form className="form text">
+                                                    <FormGroup>
+                                                        <ControlLabel>A ešte zaplatiť. Ako sa ti to hodí?</ControlLabel>
+                                                        <FormControl 
+                                                            componentClass="select" 
+                                                            placeholder="Spôsob platby"
+                                                            onChange={ this.handlePaymentChange }>
+                                                            <option value="bankwire">Prevodom na účet</option>
+                                                        </FormControl>
+                                                    </FormGroup>
+                                                    <FormGroup>
+                                                        <ControlLabel>E-mail, na ktorý obrázok pošleme:</ControlLabel>
+                                                        <FormControl 
+                                                            componentClass="input" 
+                                                            placeholder="Sem pošleme obrázok. Môžeš tak poslať milý darček!" 
+                                                            defaultValue={ Auth.getCurrentUser().email } />
+                                                    </FormGroup>
+                                                    <FormGroup className="form__section form__section_price">
+                                                        <ControlLabel>Cena:</ControlLabel><br/>
+                                                        <span className="result-price">{ this.state.price } &euro;</span>
+                                                    </FormGroup>
+                                                </form>
+                                            }                                            
                                             
-                                            </form>
                                         </div>
                                     </Col>
                                 </Row> :

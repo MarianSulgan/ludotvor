@@ -31,6 +31,7 @@ body {
   min-height: calc(100vh - #{$navbar-height});
   padding-top: 20px;
   padding-bottom: 20px;
+  position: relative;
 }
 
 .page-content_gray {
