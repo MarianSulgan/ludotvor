@@ -135,7 +135,7 @@ class Dashboard extends Component {
                         </Row>
 
                         {
-                            (data && data.length > 0) ?
+                            (data && data.length > 0 && this.state.key === 1) ?
                             <div className="container_delete-button text-center">
                                 <span
                                     className="btn btn-secondary button block__button button_delete"

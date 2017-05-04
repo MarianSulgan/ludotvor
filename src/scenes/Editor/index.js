@@ -14,6 +14,7 @@ import SideNavigation from 'components/SideNavigation';
 import AlertDismissable from 'components/AlertDismissable';
 import ShapeGrammarCanvas from './components/ShapeGrammarCanvas';
 import OptionsBar from './components/OptionsBar';
+import ArtworkAndProduct from 'components/ArtworkAndProduct';
 
 import './style.css';
 import '../style.css';
@@ -178,6 +179,21 @@ class Editor extends Component {
                 height={ this.state.options.canvasHeight } 
                 patternBorderSize={ patternBorderSize }
                 backgroundColor={ this.state.options.color }/>;
+                
+        /*const _class = 
+            " canvas_" + Products.toString(this.state.options.productType) + " " +
+            "canvas_" + Layouts.toString(this.state.options.layoutType) + " ";
+
+        const canvas = 
+            <div className="canvas_aap">
+                <ArtworkAndProduct 
+                    product={ this.state.options.productType }
+                    pattern={ this.state.patternData }
+                    layout={ this.state.options.layoutType }
+                    className={ _class }
+                    options={ this.state.options }
+                />
+            </div>*/
 
         return (
             <div className="wrapper">

@@ -94,7 +94,7 @@ class TabAboutMe extends Component {
     
     render() {
         return (
-            <div className="tab__content">
+            <div className="tab__content content_3">
                 <Row>
                     {
                     this.state.alertVisible &&

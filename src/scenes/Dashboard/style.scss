@@ -37,6 +37,10 @@
     align-items: center;
 }
 
+.tab__content.content_3 > .row {
+    padding: 0 15px;
+}
+
 .form_dashboard {
     font-family: $font-family-controls;
 }
