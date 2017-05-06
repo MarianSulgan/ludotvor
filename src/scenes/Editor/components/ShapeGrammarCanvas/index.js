@@ -13,6 +13,7 @@ import React, { Component } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router-dom';
+// import { Image } from 'react-bootstrap';
 
 import SvgWrapper from 'components/SvgWrapper';
 import Products from 'data/products';
@@ -46,7 +47,13 @@ class Canvas extends Component {
         let svgDataElement;
         if (patternData) {
             const _svgDataElement = patternData.shapeContainers.map((elem, index) =>            
-                <g key={ index } transform={ elem.transforms }  dangerouslySetInnerHTML={{ __html: patternData.staticSvgs[elem.index] }} />
+                <g 
+                    key={ index } 
+                    transform={ elem.transforms }  
+                    dangerouslySetInnerHTML={{ __html: 
+                        stripHeader(patternData.staticSvgs[elem.index])
+                    }} 
+                />
             );
             svgDataElement = _svgDataElement;
         } 
@@ -77,7 +84,7 @@ class Canvas extends Component {
                 break;
             default: 
                 productImageUrl = "";
-                productClass = "product_undefined"
+                productClass = "product_undefined";
         }
 
         const canvas__layer_product__style = 
@@ -95,23 +102,34 @@ class Canvas extends Component {
         const _svg =
             <SvgWrapper {...args} />
 
-        // save svg content to storage to be used later        
+        // save svg content to storage to be used later   
+        let renderedSvgWrapper = null;
         try {
-            let x = ReactDOMServer.renderToStaticMarkup(_svg);
-            Store.set("orderSvg", x);
+            renderedSvgWrapper = ReactDOMServer.renderToStaticMarkup(_svg);
+            Store.set("orderSvg", renderedSvgWrapper);
             Store.set("isChange", false);
         } catch (error) {
             console.log("Unable to render static markup.");
         }
 
+        var encodedData = window.btoa(renderedSvgWrapper);
+        // console.log(encodedData);
+        const style = {
+            backgroundImage: `url('data:image/svg+xml;base64,${encodedData}')`,
+            height: '100%'
+        }
+        const svgDiv = <div className="svg-content-div" style={ style }></div>
+
         return (
-            <div className="block">
+            <div className="block canvas_wrapper">
                 { 
                     (Store.getArr("options.ornaments") || Store.get("options.product") || Store.get("options.layout")) || Store.get("sg_canvas") ?
                     <div className={`canvas canvas_editor ${productClass} ${layoutClass}`}>
-                        <div style={ canvas__layer_product__style } className="canvas__layer canvas__layer_product"></div>
+                        <div style={ canvas__layer_product__style } className="div canvas__layer canvas__layer_product"></div>
+                        {/*<Image className="canvas__layer canvas__layer_product" src={ productImageUrl } responsive />*/}
                         <div className="canvas__layer canvas__layer_svg">
-                            { _svg }
+                            {/*{ _svg }*/}
+                            { svgDiv }
                         </div> 
                     </div>
                     :
@@ -129,5 +147,11 @@ class Canvas extends Component {
 }
 
 export default Canvas;
+
+function stripHeader(str) {
+    let _str = str.replace(/<\?xml.+\?>/g, '');
+    _str = _str.replaceAll('<!DOCTYPE [^>]+>', '').replaceAll('<!-- .+-->', '');
+    return _str;
+}
 
 

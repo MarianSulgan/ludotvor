@@ -133,20 +133,19 @@ class Dashboard extends Component {
                                 </Tabs>
                             </Col>
                         </Row>
-
                         {
                             (data && data.length > 0 && this.state.key === 1) ?
                             <div className="container_delete-button text-center">
                                 <span
                                     className="btn btn-secondary button block__button button_delete"
                                     onClick={ this.handleDeleteAll }>
-                                    Zmazať výtvory :(
+                                    Zmazať všetky výtvory :(
                                 </span>
                             </div>:
                             null
                         }
-                        
                     </Grid> :
+
                     <Redirect to="/login" />
                 }
             </div>

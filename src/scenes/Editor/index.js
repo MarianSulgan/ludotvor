@@ -8,13 +8,12 @@
  */
 
 import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col, Alert, Clearfix } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import SideNavigation from 'components/SideNavigation';
-import AlertDismissable from 'components/AlertDismissable';
 import ShapeGrammarCanvas from './components/ShapeGrammarCanvas';
 import OptionsBar from './components/OptionsBar';
-import ArtworkAndProduct from 'components/ArtworkAndProduct';
 
 import './style.css';
 import '../style.css';
@@ -54,10 +53,11 @@ class Editor extends Component {
                 canvasHeight: _canvasHeight(Store.get("options.layout")),
                 canvasWidth: _canvasWidth(Store.get("options.layout")),
                 svgSide: svgSide,
-                freeSide: 200,
+                freeSide: 150,
                 freeCount: 5
             },
-            counter: 0
+            counter: 0,
+            alertVisible: false
         }
     }
 
@@ -134,7 +134,7 @@ class Editor extends Component {
     }
 
     // @todo: replace with Storage functionality
-    // -> when used, it reloads unpredictably, fix
+    // -> when used with, it reloads unpredictably, fix
     handleFinishedClicked = () => {
 
         // load array from storage
@@ -157,6 +157,8 @@ class Editor extends Component {
         // save new state to storage
         arr.push(this.state);
         localStorage.setItem("user.created", JSON.stringify(arr));
+
+        this.setState({ alertVisible: true });
     }
 
     handleBackClick() {
@@ -165,6 +167,10 @@ class Editor extends Component {
 
     handleForwardClick() {
         // one step forward, if back was pressed
+    }
+
+    handleDismiss = () => {
+        this.setState({ alertVisible: false })
     }
 
     render() {
@@ -198,10 +204,6 @@ class Editor extends Component {
         return (
             <div className="wrapper">
                 <Grid className="page-content page-content_editor_theme" fluid>
-                    <AlertDismissable 
-                        message={ this.state.message.text } 
-                        type={ this.state.message.type } 
-                        show={ this.state.message.show }/>
                     <Row>
                         <Col xs={ 1 } >
                             <SideNavigation indicatorNumber={ 3 }/>
@@ -210,13 +212,22 @@ class Editor extends Component {
                         <Col xs={ 11 } sm={ 8 } className="block">
                             <Row>
                                 <Col xs={12} className="block text-center">
+                                    {
+                                        this.state.alertVisible ?
+                                        <Alert bsStyle="success" className="editor__alert text" onDismiss={ this.handleDismiss }>
+                                            <strong>Úspešne uložené.</strong> Ak sa pozrieš do svojho <Link to="/dashboard">profilu</Link>, nájdeš to tam. Tak to je fantastické.
+                                        </Alert>
+                                        :
+                                        null
+                                    }
                                     { canvas }
                                 </Col>
                             </Row>
                         </Col>
+                        <Clearfix visibleXsBlock />
                         {/*settings, here user can change generation options*/}
                         <OptionsBar 
-                            xs={ 12 } sm={ 3 } 
+                            xs={11} xsOffset={1} sm={ 3 } smOffset={ 0 }
                             type={ this.state.options.layoutType }
                             handleRenderClick={ () => this.handleRenderClick() }
                             handleOptionsChange={ (options) => this.handleOptionsChange(options) }

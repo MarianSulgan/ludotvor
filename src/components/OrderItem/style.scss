@@ -25,3 +25,8 @@
 .orders__item-data .item__label > .label-lg {
     font-size: 1.6rem;
 }
+
+.orders__item > .aap-container {
+    min-height: 270px;
+    display: flex;
+}

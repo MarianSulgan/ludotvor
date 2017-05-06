@@ -6,11 +6,12 @@
  */
 
 import React, { Component } from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import RouterNavItem from './components/RouterNavItem';
 import Auth from 'service/auth';
+import logoImage from './images/logo.svg';
 import './style.css';
 
 class Navigation extends Component {
@@ -28,7 +29,7 @@ class Navigation extends Component {
         );
 
         const otherMenuItems = [
-            <RouterNavItem key={1} to="/dashboard" className="button">Moje</RouterNavItem>,
+            <RouterNavItem key={1} to="/dashboard" className="button button_bordered">Moje!</RouterNavItem>,
             <RouterNavItem key={2} to={ location.pathname } className="button" logout={ this.handleLogoutClicked }>Odhlásiť</RouterNavItem>
         ]
 
@@ -40,7 +41,9 @@ class Navigation extends Component {
                 className="navigation navigation_bg">
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <Link to="/">Ľudotvor</Link>
+                        <Link to="/">
+                            <Image className="image image_logo" src={ logoImage } responsive />
+                        </Link>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>

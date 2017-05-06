@@ -152,8 +152,8 @@ class Export extends Component {
                                     <h1 className="text block__headline block__headline_h1">Svoj výtvor si veru môžeš aj kúpiť.</h1>
                                     <p className="text block__text">
                                         Je to hotové! Ak sa ti výsledok páči, pokojne si ho môžeš aj objednať. Stačí zadať 
-                                        veľkosť a počet kusov. A ak si chceš objednať viac rôznych výtvorov naraz, môžeš tak 
-                                        spraviť vo <Link to="/dashboard">svojom profile</Link> v záložke Výtvory.
+                                        veľkosť a počet kusov. A ak si chceš objednať niektoré výtvory znovu, môžeš tak 
+                                        spraviť vo <Link to="/dashboard">svojom profile</Link> v záložke Výtvory, keď naň jednoducho klikneš.
                                     </p>
                                 </Col>
                                 {

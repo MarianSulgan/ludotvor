@@ -1,5 +1,16 @@
 @import '../../../../utils/variables.scss';
 
+.sidebar__content {
+  position: fixed;
+  padding-right: 30px;
+  @media (max-width: $screen-xs-max) {
+    position: initial;
+    padding: 0 30px;
+  }
+
+  // @media (max-width: $screen-xs-)
+}
+
 .sidebar {
     max-height: calc(100vh - 50px);
     padding: 1em;
@@ -29,6 +40,11 @@
   margin-bottom: 14px; 
   transform: scale(1); 
   transition: transform 100ms ease;
+}
+
+.resolution-picker input {
+  max-width: 75px;
+  display: inline-block;
 }
 
 

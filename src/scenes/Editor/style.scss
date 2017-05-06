@@ -7,3 +7,9 @@
     margin: 10px;
 }
 
+.editor__alert {
+    position: absolute;
+    z-index: 999;
+    left: 0;
+    right: 0;
+}

@@ -12,19 +12,22 @@ Indicator based on Codrops article, type: Zahi
 .section--nav {
 
     font-family: $font-family-nav;
+    display: flex;
+    align-items: center;
 
     // margin-top: 3rem;
 
-    @media (max-width: $screen-xs-max) {
-        padding-top: 0;
-    }
+    // @media (max-width: $screen-xs-max) {
+    //     padding-top: 0;
+    // }
 
     // general nav styling
 
     .nav {
-        position: relative;
+        position: fixed;
         z-index: 2;
-        top: calc(50% - 150px);
+        // top: 50%;
+        // transform: translateY(-50%);
 
         // &::before {
         //     content: '';
@@ -130,6 +133,7 @@ Indicator based on Codrops article, type: Zahi
 
         @media (max-width: 1100px) {
             visibility: hidden;
+            width: 0;
         }
     }
 

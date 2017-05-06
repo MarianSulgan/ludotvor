@@ -1,218 +1,398 @@
-//  @todo: change values based on input product image, for example thsirt/bag/phone background...
+/* Dashboard > style.scss */
 
-$max-canvas-width: 630px; //580 px for smaller heights
-$min-canvas-width: 390px; //580 px for smaller heights
+@import '../../../../utils/variables.scss';
 
-.canvas_editor {
-    height: calc(100vh - 50px);
+/*
+Fix with background-image
+*/
+
+.canvas_wrapper {
     width: 100%;
-    position: relative;
-    bottom: 0;
-}
-
-.product_bag {
-
-    .canvas__layer {
-        width: 100%;
-        max-width: $max-canvas-width; // otherwise, product image might be too big
-        min-width: $min-canvas-width; // otherwise it gets shifted, shrinks
-        position: absolute;
-        background-repeat: no-repeat;
-        background-position: bottom;
-    }
-
-    .canvas__layer_product {
-        // background-image is set programatically
-        background-size: cover;
-        top: -50px;
-        height: calc(100vh);
-        position: relative;
-        margin: 0 auto;
-        margin-bottom: calc(-100vh + -50px);
-    }
-
-    .canvas__layer_svg {
-        // background-image is set programatically
-        /* bottom: 750px; */
-        /* padding: 6em 5.2em 6em 4em; */
-        position: relative;
-        margin: 0 auto;
-        z-index: 1;
-        height: calc(100vh);
-        min-width: 470px;
-        /* margin-bottom: -100vh; */
-    }
-
-    .layer__svg {
-        padding: 4em;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: auto;
-    }
-
-}
-
-.product_tshirt {
-
-    .canvas__layer {
-        width: 100%;
-        max-width: $max-canvas-width; // otherwise, product image might be too big
-        min-width: $min-canvas-width; // otherwise it gets shifted, shrinks
-        position: absolute;
-        background-repeat: no-repeat;
-        background-position: bottom;
-    }
-
-    .canvas__layer_product {
-        // background-image is set programatically
-        background-size: cover;
-        top: -50px;
-        height: calc(100vh);
-        margin: 0 auto;
-        margin-bottom: calc(-100vh + -50px);
-        max-width: 900px;
-        min-width: 765px;
-        position: absolute;
-        @media screen and (max-width: 1100px) {
-            & {
-                right: -50px;
-            }
-        }
-    }
-
-    .canvas__layer_svg {
-        position: absolute;
-        margin: 0 auto;
-        z-index: 1;
-        height: calc(100vh);
-        max-width: 900px;
-        min-width: 765px;
-        @media screen and (max-width: 1100px) {
-            & {
-                right: -50px;
-            }
-        }
-        @media screen and (min-width: 1100px) {
-            & {
-                transform: scale(0.9);
-            }
-        }
-    }
-
-    .layer__svg {
-        position: absolute;
-        left: 0;
-        bottom: 10em;
-        width: 100%;
-        height: auto;
-        padding: 16em;
-    }
-
-}
-
-.product_digital {
-
-    .canvas__layer {
-        width: 100%;
-        position: absolute;
-    }
-
-    .canvas__layer_svg {
-        position: relative;
-        margin: 0 auto;
-        z-index: 1;
-        height: calc(100vh);
-        display: flex;
-        align-items: center;
-        top: -50px;
-    }
-
-    .layer__svg {
-        @media screen and (orientation: portrait) {
-            & {
-                position: absolute;
-                width: 100%;
-                height: auto;
-            }
-        }
-
-        @media screen and (orientation: landscape) {
-            & {
-                max-height: 100%;
-                height: auto;
-                max-width: 100%;
-                width: auto;
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-        }
-    }
-
-}
-
-.product_tshirt.layout_free .layer__svg {
-
-    bottom: 0;
-    padding: 0 16em 6em 16em;
-
-    @media screen and (min-width: 1100px) {
-        & {
-            transform: scale(0.9);
-        }
-    }
-}
-
-.product_digital.layout_free .layer__svg {
-    
-    padding: 8em;
-}
-
-.product_undefined {
-    
-    .canvas__layer {
-        width: 100%;
-        position: absolute;
-    }
-
-    .canvas__layer_svg {
-        position: relative;
-        margin: 0 auto;
-        z-index: 1;
-        height: 100vh;
-        top: -50px;
-    }
-
-    .layer__svg {
-        padding: 4em;
-        position: absolute;
-        width: 100%;
-        height: auto;
-        top: 50%;
-        left: 0;
-        transform: translateY(calc(-50% + 0px))
-    }
-}
-
-// .product_bag.layout_free {
-
-// }
-
-// .message {
-
-// }
-
-.message_centered {
     height: calc(100vh - 50px);
 }
 
-.message_centered .text {
-    position: relative;
-    top: calc(50% - 50px);
-    transform: translateY(-50%);
-    width: 80%;
-    max-width: 30em;
-    opacity: 0.5;
+div.canvas__layer_product {
+    height: 100%;
+    // background-image: url(/static/media/tshirt.b20c4659.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
 }
+
+div.canvas__layer_svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+}
+
+.svg-content-div {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    }
+
+.canvas.canvas_editor {
+    width: 100%;
+    height: 100%;
+}
+
+/*
+TSHIRT
+*/
+
+.product_tshirt.layout_grid .canvas__layer_svg {
+    padding: 28.7vh 16.6vw;
+
+    @media screen and (max-width: $screen-xs-max) {
+        padding: 30.8vh 23vw;
+    }
+}
+
+.product_tshirt.layout_free .canvas__layer_svg {
+    padding: 28.7vh 16.6vw;
+
+    @media screen and (max-width: $screen-xs-max) {
+        padding: 30.8vh 23vw;
+    }
+}
+
+.product_tshirt.layout_lines .canvas__layer_svg {
+    // padding: 28.7vh 16.6vw;
+
+    @media screen and (max-width: $screen-xs-max) {
+        // padding: 30.8vh 23vw;
+    }
+}
+
+/*
+BAG
+*/
+
+.product_bag.layout_grid .canvas__layer_svg {
+    padding: 47.7vh 7.6vw 4.7vh 7.6vw;
+}
+
+.product_bag.layout_free .canvas__layer_svg {
+    padding: 47.7vh 7.6vw 4.7vh 7.6vw;
+}
+
+.product_bag.layout_lines .canvas__layer_svg {
+    // padding: 47.7vh 7.6vw 4.7vh 7.6vw;
+}
+
+
+/*
+DIGITAL
+*/
+
+.product_digital.layout_grid .canvas__layer_svg,
+.product_digital.layout_lines .canvas__layer_svg,
+.product_digital.layout_free .canvas__layer_svg {
+    padding: 10%;
+}
+
+/*
+GENERAL
+*/
+.canvas.canvas_editor {
+    position: relative;
+}
+
+.canvas__layer_svg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    
+}
+
+.layer__svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+/*
+TSHIRT
+*/
+
+// .product_tshirt .canvas__layer_svg {
+//     top: 50%;
+//     transform: translateY(-50%);
+// }
+
+// .product_tshirt .layer__svg {
+//     max-width: 840px;
+// }
+
+// .product_tshirt.layout_grid .layer__svg {
+//     transform: translate(12px) scale(0.45);
+// }
+
+// .product_tshirt.layout_free .layer__svg {
+//     transform: translate(12px, 60px) scale(0.45);
+// }
+
+/*
+BAG
+*/
+
+// .product_bag {
+//     max-width: 460px;
+//     margin: 0 auto;
+//     top: -50px;
+// }
+
+// .product_bag.layout_grid .layer__svg {
+//     transform: translate(-3px) scale(0.8);
+// }
+
+// .product_bag.layout_free .layer__svg {
+//     transform: translate(-3px) scale(0.85);
+// }
+
+// .product_bag .canvas__layer_svg {
+//     top: initial;
+//     bottom: 0;
+//     transform: none;
+// }
+
+// /*
+// DIGITAL
+// */
+
+// .product_digital .canvas__layer_svg {
+//     position: relative;
+//     height: calc(100vh - 50px);
+//     display: flex;
+//     align-items: center;
+// }
+
+// .product_digital .layer__svg {
+//     transform: translate(0) scale(0.7);
+//     max-width: 700px;
+//     max-height: 100%;
+//     margin: 0 auto;
+// }
+
+
+
+// $max-canvas-width: 630px; //580 px for smaller heights
+// $min-canvas-width: 390px; //580 px for smaller heights
+
+// .canvas_editor {
+//     height: calc(100vh - 50px);
+//     width: 100%;
+//     position: relative;
+//     bottom: 0;
+// }
+
+// .product_bag {
+
+//     .canvas__layer {
+//         width: 100%;
+//         max-width: $max-canvas-width; // otherwise, product image might be too big
+//         min-width: $min-canvas-width; // otherwise it gets shifted, shrinks
+//         position: absolute;
+//         background-repeat: no-repeat;
+//         background-position: bottom;
+//     }
+
+//     .canvas__layer_product {
+//         // background-image is set programatically
+//         background-size: cover;
+//         top: -50px;
+//         height: calc(100vh);
+//         position: relative;
+//         margin: 0 auto;
+//         margin-bottom: calc(-100vh + -50px);
+//     }
+
+//     .canvas__layer_svg {
+//         // background-image is set programatically
+//         /* bottom: 750px; */
+//         /* padding: 6em 5.2em 6em 4em; */
+//         position: relative;
+//         margin: 0 auto;
+//         z-index: 1;
+//         height: calc(100vh);
+//         min-width: 470px;
+//         /* margin-bottom: -100vh; */
+//     }
+
+//     .layer__svg {
+//         padding: 4em;
+//         position: absolute;
+//         left: 0;
+//         bottom: 0;
+//         width: 100%;
+//         height: auto;
+//     }
+
+// }
+
+// .product_tshirt {
+
+//     .canvas__layer {
+//         width: 100%;
+//         max-width: $max-canvas-width; // otherwise, product image might be too big
+//         min-width: $min-canvas-width; // otherwise it gets shifted, shrinks
+//         position: absolute;
+//         background-repeat: no-repeat;
+//         background-position: bottom;
+//     }
+
+//     .canvas__layer_product {
+//         // background-image is set programatically
+//         background-size: cover;
+//         top: -50px;
+//         height: calc(100vh);
+//         margin: 0 auto;
+//         margin-bottom: calc(-100vh + -50px);
+//         max-width: 900px;
+//         min-width: 765px;
+//         position: absolute;
+//         @media screen and (max-width: 1100px) {
+//             & {
+//                 right: -50px;
+//             }
+//         }
+//     }
+
+//     .canvas__layer_svg {
+//         position: absolute;
+//         margin: 0 auto;
+//         z-index: 1;
+//         height: calc(100vh);
+//         max-width: 900px;
+//         min-width: 765px;
+//         @media screen and (max-width: 1100px) {
+//             & {
+//                 right: -50px;
+//             }
+//         }
+//         @media screen and (min-width: 1100px) {
+//             & {
+//                 transform: scale(0.9);
+//             }
+//         }
+//     }
+
+//     .layer__svg {
+//         position: absolute;
+//         left: 0;
+//         bottom: 10em;
+//         width: 100%;
+//         height: auto;
+//         padding: 16em;
+//     }
+
+// }
+
+// .product_digital {
+
+//     .canvas__layer {
+//         width: 100%;
+//         position: absolute;
+//     }
+
+//     .canvas__layer_svg {
+//         position: relative;
+//         margin: 0 auto;
+//         z-index: 1;
+//         height: calc(100vh);
+//         display: flex;
+//         align-items: center;
+//         top: -50px;
+//     }
+
+//     .layer__svg {
+//         @media screen and (orientation: portrait) {
+//             & {
+//                 position: absolute;
+//                 width: 100%;
+//                 height: auto;
+//             }
+//         }
+
+//         @media screen and (orientation: landscape) {
+//             & {
+//                 max-height: 100%;
+//                 height: auto;
+//                 max-width: 100%;
+//                 width: auto;
+//                 position: absolute;
+//                 left: 50%;
+//                 transform: translateX(-50%);
+//             }
+//         }
+//     }
+
+// }
+
+// .product_tshirt.layout_free .layer__svg {
+
+//     bottom: 0;
+//     padding: 0 16em 6em 16em;
+
+//     @media screen and (min-width: 1100px) {
+//         & {
+//             transform: scale(0.9);
+//         }
+//     }
+// }
+
+// .product_digital.layout_free .layer__svg {
+    
+//     padding: 8em;
+// }
+
+// .product_undefined {
+    
+//     .canvas__layer {
+//         width: 100%;
+//         position: absolute;
+//     }
+
+//     .canvas__layer_svg {
+//         position: relative;
+//         margin: 0 auto;
+//         z-index: 1;
+//         height: 100vh;
+//         top: -50px;
+//     }
+
+//     .layer__svg {
+//         padding: 4em;
+//         position: absolute;
+//         width: 100%;
+//         height: auto;
+//         top: 50%;
+//         left: 0;
+//         transform: translateY(calc(-50% + 0px))
+//     }
+// }
+
+// // .product_bag.layout_free {
+
+// // }
+
+// // .message {
+
+// // }
+
+// .message_centered {
+//     height: calc(100vh - 50px);
+// }
+
+// .message_centered .text {
+//     position: relative;
+//     top: calc(50% - 50px);
+//     transform: translateY(-50%);
+//     width: 80%;
+//     max-width: 30em;
+//     opacity: 0.5;
+// }

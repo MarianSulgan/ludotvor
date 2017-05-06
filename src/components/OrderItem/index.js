@@ -8,7 +8,6 @@ class OrderItem extends Component {
     state = {  }
     render() {
         const { isLink, ...rest} = this.props;
-        console.log(this.props);
         return (
             <div className="orders__item">
                 <ArtworkAndProduct { ...rest } isLink={ false }/>

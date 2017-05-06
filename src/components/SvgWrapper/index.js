@@ -44,8 +44,9 @@ class SvgWrapper extends Component {
                 viewBox={`${a} ${b} ${c} ${d}`}
                 preserveAspectRatio="xMaxYMax meet"
                 className={`layer__svg ${this.props.className}`}
-                width={`${this.props.width}`}
-                height={`${this.props.height}`}>
+                width="100%"
+                height="100%"
+            >
                 <rect width="100%" height="100%" x={ a } y={ b } fill={`${this.props.backgroundColor }`}></rect>
                 {this.props.content}
             </svg>

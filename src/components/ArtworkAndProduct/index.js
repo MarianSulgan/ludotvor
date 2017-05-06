@@ -68,7 +68,7 @@ class ArtworkAndProduct extends Component {
             </div>
 
         return (
-            <div>
+            <div className="aap-container">
                 {
                     this.props.isLink ?
                     <Link to="/editor" onClick={ this.handleLinkClick }>

@@ -262,8 +262,11 @@ async function generatePattern(options, callback) {
     const grabContent = url => fetch(url)
         .then(res => res.text())
         .then(data => {
-            // process data here
-            staticSvgs.push(data);
+            // process data
+            let str = data.replace(/<\?xml.+\?>/g, '');
+            str = str.replaceAll('<!DOCTYPE [^>]+>', '').replaceAll('<!-- .+-->', '');
+            // save data
+            staticSvgs.push(str);
         })
 
     Promise
