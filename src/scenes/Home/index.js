@@ -11,7 +11,7 @@ import { Grid, Row, Button, Col } from 'react-bootstrap';
 
 import './style.css';
 import '../style.css';
-import '../../utils/CreativeButtons/css/component.css';
+import './components/CreativeButtons/css/component.css';
 
 class Home extends Component {
 
