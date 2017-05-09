@@ -162,7 +162,7 @@ class OrnamentsSelector extends Component {
                     <Row className="ornament-selector-block__row">
                         <Link className={`button btn btn-secondary ${ disableButton ? "" : "disabled" }`} to="/editor">Preskočiť</Link>
                         { ' ' }
-                        <Link className={`button btn btn-primary ${ disableButton ? "disabled" : "" }`} to="/editor" onClick={ () => this.handleLinkClick() }>Vybral som. Ďalej!</Link>
+                        <Link className={`button btn btn-primary ${ disableButton ? "disabled" : "" }`} to="/editor" onClick={ () => this.handleLinkClick() }>Vybral som. Ľudo, tvor!</Link>
                     </Row>
                 }
             </div>

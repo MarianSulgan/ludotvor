@@ -54,7 +54,8 @@ class Editor extends Component {
                 canvasWidth: _canvasWidth(Store.get("options.layout")),
                 svgSide: svgSide,
                 freeSide: 150,
-                freeCount: 5
+                freeCount: 5,
+                lineCount: 5
             },
             counter: 0,
             alertVisible: false
@@ -93,15 +94,28 @@ class Editor extends Component {
     }
 
     renderPattern(options, callback) {
-        // validate options, if they are reasonable
-        // ...
-
-        // result is data container
-        Generator.generatePattern(options, (result, viewBox) => {
-            this.setState({ patternData: result }, () => {
-                if (callback)
-                    callback();
-            });
+        // _result_ is data container
+        Generator.generatePattern(options, (result) => {
+            
+            if (result.newCanvasDimensions) { // set dimension of canvas and then, state
+                console.log("canvas new dims set...");
+                this.setState({
+                    options: {
+                        ...this.state.options,
+                        canvasWidth: result.newCanvasDimensions.width,
+                        canvasHeight: result.newCanvasDimensions.height
+                    },
+                    patternData: result
+                }, () => {
+                    if (callback)
+                        callback();
+                })
+            } else { // only set state
+                this.setState({ patternData: result }, () => {
+                    if (callback)
+                        callback();
+                });
+            }
         });
     }
 
@@ -123,7 +137,8 @@ class Editor extends Component {
                 canvasWidth: _canvasWidth(Store.get("options.layout")),
                 svgSide: svgSide,
                 freeSide: opts.freeSide,
-                freeCount: opts.freeCount
+                freeCount: opts.freeCount,
+                lineCount: opts.lineCount
             }
         }, () => {
             this.renderPattern(this.state.options, () => {
@@ -156,7 +171,9 @@ class Editor extends Component {
 
         // save new state to storage
         arr.push(this.state);
-        localStorage.setItem("user.created", JSON.stringify(arr));
+        this.setState({ alertVisible: false }, () => {
+            localStorage.setItem("user.created", JSON.stringify(arr));
+        })
 
         this.setState({ alertVisible: true });
     }
@@ -257,7 +274,10 @@ function _canvasHeight(layout) {
         case Layouts.Grid:
             return 800;
         case Layouts.Lines:
-            return 800;
+            let temp = Store.get("lines_ch");
+            if (temp)
+                return parseInt(temp, 10);
+            return 1600;
         case Layouts.Free:
             if (Store.get("options.product") === Products.Bag)
                 return 800;
@@ -277,6 +297,9 @@ function _canvasWidth(layout) {
         case Layouts.Grid:
             return 800;
         case Layouts.Lines:
+            let temp = Store.get("lines_cw");
+            if (temp)
+                return parseInt(temp, 10);
             return 800;
         case Layouts.Free:
             return 800;

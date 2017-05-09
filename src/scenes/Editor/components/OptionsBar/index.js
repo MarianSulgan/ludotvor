@@ -1,5 +1,6 @@
 /**
  * Sidebar with options in Editor page
+ * @todo: add more setting, e.g. dimensions for digital image
  */
 
 import React, { Component } from 'react';
@@ -42,7 +43,8 @@ class OptionsBar extends Component {
             counter: 0,
             backCounter: 0,
             resolutionX: 1200,
-            resolutionY: 1200
+            resolutionY: 1200,
+            lineCount: this.props.options.lineCount
         }
     }
 
@@ -144,6 +146,15 @@ class OptionsBar extends Component {
         })
     }
 
+    onLineCountChange = (val) => {
+        console.log(val);
+        this.setState({
+            lineCount: val
+        }, () => {
+            this.handleOptionsChange();
+        })
+    }
+
     componentDidMount () {
         Mousetrap.bind(['space','g'], () => {
             let _this = this;
@@ -166,29 +177,7 @@ class OptionsBar extends Component {
                 className="sidebar" 
             >
                 <div className="sidebar__content">
-                    {/*save button*/}
-                    <OverlayTrigger 
-                        placement="left"
-                        overlay={ <Tooltip id="id--next--button">Výtvor sa po kliknutí <strong>automaticky uloží</strong> do profilu. Môžeš si ho neskôr znovu objednať alebo upraviť.</Tooltip>}>
-                        <Button 
-                            bsStyle="default"
-                            className="block__button block__button_main" 
-                            onClick={ () => this.handleFinishedClicked() }>
-                            Uložiť
-                        </Button>
-                    </OverlayTrigger>
-
-                    <OverlayTrigger 
-                        placement="left"
-                        overlay={ <Tooltip id="id--generator--button"><strong>Vygeneruje nový vzor.</strong> Namiesto klikania môžeš stlačiť <em>medzerník</em> alebo písmeno <em>g</em>.</Tooltip>}>
-                        <Button 
-                            bsStyle="primary" 
-                            onClick={ () => this.handleClick() }
-                            className="block__button block__button_main">
-                            Ľudo, tvor!
-                        </Button>
-                    </OverlayTrigger>
-                    <br />
+                    
 
                     {   
                         (this.props.type === Layouts.Free) &&
@@ -248,8 +237,10 @@ class OptionsBar extends Component {
                         </Row>
                     }
 
+                    {/*@todo: finish pixel setting*/}
+
                     {   
-                        (this.props.options.productType === Products.Digital) &&
+                        {/*(this.props.options.productType === Products.Digital) &&
                         <Row className="sidebar__block resolution-picker">
                             <p>Rozlíšenie v pixeloch:{' '}</p>
                             <FormControl
@@ -265,13 +256,24 @@ class OptionsBar extends Component {
                             placeholder="Výška"
                             onChange={this.handleResolutionYChange}
                             />
-                        </Row>
+                        </Row>*/}
                     }
 
-                    {/*<Row className="sidebar__block">
-                        <h4>Produkty</h4>
-                        <p>Zmeniť produkt</p>
-                    </Row>*/}
+                    {   
+                        (this.props.type === Layouts.Lines) &&
+                        <Row className="sidebar__block">
+                            <p>
+                                Počet riadkov:{' '}
+                                <Label bsStyle="primary">{this.state.lineCount}</Label>
+                            </p>
+                            <Slider 
+                                min={1}
+                                max={10}
+                                dots
+                                defaultValue={ this.state.lineCount }
+                                onAfterChange={ this.onLineCountChange }/>
+                        </Row>
+                    }
 
                     <Row className="sidebar__block">
                         <span>Čiernobiele</span>
@@ -301,6 +303,35 @@ class OptionsBar extends Component {
                             defaultChecked={ this.state.transform }
                             onChange={ (e) => this.onTransformSettingChange(e) } 
                             className="block__toggle pull-right"/>
+                    </Row>
+
+                    {/* save button */}
+                    <OverlayTrigger 
+                        placement="left"
+                        overlay={ <Tooltip id="id--next--button">Výtvor sa po kliknutí <strong>automaticky uloží</strong> do profilu. Môžeš si ho neskôr znovu objednať alebo upraviť.</Tooltip>}>
+                        <Button 
+                            bsStyle="default"
+                            className="block__button block__button_main" 
+                            onClick={ () => this.handleFinishedClicked() }>
+                            Uložiť
+                        </Button>
+                    </OverlayTrigger>
+
+                    {/* generate new pattern button */}
+                    <OverlayTrigger 
+                        placement="left"
+                        overlay={ <Tooltip id="id--generator--button"><strong>Vygeneruje nový vzor.</strong> Namiesto klikania môžeš stlačiť <em>medzerník</em> alebo písmeno <em>g</em>.</Tooltip>}>
+                        <Button 
+                            bsStyle="primary" 
+                            onClick={ () => this.handleClick() }
+                            className="block__button block__button_main">
+                            Generuj nový vzor
+                        </Button>
+                    </OverlayTrigger>
+                    <br />
+
+                    <Row className="sidebar__block">
+                        <hr className="block__hr" />
                     </Row>
 
                     <Row className="sidebar__block text-center">

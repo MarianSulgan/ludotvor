@@ -149,8 +149,11 @@ class Canvas extends Component {
 export default Canvas;
 
 function stripHeader(str) {
-    let _str = str.replace(/<\?xml.+\?>/g, '');
-    _str = _str.replaceAll('<!DOCTYPE [^>]+>', '').replaceAll('<!-- .+-->', '');
+    let _str = "";
+    if (str) {
+        _str = str.replace(/<\?xml.+\?>/g, '');
+        _str = _str.replaceAll('<!DOCTYPE [^>]+>', '').replaceAll('<!-- .+-->', '');
+    }
     return _str;
 }
 

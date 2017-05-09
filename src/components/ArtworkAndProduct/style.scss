@@ -43,8 +43,12 @@ $digital-width: 15vw;
     z-index: 2;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -40%);
+    transform: translate(-45%, -40%);
     padding: 3%;
+}
+
+.aap-item.tshirt.lines .svg-wrapper {
+    padding: 10% 10% 0 10%;
 }
 
 .aap-item.tshirt.free .svg-wrapper {
@@ -69,6 +73,10 @@ $digital-width: 15vw;
 .aap-item.bag .svg-wrapper {
     z-index: 2;
     padding: 10%;
+}
+
+.aap-item.bag.lines .svg-wrapper {
+    padding-top: 100%;
 }
 
 /*

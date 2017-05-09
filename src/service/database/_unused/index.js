@@ -1,8 +1,7 @@
+/**
+ * deprecated, not used
+ */
 import datastore from 'nedb-promise';
-
-
-
-
 
 function _insertData(db) {
 

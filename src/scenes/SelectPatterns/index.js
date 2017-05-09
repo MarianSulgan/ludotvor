@@ -119,7 +119,7 @@ function layoutToPatternCount() {
         case Layouts.Free:
             return 10;
         case Layouts.Lines:
-            return 6;
+            return 5;
         default:
             return 5;
     }

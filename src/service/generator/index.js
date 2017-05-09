@@ -16,6 +16,8 @@ import Layouts from 'data/layouts';
 import 'utils/functions';
 import ShapeContainer from './core/ShapeContainer';
 import Randomizer from './core/Randomizer';
+import SGEngine from './core/SGEngine';
+import { Store } from 'service/store';
 
 /**
  * Main function for generating SVG pattern
@@ -26,19 +28,80 @@ async function generatePattern(options, callback) {
 
     let shapeContainers = [];
     console.log("Generator ", options.layoutType);
+    let cW, cH, newDims = null;
 
     switch(options.layoutType) {
 
 
 
-        case Layouts.Lines:
+        case Layouts.Lines: {
 
             /**
              * Layout: LINES
              */
 
             console.log("Lines SG");
-            break;
+
+            if (options.basicShapesIds === null || options.basicShapesIds.length === 0)
+                return;
+            
+            // Generate strings
+
+            let lineStrings = [];
+            let lineRules;
+            let lineShapes = options.basicShapesIds.slice();
+            let shapesOnLine = 8;
+            
+            for (let i = 0; i < options.lineCount; i++) {
+                let tmp = i % 2;
+                let char = (Math.random() > 0.5) ? "A" : "B";
+                if (tmp === 0) {
+                    lineRules = [
+                        { left: char, right: char + char}
+                    ]                    
+                } else {
+                    lineRules = SGEngine.generateRules(2);
+                }
+                lineStrings.push(SGEngine.generateString(lineRules, shapesOnLine, char, 1, 1));
+            }
+
+            console.log(lineStrings);
+
+            // Assign shapes
+
+            let index = 0, lineMargin = 200, shapeIndex = Math.floor(Math.random() * 4);
+            let scale = 1;
+
+            for (let i = 0; i < lineStrings.length; i++) {
+                console.log(lineStrings[i]);
+                for (let j = 0; j < lineStrings[i].length; j++) {
+                    shapeContainers[index] = new ShapeContainer();
+                    shapeContainers[index].position = {
+                        x: j * options.svgSide,
+                        y: i * (options.svgSide + lineMargin)
+                    };
+                    let _index =  lineStrings[i].charCodeAt(j) - "A".charCodeAt(0);
+                    shapeContainers[index].shapeId = options.basicShapesIds[(_index + shapeIndex) % options.basicShapesIds.length];
+                    shapeContainers[index].index = (_index + shapeIndex) % options.basicShapesIds.length;
+                    console.log(_index, shapeIndex, " -> ",(_index + shapeIndex) % options.basicShapesIds.length);
+                    let transforms = `scale(${scale})`;
+                    shapeContainers[index].transforms = 
+                        transforms + ` translate(${shapeContainers[index].position.x}, ${shapeContainers[index].position.y}) `;
+                    index++;
+                }
+                shapeIndex += 1;
+            }
+
+            // Calculate new dimension of canvas, for SVG positioning
+
+            cW = options.svgSide * shapesOnLine * scale;
+            cH = ((options.svgSide + lineMargin) * options.lineCount - lineMargin) * scale;
+            Store.set("lines_cw", cW);
+            Store.set("lines_ch", cH);
+            Store.set("isChange", false);
+            newDims = { "width": cW, "height": cH };
+
+        }  break;
 
         case Layouts.Free: {
 
@@ -107,113 +170,13 @@ async function generatePattern(options, callback) {
             /**
              * Rules assignment
              */
-            let rules = [];
-            switch (options.basicShapesIds.length) {
-                case 1:
-                    console.log("Rule set 1");
-                    rules = [
-                        { left: "0", right: "A" },
-                        { left: "A", right: "AA"}
-                    ];
-                    break;
-                case 2:
-                    console.log("Rule set 2");
-                    rules = [
-                        { left: "0", right: "A" },
-                        { left: "0", right: "B" },
-                        { left: "A", right: "AB" },
-                        { left: "B", right: "BA" },
-                        { left: "A", right: "AA" },
-                        { left: "B", right: "BB" },
-                        { left: "AA", right: "ABAB"}
-                    ];
-                    break;
-                case 3:
-                    console.log("Rule set 3");
-                    rules = [ 
-                        { left: "0", right: "A" },
-                        { left: "0", right: "B" },
-                        { left: "0", right: "C" },
-                        { left: "A", right: "AB" },
-                        { left: "A", right: "AC" },
-                        { left: "B", right: "BA" },
-                        { left: "B", right: "BC" },
-                        { left: "C", right: "CA" },
-                        { left: "C", right: "CB" },
-                    ];
-                    break;
-                case 4:
-                    console.log("Rule set 4");
-                    rules = [
-                        { left: "0", right: "A" },
-                        { left: "0", right: "B" },
-                        { left: "0", right: "C" },
-                        { left: "0", right: "D" },
-                        { left: "A", right: "AACC" },
-                        { left: "B", right: "BA" },
-                        { left: "C", right: "CCDD" },
-                        { left: "D", right: "ABCD" },
-                    ]
-                    break;
-                case 5:
-                    console.log("Rule set 5");
-                    break;                
-                case 6:
-                    console.log("Rule set 6");
-                    break;
-                default:
-                    console.log('Sorry for party rocking.');
-                    return;
-            }
+            let rules = SGEngine.generateRules(options.basicShapesIds.length);
 
             /**
              * Generation
              */
-            let str = "0";
-            let lastRule = null;
-            do {
-
-                // find all appliable rules
-                let nowRules = [];
-                for (let i = 0; i < rules.length; i++) {
-                    if (str.includes(rules[i].left))
-                        nowRules.push(rules[i]);
-                }
-
-                // choose rule to apply (random)
-                let index = Math.floor(Math.random() * nowRules.length);
-
-                // choose rule to apply (last unused rule)
-                // let index = 0
-                // for (let i = 0; i < nowRules.length; i++) {
-                //     if (nowRules[i] != lastRule) {
-                //         index = i;
-                //         // break;
-                //     }
-                // }
-
-                // apply rule 
-                // @todo: choose approach
-
-                // 1. to last occurence
-                // let n = str.lastIndexOf(nowRules[index].left);
-                // str = str.slice(0, n) + str.slice(n).replace(nowRules[index].left, nowRules[index].right);
-
-                // 2. to first occurence
-                // str = str.replace(nowRules[index].left, nowRules[index].right);
-
-                // 3. to all occurences
-                str = str.replaceAll(nowRules[index].left, nowRules[index].right);
-                
-                lastRule = nowRules[index];
-
-            } while(str.length < gridSize)
-
-            // string to array        
-            let arr = [];
-            Array.prototype.map.call(str, function(x) {
-                arr.push(x.charCodeAt(0) - "A".charCodeAt(0));
-            });
+            let str = SGEngine.generateString(rules, gridSize);
+            let arr = SGEngine.stringToIndexes(str);
 
             /**
              * Visualization
@@ -275,12 +238,11 @@ async function generatePattern(options, callback) {
             // pass relevant data as callback in scenes/Editor
             callback({
                 staticSvgs: staticSvgs, 
-                shapeContainers: shapeContainers
+                shapeContainers: shapeContainers,
+                newCanvasDimensions: newDims
             });
         });
 }
-
-
 
 const Generator = {
     generatePattern: generatePattern

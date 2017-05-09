@@ -25,6 +25,12 @@
     margin-right: 0 !important;
 }
 
+.sidebar__block .block__hr {
+    margin: 0;
+    margin-top: 20px;
+    border-bottom: 3px solid $gray-lighter;
+}
+
 .block__button {
     margin-top: 1.6rem;
 }

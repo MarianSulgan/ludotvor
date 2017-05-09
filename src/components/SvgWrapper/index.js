@@ -8,6 +8,7 @@ class SvgWrapper extends Component {
     render() {
         
         let a, b, c, d;
+        let w = "100%", h = "100%"
 
         if (this.props.layoutType === Layouts.Grid) {
 
@@ -26,8 +27,10 @@ class SvgWrapper extends Component {
 
             a = 0;
             b = 0;
-            c = 800;
-            d = 800;
+            c = this.props.width;
+            d = this.props.height;
+            w = this.props.width;
+            h = this.props.height;
 
         } else {
             a = 0;
@@ -44,8 +47,8 @@ class SvgWrapper extends Component {
                 viewBox={`${a} ${b} ${c} ${d}`}
                 preserveAspectRatio="xMaxYMax meet"
                 className={`layer__svg ${this.props.className}`}
-                width="100%"
-                height="100%"
+                width={ w }
+                height={ h }
             >
                 <rect width="100%" height="100%" x={ a } y={ b } fill={`${this.props.backgroundColor }`}></rect>
                 {this.props.content}

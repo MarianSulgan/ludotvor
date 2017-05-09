@@ -44,6 +44,7 @@ TSHIRT
 
 .product_tshirt.layout_grid .canvas__layer_svg {
     padding: 28.7vh 16.6vw;
+    transform: translateX(12px);
 
     @media screen and (max-width: $screen-xs-max) {
         padding: 30.8vh 23vw;
@@ -59,11 +60,16 @@ TSHIRT
 }
 
 .product_tshirt.layout_lines .canvas__layer_svg {
-    // padding: 28.7vh 16.6vw;
+    padding: 28vh 19.5vw 12vh 22.2vw;
 
-    @media screen and (max-width: $screen-xs-max) {
-        // padding: 30.8vh 23vw;
+    @media screen and (max-width: $screen-xs-max) and (orientation: portrait) {
+        padding: 33vh 25.5vw 21vh 29.2vw;
     }
+}
+
+.product_tshirt.layout_lines .svg-content-div {
+    max-width: 340px;
+    margin: 0 auto;
 }
 
 /*
@@ -79,7 +85,20 @@ BAG
 }
 
 .product_bag.layout_lines .canvas__layer_svg {
-    // padding: 47.7vh 7.6vw 4.7vh 7.6vw;
+    padding: 47.7vh 17.6vw 4.7vh 17.6vw;
+
+    @media screen and (max-width: $screen-xs-max) and (orientation: portrait) {
+        padding: 47.7vh 17.6vw 4.7vh 17.6vw;
+    }
+
+    @media screen and (max-width: $screen-xs-max) and (orientation: landscape) {
+        padding: 47.7vh 32vw 4.7vh 32vw;
+    }
+}
+
+.product_bag.layout_lines .svg-content-div {
+    max-width: 350px;
+    margin: 0 auto;
 }
 
 
