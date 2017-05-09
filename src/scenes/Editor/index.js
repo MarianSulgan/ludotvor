@@ -201,7 +201,9 @@ class Editor extends Component {
                 width={ this.state.options.canvasWidth } 
                 height={ this.state.options.canvasHeight } 
                 patternBorderSize={ patternBorderSize }
-                backgroundColor={ this.state.options.color }/>;
+                backgroundColor={ this.state.options.color }
+                blackandwhite={ this.state.options.blackandwhite }
+            />;
                 
         /*const _class = 
             " canvas_" + Products.toString(this.state.options.productType) + " " +

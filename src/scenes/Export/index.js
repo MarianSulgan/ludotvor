@@ -196,7 +196,7 @@ class Export extends Component {
                                                 product !== Products.Digital ?
 
                                                 <form className="form text">
-                                                    <FormGroup className="form__section">
+                                                    <FormGroup className="form__section size-picker">
                                                         <ControlLabel>Vyber veľkosť:</ControlLabel><br />
                                                         <ButtonGroup className="form__control form__control_buttongroup">
                                                             {sizes}
@@ -295,7 +295,7 @@ class Export extends Component {
                                 !this.state.finished && Auth.isLoggedIn() ?
                                 <Row>
                                     <Col xs={12} className="block text-center">
-                                        <Button bsSize="large" className="button block__button" onClick={ this.handleOrderClick } bsStyle="success">
+                                        <Button bsSize="large" className="button block__button order-btn" onClick={ this.handleOrderClick } bsStyle="success">
                                             Objednať
                                         </Button>
                                         {' '}

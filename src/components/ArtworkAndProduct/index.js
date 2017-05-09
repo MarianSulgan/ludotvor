@@ -34,7 +34,12 @@ class ArtworkAndProduct extends Component {
     render() {
 
         const svgDataElement = this.props.pattern.shapeContainers.map((elem, index) =>            
-            <g key={ index } transform={ elem.transforms } dangerouslySetInnerHTML={{ __html: this.props.pattern.staticSvgs[elem.index] }} />
+            <g 
+                key={ index } 
+                transform={ elem.transforms } 
+                dangerouslySetInnerHTML={{ __html: this.props.pattern.staticSvgs[elem.index] }}
+                filter={ this.props.options.blackandwhite ? "url(#grayscale)" : "" } 
+            />
         );
 
         const args =  {

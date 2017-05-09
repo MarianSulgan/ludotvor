@@ -8,6 +8,8 @@
  * @todo: create API (expose)
  * @todo: clean code
  * @todo: create sets of rules
+ * @todo: redux remake
+ * 
  */
 
 import 'whatwg-fetch'; // _fetch_ polyfill for IE and similar
@@ -27,12 +29,12 @@ import { Store } from 'service/store';
 async function generatePattern(options, callback) {
 
     let shapeContainers = [];
-    console.log("Generator ", options.layoutType);
     let cW, cH, newDims = null;
 
+    console.log(options.blackandwhite);
+    console.log(options.transform);
+
     switch(options.layoutType) {
-
-
 
         case Layouts.Lines: {
 
@@ -49,8 +51,7 @@ async function generatePattern(options, callback) {
 
             let lineStrings = [];
             let lineRules;
-            let lineShapes = options.basicShapesIds.slice();
-            let shapesOnLine = 8;
+            const shapesOnLine = 8; // how many shapes there will be on one line
             
             for (let i = 0; i < options.lineCount; i++) {
                 let tmp = i % 2;
@@ -65,15 +66,12 @@ async function generatePattern(options, callback) {
                 lineStrings.push(SGEngine.generateString(lineRules, shapesOnLine, char, 1, 1));
             }
 
-            console.log(lineStrings);
-
             // Assign shapes
 
             let index = 0, lineMargin = 200, shapeIndex = Math.floor(Math.random() * 4);
             let scale = 1;
 
             for (let i = 0; i < lineStrings.length; i++) {
-                console.log(lineStrings[i]);
                 for (let j = 0; j < lineStrings[i].length; j++) {
                     shapeContainers[index] = new ShapeContainer();
                     shapeContainers[index].position = {
@@ -83,10 +81,15 @@ async function generatePattern(options, callback) {
                     let _index =  lineStrings[i].charCodeAt(j) - "A".charCodeAt(0);
                     shapeContainers[index].shapeId = options.basicShapesIds[(_index + shapeIndex) % options.basicShapesIds.length];
                     shapeContainers[index].index = (_index + shapeIndex) % options.basicShapesIds.length;
-                    console.log(_index, shapeIndex, " -> ",(_index + shapeIndex) % options.basicShapesIds.length);
+
+                    // add random rotations
+                    let randomRotate = "";
+                    if (options.transform)
+                        randomRotate = ` rotate(${Math.floor(Math.random() * 360)} ${100} ${100}) `;
+
                     let transforms = `scale(${scale})`;
                     shapeContainers[index].transforms = 
-                        transforms + ` translate(${shapeContainers[index].position.x}, ${shapeContainers[index].position.y}) `;
+                        transforms + ` translate(${shapeContainers[index].position.x}, ${shapeContainers[index].position.y}) ` + randomRotate;
                     index++;
                 }
                 shapeIndex += 1;
@@ -113,7 +116,6 @@ async function generatePattern(options, callback) {
             const elementCount = options.freeCount;
             const elementSize = options.freeSide;
             const refSide = 200;
-            // const _side = 200;
             let _side = (elementSize / refSide);
             const refW = options.canvasWidth;
             const refH = options.canvasHeight;
@@ -129,10 +131,16 @@ async function generatePattern(options, callback) {
                     let index = i % options.basicShapesIds.length;
                     shapeContainers[i].shapeId = options.basicShapesIds[index];
                     shapeContainers[i].index = index;
+
+                    // add random rotations
+                    let randomRotate = "";
+                    if (options.transform)
+                        randomRotate = ` rotate(${Math.floor(Math.random() * 360)} ${refSide / 2} ${refSide / 2}) `;
+
                     // move shape to position + add transformations
                     let transforms = ` scale(${_side}) `;
                     shapeContainers[i].transforms = 
-                        ` translate(${shapeContainers[i].position.x}, ${shapeContainers[i].position.y}) ` + transforms; 
+                        ` translate(${shapeContainers[i].position.x}, ${shapeContainers[i].position.y}) ` + transforms + randomRotate; 
                 }
             }
         } break;
@@ -203,14 +211,19 @@ async function generatePattern(options, callback) {
                 shapeContainers[i].shapeId = options.basicShapesIds[index];
                 shapeContainers[i].index = index;
 
+                // add random rotations
+                let randomRotate = "";
+                if (options.transform)
+                    randomRotate = ` rotate(${Math.floor(Math.random() * 360)} ${side / 2} ${side / 2}) `;
+                
                 // create transforms 
                 let val = refW / (n * side + (n - 1) * margin);
-                let transforms = `scale(${val}) `;
+                let transforms = ` scale(${val}) `;
                 //  merge positioning and transforms
                 // ! NOTE: transforms work from RIGHT to LEFT !
                 shapeContainers[i].transforms = 
-                    transforms + 
-                    `translate(${shapeContainers[i].position.x}, ${shapeContainers[i].position.y})`;
+                     transforms + 
+                    ` translate(${shapeContainers[i].position.x}, ${shapeContainers[i].position.y}) ` + randomRotate;
             }
     }
 

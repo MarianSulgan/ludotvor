@@ -69,3 +69,21 @@
     left: 0;
     right: 0;
 }
+
+.tabs li[role=presentation] > a {
+    // min-width: 100px;
+    text-align: center;
+    letter-spacing: 0.06rem;
+    color: $brand-primary !important;
+
+    &:hover {
+        border-radius: 25px;
+    }
+}
+
+.tabs li[role=presentation].active > a {
+    @include button-style();
+    min-width: initial;
+    color: #fff !important;
+    background-color: $brand-primary !important;
+}

@@ -120,10 +120,10 @@ const Privacy = () => (
 const Shop = () => (
     <LegalTemplate headline="Ako nakupovať">
         <p className="text block__text">
-            Šak to je jednoduché. Naklikáš, vygeneruješ, pridáš do košíka a necháš si poslať domov. A potom na dobierku zaplatíš. Nuž a nezabudni hrdo nosiť tieto vecičky!
+            Šak to je jednoduché. Naklikáš, vygeneruješ a necháš si poslať domov. A potom na dobierku zaplatíš. Nuž a nezabudni hrdo nosiť tieto vecičky!
             Ale pre istotu to môžeme zhrnúť do pár bodov:
         </p>
-        <ul className="text block__text">
+        {/*<ul className="text block__text">
             <li>Klikni na tlačidlo "Tvoriť".</li>
             <li>Vyber si produkt, ktorý chceš kúpiť po tom, čo si vygeneruješ svoj osobitý vzor.</li>
             <li>Vyber si aké rozmiestnenie vzoru chceš. Čiže ako budú jednotlivé malé vzory usporiadané do veľkého celku.</li>
@@ -131,7 +131,14 @@ const Shop = () => (
             <li>Ľudo tvorí. Teda, generuje sa vzor. Môžeš pomeniť nejaké vlastnosti, prípadne sa vráťiť a povyberať si iné vzory alebo tak. Keď si spokojný, klikaj "Hotovo, ďalej".</li>
             <li>V poslednom kroku si pridaj vec do košíka tlačidlom. Zvoľ si samozrejme veľkosť a počet kusov, prípadne sa vráť na začiatok a pridaj si aj iné vecičky a potlače. Ak si so všetkým spokojný, prihlás sa, zadaj adresu a klikaj "Objednať".</li>
             <li>Hotovo. Už len počkaj pár dní, pokým balík príde.</li>
-        </ul>
+        </ul>*/}
+        <ol className="text block__text list list_ordered">
+          <li>Vyberieš si <strong>vecičku</strong> &mdash; tašku, tričko alebo len tak, obrázok.</li>
+          <li>Zvolíš si <strong>rozmiestnenie</strong> vzorov na onakvej veci.</li>
+          <li>Vyklikáš si <strong>vzory</strong>, rozdelené podľa regiónov. Počet je obmedzený. Nech to nie je guľáš.</li>
+          <li>Hľa, <strong>generátor</strong>. Tu ti to všetko ukáže a môžeš si aj pomeniť parametre, vygenerovať nový vzor, uložiť starý a tak.</li>
+          <li>Finále! Môžeš si to celé <strong>kúpiť</strong>. Normálne, taška s tvojou vlastnou, unikátnou potlačou. Rovno domov, ešte teplá.</li>
+        </ol>
     </LegalTemplate>
 );
 

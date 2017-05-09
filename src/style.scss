@@ -57,10 +57,73 @@ div > .section--nav {
 }
 
 .button, .block__button {
-  font-family: $font-family-controls;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 0.05rem;
+  @include button-style();
+}
+
+.btn {
+  padding: 10px 15px;
+}
+
+.btn-default {
+  border: 3px solid;
+
+  &:hover {
+    border-color: #333;
+  }
+}
+
+.btn-success {
+  background-color: $brand-success;
+  border-color: $brand-success;
+
+  &:hover {
+    background-color: darken($brand-success, 5%);
+    border-color: darken($brand-success, 5%);
+  }
+}
+
+.btn-default[disabled]:hover {
+  background-color: initial;
+  border-color: initial;
+}
+
+.btn-primary[disabled]:hover {
+  background-color: $brand-primary;
+  border-color: $brand-primary;
+}
+
+.btn-primary {
+  border: 3px solid $brand-primary;
+  background-color: $brand-primary;
+
+  &:hover, &:active, &:focus {
+    // border-color: darken(#FFB300, 5%);
+    // background-color: darken(#FFB300, 5%);
+  }
+}
+
+.btn:active:hover {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: darken($brand-primary, 5%);
+  background-color: darken($brand-primary, 5%);
+}
+
+button:active, .button:active, button:focus, .button:focus, button:hover, .button:hover{
+    outline:none !important;
+}
+
+.label {
+  border-radius: 25px;
+  background-color: $brand-primary;
+}
+
+.page-content .button.block__button.button_lg {
+  min-width: 200px;
+}
+
+a[role=button] {
+  border-radius: 25px;
 }
 
 .button_unstyled {
@@ -73,4 +136,20 @@ div > .section--nav {
 
 .form {
   font-family: $font-family-controls;
+}
+
+a:focus, button:focus, .btn:focus, .btn:active {
+  outline: none;
+}
+
+.page-content .button.block__button {
+  min-width: 100px;
+}
+
+a {
+  color: $brand-primary;
+
+  &:hover {
+    color: darken($brand-primary, 5%);
+  }
 }

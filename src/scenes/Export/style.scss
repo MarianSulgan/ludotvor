@@ -1,4 +1,4 @@
-
+@import '../../utils/variables.scss';
 
 // .items-container {
 // }
@@ -12,10 +12,6 @@
 .items-container svg {
     height: 100%;
     width: 100%;
-}
-
-.order-form-container {
-    // max-width: 20em;
 }
 
 .form .form__control.form__control_buttongroup > * {
@@ -35,4 +31,30 @@
 .form__section .result-price {
     font-weight: 700;
     font-size: 3.2rem;
+}
+
+.page-content .order-btn {
+    margin-top: 0;
+    margin-bottom: 3.2rem;
+}
+
+.page-content .size-picker .form__control_buttongroup {
+
+    button {
+        border: 3px solid #333;
+        border-right: none;
+        margin-left: 0;
+
+        &:active, &:focus, &:hover {
+            border: 3px solid #333;
+            border-right: none;
+            background-color: $brand-primary;
+            color: #fff;
+        }
+    }
+
+    button:last-of-type {
+        border-right: 3px solid #333;
+    }
+
 }

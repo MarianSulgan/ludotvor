@@ -111,7 +111,7 @@ class Dashboard extends Component {
                                     bsStyle="pills" 
                                     className="tabs tabs_dashboard">
 
-                                    <Tab eventKey={1} title="Výtvory" className="tab">
+                                    <Tab eventKey={1} title="Výtvory" className="tab" role="button">
                                         <div className="tab__content content_1">
                                             { /* display previously created artworks + products */ }
                                             { createdItems }

@@ -49,6 +49,7 @@ class Canvas extends Component {
             const _svgDataElement = patternData.shapeContainers.map((elem, index) =>            
                 <g 
                     key={ index } 
+                    filter={ this.props.blackandwhite ? "url(#grayscale)" : "" }
                     transform={ elem.transforms }  
                     dangerouslySetInnerHTML={{ __html: 
                         stripHeader(patternData.staticSvgs[elem.index])
