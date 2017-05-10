@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
+import includes from 'array-includes';
 
 import ImageWithIcon from './components/ImageWithIcon';
 import Ornaments from 'data/ornaments';
 import { Store } from 'service/store';
+import 'utils/polyfills';
 
 import './style.css';
 
@@ -70,7 +72,7 @@ class OrnamentsSelector extends Component {
         // get ornaments regions
         let regions = [];
         for (let i = 0; i < Ornaments.length; i++) {
-            if (!regions.includes(Ornaments[i].region)) 
+            if (!includes(regions, Ornaments[i].region)) 
                 regions.push(Ornaments[i].region);
         }
         this.setState({ regions: regions });
@@ -103,7 +105,7 @@ class OrnamentsSelector extends Component {
                         ornamentId={ elem.id.toString() } 
                         handleClick={ (id, state) => this.handleClick(id, state) } 
                         elemData={ ornamentsByRegion[i].ornaments[index] }
-                        isActive={ temp.includes(elem.id.toString()) } />
+                        isActive={ includes(temp, elem.id.toString()) } />
                     )
             };
             content.push(images)

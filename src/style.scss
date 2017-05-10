@@ -153,3 +153,8 @@ a {
     color: darken($brand-primary, 5%);
   }
 }
+
+/* IE7-8 need help adjusting responsive images */
+.img-responsive {
+  width: auto\9;
+}

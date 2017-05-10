@@ -45,7 +45,7 @@ class SvgWrapper extends Component {
                 baseProfile="full"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox={`${a} ${b} ${c} ${d}`}
-                preserveAspectRatio="xMaxYMax meet"
+                preserveAspectRatio="xMidYMid meet"
                 className={`layer__svg ${this.props.className}`}
                 width={ w }
                 height={ h }

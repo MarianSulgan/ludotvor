@@ -5,6 +5,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, Label } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import includes from 'array-includes';
 
 import SideNavigation from 'components/SideNavigation';
 import OrnamentsSelector from 'components/OrnamentsSelector'
@@ -61,7 +62,7 @@ class SelectPatterns extends Component {
                 <p className="text block__text block__text_left">
                     Môžeš si <strong>vybrať</strong> ešte <Label className="label" bsStyle="primary">{ this.state.counter }</Label> vzorov.
                 </p>
-        } else if ([4, 3, 2].includes(this.state.counter)) {
+        } else if (includes([4, 3, 2], this.state.counter)) {
             sentence = 
                 <p className="text block__text block__text_left">
                     Môžeš si <strong>vybrať</strong> ešte <Label className="label" bsStyle="primary">{ this.state.counter }</Label> vzory.

@@ -2,6 +2,8 @@
  * Generation engine basic functions
  */
 
+import 'utils/polyfills.js'
+
 /**
  * Generates string derived from rules
  * @param {array} rules Array of rules, e.g. [ { left: "A", right: "AB" }, ...]

@@ -2,25 +2,25 @@
 .aap-wrapper {
     position: relative;
     height: 100%;
+    width: 100%;
 }
 
 .aap-wrapper .product-wrapper {
     position: absolute;
     z-index: 1;
+    height: 100%;
+    width: 100%;
 }
 
-// .aap-wrapper .svg-wrapper {
-//     position: absolute;
-//     z-index: 2;
-//     top: 50%;
-//     left: 50%;
-//     transform: translate(-50%, -40%);
-//     padding: 3%;
-// }
+
 
 .svg-wrapper .aap-svg {
     width: 100%;
     height: 100%;
+}
+
+.svg-wrapper {
+    min-width: 100px;
 }
 
 $tshirt-width: 20vw;
@@ -73,6 +73,9 @@ $digital-width: 15vw;
 .aap-item.bag .svg-wrapper {
     z-index: 2;
     padding: 10%;
+    padding-top: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .aap-item.bag.lines .svg-wrapper {
