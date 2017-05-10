@@ -327,7 +327,7 @@ class OptionsBar extends Component {
                         <Button 
                             bsStyle="primary" 
                             onClick={ () => this.handleClick() }
-                            className="block__button block__button_main">
+                            className="button block__button block__button_main">
                             Generuj nový vzor
                         </Button>
                     </OverlayTrigger>

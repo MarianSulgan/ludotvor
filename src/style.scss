@@ -158,3 +158,10 @@ a {
 .img-responsive {
   width: auto\9;
 }
+
+button.btn-primary:focus, button.btn-primary:active {
+  background-color: $brand-primary;
+  border: 3px solid $brand-primary;
+  color: #fff;
+  box-shadow: none;
+}
