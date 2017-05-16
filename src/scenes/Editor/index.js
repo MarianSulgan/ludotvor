@@ -68,7 +68,6 @@ class Editor extends Component {
 
         if (_canvas === null || _change === true) {
             this.renderProduct(this.state.options.productType);
-            console.log("Editor", this.state.options);
             this.renderPattern(this.state.options, () => {
                 // save state to variable
                 Store.setArr("sg_canvas", this.state);
@@ -98,7 +97,6 @@ class Editor extends Component {
         Generator.generatePattern(options, (result) => {
             
             if (result.newCanvasDimensions) { // set dimension of canvas and then, state
-                console.log("canvas new dims set...");
                 this.setState({
                     options: {
                         ...this.state.options,
@@ -119,7 +117,7 @@ class Editor extends Component {
         });
     }
 
-    handleOptionsChange(opts) {
+    handleOptionsChange(opts, changedOptionName) {
         // convert from options in Options Bar to _this_ options
         this.setState({
             options: { 
@@ -141,10 +139,17 @@ class Editor extends Component {
                 lineCount: opts.lineCount
             }
         }, () => {
-            this.renderPattern(this.state.options, () => {
+            // if options was changed to black and white, do not render new pattern, 
+            // only use filter and save result to Store
+            if (changedOptionName === "blackandwhite") {
                 Store.setArr("sg_canvas", this.state);
                 Store.setArr("isChange", false);
-            });
+            } else {
+                this.renderPattern(this.state.options, () => {
+                    Store.setArr("sg_canvas", this.state);
+                    Store.setArr("isChange", false);
+                });
+            }
         })
     }
 
@@ -249,7 +254,7 @@ class Editor extends Component {
                             xs={11} xsOffset={1} sm={ 3 } smOffset={ 0 }
                             type={ this.state.options.layoutType }
                             handleRenderClick={ () => this.handleRenderClick() }
-                            handleOptionsChange={ (options) => this.handleOptionsChange(options) }
+                            handleOptionsChange={ (options, changed) => this.handleOptionsChange(options, changed) }
                             handleFinishedClicked={ this.handleFinishedClicked } 
                             handleBackClick={ () => this.handleBackClick() } 
                             handleForwardClick={ () => this.handleForwardClick() } 

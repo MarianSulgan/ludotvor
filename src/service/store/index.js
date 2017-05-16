@@ -15,15 +15,12 @@ function getArr(key) {
 }
 
 function set(key, value) {
-    // if (key === "options.product")
     localStorage.setItem("isChange", true);
-    // console.log("isChange set to true");
     return localStorage.setItem(key, value);
 }
 
 function setArr(key, arr) {
     localStorage.setItem("isChange", true);
-    // console.log("(arr) isChange set to true");
     return localStorage.setItem(key, JSON.stringify(arr));
 }
 
@@ -46,18 +43,6 @@ function pop(key) {
     return elem;
 }
 
-// function back(key) {
-//     let arr = getArr(key);
-//     console.log(arr);
-//     let counter = parseInt(localStorage.getItem("_counter"), 10) + 1;
-//     let elem = arr[arr.length - 1 - counter];
-//     return elem;
-// }
-
-// function forward() {
-
-// }
-
 export const Store = {
     set: set,
     get: get,
@@ -66,6 +51,4 @@ export const Store = {
     remove: remove,
     pushTo: push,
     popFrom: pop,
-    // back: back,
-    // forward: forward
 }

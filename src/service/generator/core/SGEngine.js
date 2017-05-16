@@ -97,14 +97,12 @@ function generateRules(symbolCount) {
     let rules = [];
     switch (symbolCount) {
         case 1:
-            console.log("Rule set 1");
             rules = [
                 { left: "0", right: "A" },
                 { left: "A", right: "AA"}
             ];
             break;
         case 2:
-            console.log("Rule set 2");
             rules = [
                 { left: "0", right: "A" },
                 { left: "0", right: "B" },
@@ -117,7 +115,6 @@ function generateRules(symbolCount) {
             ];
             break;
         case 3:
-            console.log("Rule set 3");
             rules = [ 
                 { left: "0", right: "A" },
                 { left: "0", right: "B" },
@@ -131,7 +128,6 @@ function generateRules(symbolCount) {
             ];
             break;
         case 4:
-            console.log("Rule set 4");
             rules = [
                 { left: "0", right: "A" },
                 { left: "0", right: "B" },
@@ -144,7 +140,6 @@ function generateRules(symbolCount) {
             ]
             break;
         case 5:
-            console.log("Rule set 5");
             rules = [
                 { left: "0", right: "A" },
                 { left: "0", right: "B" },
@@ -160,7 +155,6 @@ function generateRules(symbolCount) {
             ]
             break;                
         default:
-            console.log('Sorry for party rocking.');
             return null;
     }
     return rules;

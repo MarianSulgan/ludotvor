@@ -64,7 +64,6 @@ class Export extends Component {
     }
 
     getNumberValidationState() {
-        console.log(this.state.number);
         if (isNumeric(this.state.number) && this.state.number > 0 && this.state.number < 20) 
             return 'success';
         else
@@ -128,14 +127,6 @@ class Export extends Component {
                 />
             );
         }
-
-        console.log(Products.toString(product));
-        console.log(Products.toString(Products.Digital));
-
-        // convert string (saved svg) to html and insert
-        // const orderSvgString = Store.get("orderSvg");
-        // const orderSvgElement = <div dangerouslySetInnerHTML={{__html: orderSvgString }} />
-
 
         let add = Auth.getCurrentUser().address;
         let address = "";

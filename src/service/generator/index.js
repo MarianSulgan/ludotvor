@@ -31,9 +31,6 @@ async function generatePattern(options, callback) {
     let shapeContainers = [];
     let cW, cH, newDims = null;
 
-    console.log(options.blackandwhite);
-    console.log(options.transform);
-
     switch(options.layoutType) {
 
         case Layouts.Lines: {
@@ -41,8 +38,6 @@ async function generatePattern(options, callback) {
             /**
              * Layout: LINES
              */
-
-            console.log("Lines SG");
 
             if (options.basicShapesIds === null || options.basicShapesIds.length === 0)
                 return;
@@ -111,7 +106,6 @@ async function generatePattern(options, callback) {
             /**
              * Layout: FREE
              */
-            console.log("Free SG");
 
             const elementCount = options.freeCount;
             const elementSize = options.freeSide;
@@ -159,8 +153,6 @@ async function generatePattern(options, callback) {
              * Layout: GRID
              */
 
-            console.log("Grid SG");
-            
             if (options.basicShapesIds === null || options.basicShapesIds.length === 0)
                 return;
                 

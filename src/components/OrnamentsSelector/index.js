@@ -1,3 +1,10 @@
+/**
+ * OrnamentsSelector
+ * 
+ * Component for selecting ornaments, data
+ * is based on data/ornaments.js
+ */
+
 import React, { Component } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -21,12 +28,6 @@ class OrnamentsSelector extends Component {
             regions: [], 
             ornaments: temp === null ? [] : temp 
         };
-    }
-
-    handleLinkClick() {
-        // let temp = this.state.ornaments;
-        // console.log("handle... ", temp);
-        // Store.setArr("options.ornaments", temp.length === 0 ? null : temp);
     }
 
     handleClick(id, state) {
@@ -92,8 +93,6 @@ class OrnamentsSelector extends Component {
             });
         }
 
-        // console.log(ornamentsByRegion[0].ornaments);
-        // console.log(Ornaments);
         let content = [];
         for (let i = 0; i < ornamentsByRegion.length; i++) {
             let images;
@@ -110,18 +109,6 @@ class OrnamentsSelector extends Component {
             };
             content.push(images)
         }
-        console.log(content);
-
-        /*if (arr.length > 0)
-            _images = arr.map((elem, index) => 
-            <ImageWithIcon
-                key={ index } 
-                src={ elem.url } 
-                ornamentId={ elem.id.toString() } 
-                handleClick={ (id, state) => this.handleClick(id, state) } 
-                elemData={ Ornaments[index] }
-                isActive={ temp.includes(elem.id.toString()) } />
-        );*/
 
         this.setState({ images: content });
     }
@@ -164,7 +151,7 @@ class OrnamentsSelector extends Component {
                     <Row className="ornament-selector-block__row">
                         <Link className={`button btn btn-secondary ${ disableButton ? "" : "disabled" }`} to="/editor">Preskočiť</Link>
                         { ' ' }
-                        <Link className={`button btn btn-primary ${ disableButton ? "disabled" : "" }`} to="/editor" onClick={ () => this.handleLinkClick() }>Vybral som. Ľudo, tvor!</Link>
+                        <Link className={`button btn btn-primary ${ disableButton ? "disabled" : "" }`} to="/editor">Vybral som. Ľudo, tvor!</Link>
                     </Row>
                 }
             </div>

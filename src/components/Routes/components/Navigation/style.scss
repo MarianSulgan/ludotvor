@@ -60,3 +60,30 @@ img.image.image_logo {
     width: 3em;
     height: auto;
 }
+
+.navigation.navbar-default {
+    .navbar-toggle {
+        border: none;
+    }
+
+    .navbar-toggle .icon-bar {
+        background-color: #333;
+    }
+    .navbar-toggle .icon-bar + .icon-bar {
+        margin-top: 0.6rem;
+    }
+
+    .navbar-toggle .icon-bar {
+        width: 30px;
+        height: 4px;
+        border-radius: 2px;
+    }
+
+    .navbar-collapse {
+        border: none;
+    }
+
+    .navbar-toggle:hover, .navbar-toggle:focus {
+        background-color: $gray-lighter;
+    }
+}

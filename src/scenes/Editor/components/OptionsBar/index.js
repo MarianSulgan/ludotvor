@@ -57,31 +57,31 @@ class OptionsBar extends Component {
 
     onBlockSliderChange = (val) => {
         this.setState({ blockCount: val }, () => {
-            this.handleOptionsChange();
+            this.handleOptionsChange("blockCount");
         });
     }
 
     onMarginSliderChange = (val) => {
         this.setState({ marginValue: val }, () => {
-            this.handleOptionsChange();
+            this.handleOptionsChange("marginValue");
         });
     }
 
     onColorSettingChange = (e) => {
         this.setState({ blackandwhite: e.target.checked }, () => {
-            this.handleOptionsChange();
+            this.handleOptionsChange("blackandwhite");
         });
     }
 
     onChaosSettingChange = (e) => {
         this.setState({ chaos: !e.target.checked }, () => {
-            this.handleOptionsChange();
+            this.handleOptionsChange("chaos");
         });
     }
 
     onTransformSettingChange = (e) => {
         this.setState({ transform: e.target.checked }, () => {
-            this.handleOptionsChange();
+            this.handleOptionsChange("transform");
         });
     }
 
@@ -92,26 +92,24 @@ class OptionsBar extends Component {
         else
             col = color.hex;
         this.setState({ color: col }, () => {
-            this.handleOptionsChange();
-            console.log(col);
+            this.handleOptionsChange("color");
         });
     }
 
     onFreeSideChange = (val) => {
         this.setState({ freeSide: val }, () => {
-            this.handleOptionsChange();
+            this.handleOptionsChange("freeSide");
         })
     }
 
     onFreeCountChange = (val) => {
         this.setState({ freeCount: val }, () => {
-            this.handleOptionsChange();
+            this.handleOptionsChange("freeCount");
         })
     }
 
-    handleOptionsChange() {
-        this.props.handleOptionsChange(this.state);
-        console.log(this.state);
+    handleOptionsChange(changedOptionName) {
+        this.props.handleOptionsChange(this.state, changedOptionName);
     }
 
     handleClick() {
@@ -139,25 +137,22 @@ class OptionsBar extends Component {
     }
 
     handleResolutionXChange = (e) => {
-        console.log(e.target.value);
         this.setState({
             resolutionX: e.target.value
         })
     }
 
     handleResolutionYChange = (e) => {
-        console.log(e.target.value);
         this.setState({
             resolutionY: e.target.value
         })
     }
 
     onLineCountChange = (val) => {
-        console.log(val);
         this.setState({
             lineCount: val
         }, () => {
-            this.handleOptionsChange();
+            this.handleOptionsChange("");
         })
     }
 

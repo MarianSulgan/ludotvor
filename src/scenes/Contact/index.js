@@ -35,7 +35,6 @@ class Contact extends Component {
             })
         } else if (this.state.step === this.steps.length - 1) {
             // send message
-            console.log(this.state);
             this.setState({ sent: true });
         }
     }

@@ -25,20 +25,6 @@ class SelectProduct extends Component {
 
   handleClick(product) {
     Store.set("options.product", product);
-    // switch(product) {
-    //     case Products.Bag:
-    //         console.log("Bag");
-    //         break;
-    //     case Products.Tshirt:
-    //         console.log("Tshirt");
-    //         break;
-    //     case Products.Digital:
-    //         console.log("Digital");
-    //         break;
-    //     default:
-    //         console.log("Unknown layout type selected? Weird.");
-    //         break;
-    // }
   }
 
   render() {

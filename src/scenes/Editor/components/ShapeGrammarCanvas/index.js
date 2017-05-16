@@ -13,7 +13,6 @@ import React, { Component } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router-dom';
-// import { Image } from 'react-bootstrap';
 
 import SvgWrapper from 'components/SvgWrapper';
 import Products from 'data/products';
@@ -49,8 +48,8 @@ class Canvas extends Component {
             const _svgDataElement = patternData.shapeContainers.map((elem, index) =>            
                 <g 
                     key={ index } 
-                    filter={ this.props.blackandwhite ? "url(#grayscale)" : "" }
-                    transform={ elem.transforms }  
+                    transform={ elem.transforms }
+                    filter={ this.props.blackandwhite ? "url(#grayscale)" : "" } 
                     dangerouslySetInnerHTML={{ __html: 
                         stripHeader(patternData.staticSvgs[elem.index])
                     }} 
@@ -58,15 +57,6 @@ class Canvas extends Component {
             );
             svgDataElement = _svgDataElement;
         } 
-        // else return null;
-
-        // const attr = { 
-        //     version:"1.1",
-        //     baseProfile:"full",
-        //     xmlns:"http://www.w3.org/2000/svg"
-        // }
-        // const tempComponent = React.createElement('svg', attr, svgDataElement);
-        // const svgDataString = ReactElementToString(tempComponent);
 
         let productImageUrl, productClass, layoutClass = "layout_" + Layouts.toString(this.props.layoutType);
 
@@ -110,11 +100,10 @@ class Canvas extends Component {
             Store.set("orderSvg", renderedSvgWrapper);
             Store.set("isChange", false);
         } catch (error) {
-            console.log("Unable to render static markup.");
+            console.error("Unable to render static markup.");
         }
 
         var encodedData = window.btoa(renderedSvgWrapper);
-        // console.log(encodedData);
         const style = {
             backgroundImage: `url('data:image/svg+xml;base64,${encodedData}')`,
             height: '100%'
@@ -127,9 +116,7 @@ class Canvas extends Component {
                     (Store.getArr("options.ornaments") || Store.get("options.product") || Store.get("options.layout")) || Store.get("sg_canvas") ?
                     <div className={`canvas canvas_editor ${productClass} ${layoutClass}`}>
                         <div style={ canvas__layer_product__style } className="div canvas__layer canvas__layer_product"></div>
-                        {/*<Image className="canvas__layer canvas__layer_product" src={ productImageUrl } responsive />*/}
                         <div className="canvas__layer canvas__layer_svg">
-                            {/*{ _svg }*/}
                             { svgDiv }
                         </div> 
                     </div>
