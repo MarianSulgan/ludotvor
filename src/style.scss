@@ -102,7 +102,7 @@ div > .section--nav {
   }
 }
 
-.btn:active:hover {
+.btn.btn-primary:active:hover {
   outline: none !important;
   box-shadow: none !important;
   border-color: darken($brand-primary, 5%);
@@ -164,4 +164,15 @@ button.btn-primary:focus, button.btn-primary:active {
   border: 3px solid $brand-primary;
   color: #fff;
   box-shadow: none;
+}
+
+.button_small {
+  padding: 6px 10px;
+  font-size: 10px;
+  margin: 1.6rem 0;
+
+  &:active, &:focus, &:active:focus {
+    box-shadow: none;
+    border-color: #333;
+  }
 }

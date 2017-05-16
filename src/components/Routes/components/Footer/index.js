@@ -60,7 +60,9 @@ class Footer extends Component {
                         </Col>
                     </Row>
                     <Row className="footer__block footer__block--copyright text-center">
-                        <span>2017 © MŠ. Vytvorené so ❤. <Link to="/styleguide">Grafický manuál</Link>.</span>
+                        <span>2017 © MŠ. Vytvorené so ❤. 
+                            <Link to="/styleguide">Identita značky.</Link>.
+                        </span>
                     </Row>
                 </Grid>
             </footer>
