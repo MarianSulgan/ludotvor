@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 
 import SideNavigation from 'components/SideNavigation';
 import ShapeGrammarCanvas from './components/ShapeGrammarCanvas';
-import OptionsBar from './components/OptionsBar';
+import OptionsPanel from './components/OptionsPanel';
 
 import './style.css';
 import '../style.css';
@@ -183,13 +183,13 @@ class Editor extends Component {
         this.setState({ alertVisible: true });
     }
 
-    handleBackClick() {
-        // one step back
-    }
+    // handleBackClick() {
+    //     // one step back
+    // }
 
-    handleForwardClick() {
-        // one step forward, if back was pressed
-    }
+    // handleForwardClick() {
+    //     // one step forward, if back was pressed
+    // }
 
     handleDismiss = () => {
         this.setState({ alertVisible: false })
@@ -209,21 +209,6 @@ class Editor extends Component {
                 backgroundColor={ this.state.options.color }
                 blackandwhite={ this.state.options.blackandwhite }
             />;
-                
-        /*const _class = 
-            " canvas_" + Products.toString(this.state.options.productType) + " " +
-            "canvas_" + Layouts.toString(this.state.options.layoutType) + " ";
-
-        const canvas = 
-            <div className="canvas_aap">
-                <ArtworkAndProduct 
-                    product={ this.state.options.productType }
-                    pattern={ this.state.patternData }
-                    layout={ this.state.options.layoutType }
-                    className={ _class }
-                    options={ this.state.options }
-                />
-            </div>*/
 
         return (
             <div className="wrapper">
@@ -250,7 +235,7 @@ class Editor extends Component {
                         </Col>
                         <Clearfix visibleXsBlock />
                         {/*settings, here user can change generation options*/}
-                        <OptionsBar 
+                        <OptionsPanel 
                             xs={11} xsOffset={1} sm={ 3 } smOffset={ 0 }
                             type={ this.state.options.layoutType }
                             handleRenderClick={ () => this.handleRenderClick() }
