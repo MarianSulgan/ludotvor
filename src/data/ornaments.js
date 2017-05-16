@@ -199,7 +199,12 @@ const Ornaments = [
         id: "decor32",
         url: "svg/decor32.svg"
     },
-
+    {
+        region: "Moravský Ján",
+        tags: ["zoomorph", "birds", "floral"],
+        id: "decor33",
+        url: "svg/decor33.svg"
+    }
 ];
 
 export default Ornaments;
