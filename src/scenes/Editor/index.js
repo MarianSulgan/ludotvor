@@ -4,7 +4,6 @@
  * This is where all the generation is started and handled
  * from UI point of view
  * 
- * @todo: validate options, see comment in renderPattern()
  */
 
 import React, { Component } from 'react';
@@ -154,7 +153,7 @@ class Editor extends Component {
     }
 
     // @todo: replace with Storage functionality
-    // -> when used with, it reloads unpredictably, fix
+    // -> when used with it, reloads unpredictably, fix
     handleFinishedClicked = () => {
 
         // load array from storage
@@ -182,14 +181,6 @@ class Editor extends Component {
 
         this.setState({ alertVisible: true });
     }
-
-    // handleBackClick() {
-    //     // one step back
-    // }
-
-    // handleForwardClick() {
-    //     // one step forward, if back was pressed
-    // }
 
     handleDismiss = () => {
         this.setState({ alertVisible: false })

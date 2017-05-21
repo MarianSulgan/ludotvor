@@ -16,16 +16,16 @@ const Styleguide = () => (
                     <p className="text block__text">
                         Na tejto stránke si môžeš omrknúť minimanuál k značke Ľudotvor. Čo to je za nápad, 
                         prečo logo vyzerá ako vyzerá a tak. Sú tu ukázané aj jednotlivé komponenty aplikácie,
-                        takže možno ide skôr ako kratučký <em>styleguide</em>. Žiadna veda.
+                        takže možno ide skôr o kratučký <em>styleguide</em>. Žiadna veda.
                     </p>
 
                     <h2 className="text block__headline block__headline_h2">Prečo Ľudotvor?</h2>
                     <p className="text block__text">
                         Názov značky Ľudotvor v sebe skrýva viac významových rovín. Prvá rovina odkazuje na ľud, 
-                        ľudovosť v zmysle folklórneho dedičstva. Spája sa so slovom “tvor”, čiže živá bytosť a 
+                        ľudovosť v zmysle folklórneho dedičstva. Spája sa so slovom „tvor“, čiže živá bytosť a 
                         zároveň základ slova tvoriť, tvorivý. Spojenie sa snaží ukázať, že každý človek môže 
                         byť kreatívny, a v duchu historických reálií vytvárať niečo pekné.
-                        Druhý plán názvu značí výzvu alebo zvolanie: “Ľudo, tvor!” Použitím vlastného mena prináša 
+                        Druhý plán názvu značí výzvu alebo zvolanie: „Ľudo, tvor!“ Použitím vlastného mena prináša 
                         osobný rozmer, odkazuje na personalizáciu, ktorú umožňuje generátor. Hoci bola kedysi 
                         typická pre ľudovú tvorbu anonymita, súčasná doba je dobou individualizmu. Názov tak 
                         zostáva niekde na pomedzí, snaží sa reagovať na aktuálne trendy, ale nechce sa vzdať 
@@ -37,9 +37,7 @@ const Styleguide = () => (
 
                     <h2 className="text block__headline block__headline_h2">Logo</h2>
                     <p className="text block__text">
-                        Logo je poskladané z písmen Ľudo. Pretože to aj je <strong>Ľudo</strong>. A ešte jeden mäkčeň navyše, pretože vždy
-                        treba ešte kúštik navyše. Hej no a ešte to nie je celé komplet premakané dotiahnuté,
-                        treba k logu manuál, akože detailný, ja viem. Ale myšlienka tu je. Ak si niečo kúpiš,
+                        Logo je poskladané z písmen Ľ, U, D a O. Pretože to aj je <strong>Ľudo</strong>. A ešte jeden mäkčeň navyše, nech žije de te ne le a ľu. Ak si niečo kúpiš,
                         Ľudo je veselý. Ak si kúpiš za veľa dukátov, Ľudo čumí. Ak si nič nekúpiš, Ľudo je smutný.
                         <Image src={ logoImage } responsive></Image>
                     </p>
@@ -85,7 +83,7 @@ const Styleguide = () => (
                     
                     <h2 className="text block__headline block__headline_h2">Ostatné</h2>
                     <p className="text block__text">
-                        Používa sa aj zopár iných vecí, ale to už nie je podstatné. Keď sa hora rozvíjala, hojája, mamka dcéru zapletala, šuhája...
+                        Používa sa aj zopár iných vecí, ale to už nie je podstatné. Keď sa hora rozvíjala, hojája, mamka dcéru zapletala, čuhája...
                     </p>
                 </Col>
             </Row>

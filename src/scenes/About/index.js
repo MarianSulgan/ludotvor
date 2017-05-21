@@ -1,3 +1,9 @@
+/**
+ * About Page
+ * 
+ * Page with project testimony
+ * About us
+ */
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 

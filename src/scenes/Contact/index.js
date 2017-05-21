@@ -1,3 +1,10 @@
+/**
+ * Contact Page
+ * 
+ * Page with contact form
+ * Has 4 steps of contact form + validation
+ */
+
 import React, { Component } from 'react';
 import { Grid, Row, Col, FormGroup, ControlLabel, FormControl, Button, HelpBlock, Alert } from 'react-bootstrap';
 import Mousetrap from 'mousetrap';
@@ -22,7 +29,6 @@ class Contact extends Component {
 
     componentDidMount () {
         Mousetrap.bind(['enter', 'space'], () => {
-            // let _this = this;
             this.handleClick();
             return false;
         });

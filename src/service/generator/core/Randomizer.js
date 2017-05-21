@@ -1,5 +1,5 @@
 /**
- * @author: github/smutnyleszek
+ * Taken and modified, based on work of @author: github/smutnyleszek
  * https://gist.github.com/smutnyleszek/1ca053ca9e52a37d1ece
  */
 

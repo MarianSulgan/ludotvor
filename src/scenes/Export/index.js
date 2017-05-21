@@ -84,6 +84,7 @@ class Export extends Component {
         }, () => {
 
             // Save order data
+            // ...
 
             // load array from storage
             let arr = null;
@@ -172,15 +173,6 @@ class Export extends Component {
                                         <h2 className="text block__headline block__headline_h2">Objednávka</h2>
                                     </Col>
 
-                                    {/*good with artwork*/}
-                                    {/*<Col xs={12} sm={6} className="block items-container">
-                                        <div className="items-container__wrapper">
-                                            { orderSvgElement }
-                                        </div>
-                                    </Col>*/}
-                                    
-                                    {/*order form*/}
-                                    {/*<Col xs={12} sm={6}>*/}
                                     <Col xs={12}>
                                         <div className="order-form-container">
                                             { 
@@ -289,8 +281,6 @@ class Export extends Component {
                                         <Button bsSize="large" className="button block__button order-btn" onClick={ this.handleOrderClick } bsStyle="success">
                                             Objednať
                                         </Button>
-                                        {' '}
-                                        {/*<Link className="button block__button btn btn-secondary" to="/" onClick={ () => this.handleNewClick() }>Domov</Link>*/}
                                     </Col>
                                 </Row> :
                                 <Row>

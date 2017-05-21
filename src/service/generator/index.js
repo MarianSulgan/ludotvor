@@ -4,10 +4,9 @@
  * Functions (possibly api) for generating shapes using shape grammar idea
  * 
  * @todo: create database for basic shapes, so it is searchable for ID when fetching svgs from particular location
- * @todo: refactor
+ * @todo: refactor code
  * @todo: create API (expose)
- * @todo: clean code
- * @todo: create sets of rules
+ * @todo: create sets of rules based on actual historic works
  * @todo: redux remake
  * 
  */

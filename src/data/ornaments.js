@@ -128,79 +128,79 @@ const Ornaments = [
         url: "svg/decor20.svg"
     },
     {
-        region: "Moravský Ján",
+        region: "Moravský Svätý Ján",
         tags: ["zoomorph", "birds", "floral"],
         id: "decor21",
         url: "svg/decor21.svg"
     },
     {
-        region: "Moravský Ján",
+        region: "Moravský Svätý Ján",
         tags: ["zoomorph", "birds", "floral"],
         id: "decor22",
         url: "svg/decor22.svg"
     },
     {
-        region: "Moravský Ján",
+        region: "Moravský Svätý Ján",
         tags: ["zoomorph", "birds", "floral"],
         id: "decor23",
         url: "svg/decor23.svg"
     },
     {
-        region: "Moravský Ján",
+        region: "Moravský Svätý Ján",
         tags: ["zoomorph", "birds", "floral"],
         id: "decor24",
         url: "svg/decor24.svg"
     },
     {
-        region: "Moravský Ján",
+        region: "Moravský Svätý Ján",
         tags: ["zoomorph", "birds", "floral"],
         id: "decor25",
         url: "svg/decor25.svg"
     },
     {
-        region: "Moravský Ján",
+        region: "Moravský Svätý Ján",
         tags: ["zoomorph", "birds", "floral"],
         id: "decor26",
         url: "svg/decor26.svg"
     },
     {
-        region: "Moravský Ján",
+        region: "Moravský Svätý Ján",
         tags: ["zoomorph", "birds", "floral"],
         id: "decor27",
         url: "svg/decor27.svg"
     },
     {
-        region: "Moravský Ján",
+        region: "Moravský Svätý Ján",
         tags: ["zoomorph", "birds", "floral"],
         id: "decor28",
         url: "svg/decor28.svg"
     },
     {
-        region: "Moravský Ján",
+        region: "Moravský Svätý Ján",
         tags: ["zoomorph", "birds", "floral"],
         id: "decor29",
         url: "svg/decor29.svg"
     },
     {
-        region: "Moravský Ján",
+        region: "Moravský Svätý Ján",
         tags: ["zoomorph", "birds", "floral"],
         id: "decor30",
         url: "svg/decor30.svg"
     },
     {
-        region: "Moravský Ján",
+        region: "Moravský Svätý Ján",
         tags: ["zoomorph", "birds", "floral"],
         id: "decor31",
         url: "svg/decor31.svg"
     },
     {
-        region: "Moravský Ján",
+        region: "Moravský Svätý Ján",
         tags: ["zoomorph", "birds", "floral"],
         id: "decor32",
         url: "svg/decor32.svg"
     },
     {
-        region: "Moravský Ján",
+        region: "Moravský Svätý Ján",
         tags: ["zoomorph", "birds", "floral"],
         id: "decor33",
         url: "svg/decor33.svg"

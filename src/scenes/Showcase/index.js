@@ -1,3 +1,12 @@
+/**
+ * Showcase Page
+ * 
+ * Page to showcase others artwork
+ * Currently not in use, only for future purposes
+ * 
+ * @todo: consider adding showcase section to homepage
+ */
+
 import React, { Component } from 'react';
 import { Grid } from 'react-bootstrap';
 
@@ -9,7 +18,6 @@ class Showcase extends Component {
         return (
             <div className="wrapper">
                 <Grid className="page-content" fluid>
-                    <p>Lorem ipsum</p>
                 </Grid>
             </div>
         );
