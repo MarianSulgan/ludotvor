@@ -10,7 +10,7 @@ To use the development, offline, version, run these commands in local folder:
 ```shell
 git clone https://github.com/MarianSulgan/ludotvor.git
 cd ludotvor
-npm run install
+npm install
 npm start
 ```
 
